@@ -7,7 +7,7 @@ const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
 export const metadata: Metadata = {
   title: "Balance Is Not the Opposite of Ambition",
   description:
-    "Why balance isn't something you earn after working hard — it's what allows people to sustain excellence, survive difficult seasons, and keep showing up for what matters.",
+    "Why balance isn't something you earn after working hard. It's what allows people to sustain excellence, survive difficult seasons, and keep showing up for what matters.",
   alternates: { canonical: `${BASE}/balance` },
 };
 

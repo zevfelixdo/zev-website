@@ -24,7 +24,7 @@ export default function ContactPage() {
             Get in touch
           </h1>
           <p className="text-xl text-text-muted leading-relaxed">
-            Whether you have a question, want to collaborate, or just want to say hello — I would
+            Whether you have a question, want to collaborate, or just want to say hello, I would
             love to hear from you.
           </p>
         </div>

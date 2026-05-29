@@ -9,7 +9,7 @@ import { ScrollReveal } from "@/components/public/ScrollReveal";
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
 
 export const metadata: Metadata = {
-  title: "Zev Felix — Medicine, Storytelling, and the Art of Staying Human",
+  title: "Zev Felix: Medicine, Storytelling, and the Art of Staying Human",
   description:
     "Family Medicine resident, former Camp Grounded co-founder, climber, and maker. A lifelong student of how people heal, connect, and build meaningful lives.",
   alternates: { canonical: BASE },
@@ -20,7 +20,7 @@ const navCards = [
     label: "About",
     href: "/about",
     icon: Heart,
-    description: "The long way to Family Medicine — film, camp, surgery, and a dog from Taiwan.",
+    description: "The long way to Family Medicine: film, camp, surgery, and a dog from Taiwan.",
   },
   {
     label: "Family Medicine",

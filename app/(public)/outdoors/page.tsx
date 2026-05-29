@@ -7,7 +7,7 @@ const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
 export const metadata: Metadata = {
   title: "The Things That Keep Me Grounded",
   description:
-    "Making things, rock climbing, a rescue dog named Maisy, and wilderness medicine — the life outside the hospital that makes the work inside it possible.",
+    "Making things, rock climbing, a rescue dog named Maisy, and wilderness medicine: the life outside the hospital that makes the work inside it possible.",
   alternates: { canonical: `${BASE}/outdoors` },
 };
 

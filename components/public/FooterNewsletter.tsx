@@ -38,7 +38,7 @@ export function FooterNewsletter() {
         className="flex items-center gap-2 text-sm text-text-muted"
       >
         <CheckCircle size={16} className="text-green-600 flex-shrink-0" aria-hidden="true" />
-        <span>Subscribed — thanks!</span>
+        <span>Subscribed, thanks!</span>
       </div>
     );
   }

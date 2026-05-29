@@ -21,7 +21,7 @@ const projects = [
     title: "Camp Grounded",
     slug: "camp-grounded",
     description:
-      "A nationally recognized, screen-free summer camp for adults. As co-founder and creative director, I helped deliver 17 camps and 12 events for 3,000+ attendees — building spaces for presence, play, and real connection.",
+      "A nationally recognized, screen-free summer camp for adults. As co-founder and creative director, I helped deliver 17 camps and 12 events for 3,000+ attendees, building spaces for presence, play, and real connection.",
     status: "completed",
     tags: ["Community", "Digital Wellness"],
     external_url: "https://www.newyorker.com/tech/annals-of-technology/into-the-woods-and-away-from-technology",
@@ -54,7 +54,7 @@ const projects = [
     title: "zevfelix.com",
     slug: "personal-website",
     description:
-      "This site — a Next.js and Supabase personal website with a custom CMS for writing, projects, pages, and a newsletter. Designed and built by me.",
+      "This site: a Next.js and Supabase personal website with a custom CMS for writing, projects, pages, and a newsletter. Designed and built by me.",
     status: "active",
     tags: ["Web", "Next.js"],
     external_url: null,

@@ -14,7 +14,7 @@ const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
 export const metadata: Metadata = {
   title: "Building Things That Bring People Together",
   description:
-    "Camp Grounded, Digital Detox, telemedicine research, medical education, community health, and technology projects — all versions of the same question: how do we make things work better for humans?",
+    "Camp Grounded, Digital Detox, telemedicine research, medical education, community health, and technology projects. All versions of the same question: how do we make things work better for humans?",
   alternates: { canonical: `${BASE}/work` },
 };
 
@@ -61,8 +61,8 @@ export default async function WorkPage() {
             Building Things That Bring People Together
           </h1>
           <p className="text-xl text-text-muted leading-relaxed">
-            I&#8217;ve spent much of my life building things. Some of those things are tangible &mdash;
-            furniture, websites, events, community spaces. Some are harder to see &mdash; experiences,
+            I&#8217;ve spent much of my life building things. Some of those things are tangible:
+            furniture, websites, events, community spaces. Some are harder to see: experiences,
             conversations, relationships, communities.
           </p>
         </div>

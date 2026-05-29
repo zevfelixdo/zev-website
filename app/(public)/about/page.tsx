@@ -11,7 +11,7 @@ const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
 export const metadata: Metadata = {
   title: "The Long Way Here",
   description:
-    "How Zev Felix found his way to Family Medicine — through film school, Camp Grounded and Digital Detox, his brother Levi, surgery, and a rescue dog from Taiwan.",
+    "How Zev Felix found his way to Family Medicine: through film school, Camp Grounded and Digital Detox, his brother Levi, surgery, and a rescue dog from Taiwan.",
   alternates: { canonical: `${BASE}/about` },
 };
 
@@ -75,7 +75,7 @@ export default async function AboutPage() {
               <p>
                 After college, those interests led me somewhere unexpected. Together with my brother
                 Levi and a group of remarkably creative friends, I helped build Camp Grounded and
-                Digital Detox — device-free retreats where adults stepped away from phones, work
+                Digital Detox, device-free retreats where adults stepped away from phones, work
                 identities, and constant connectivity for a few days.
               </p>
             </ScrollReveal>
@@ -165,7 +165,7 @@ export default async function AboutPage() {
                 </p>
                 <ul className="space-y-2 text-sm text-text-base">
                   <li>California raised</li>
-                  <li>USC — Business &amp; Cinematic Arts</li>
+                  <li>USC (Business &amp; Cinematic Arts)</li>
                   <li>Osteopathic medical school (DO)</li>
                   <li>Preliminary year, General Surgery (UCSF East Bay)</li>
                   <li>Family Medicine resident (current)</li>

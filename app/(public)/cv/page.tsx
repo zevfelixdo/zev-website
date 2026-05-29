@@ -114,7 +114,7 @@ export default async function CvPage() {
                           {entry.start_date}
                           {entry.end_date || entry.end_date === null ? (
                             <span>
-                              {" "}—{" "}
+                              {" "}&ndash;{" "}
                               {entry.end_date ?? "Present"}
                             </span>
                           ) : null}

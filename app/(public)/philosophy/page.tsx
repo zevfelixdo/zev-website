@@ -7,7 +7,7 @@ const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
 export const metadata: Metadata = {
   title: "What Matters To You?",
   description:
-    "One of the most important questions in medicine is also one of the simplest. Not what's the matter with you — what matters to you. The answer changes everything.",
+    "One of the most important questions in medicine is also one of the simplest. Not what's the matter with you. What matters to you. The answer changes everything.",
   alternates: { canonical: `${BASE}/philosophy` },
 };
 

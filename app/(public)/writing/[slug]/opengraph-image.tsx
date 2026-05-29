@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 export const runtime = "edge";
-export const alt = "Zev Felix — Writing";
+export const alt = "Zev Felix · Writing";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

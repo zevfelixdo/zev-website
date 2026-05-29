@@ -275,7 +275,7 @@ function QuoteSection({ content }: { content: Record<string, unknown> }) {
     <section className="section-y container-content">
       <blockquote className="border-l-4 border-accent pl-6 max-w-2xl">
         <p className="text-xl font-serif italic text-text-base leading-relaxed mb-3">{text}</p>
-        {cite && <cite className="text-sm text-text-muted not-italic">— {cite}</cite>}
+        {cite && <cite className="text-sm text-text-muted not-italic">{cite}</cite>}
       </blockquote>
     </section>
   );

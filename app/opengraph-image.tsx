@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Zev Felix — Physician · Climber · Builder";
+export const alt = "Zev Felix · Physician · Storyteller · Builder";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -43,7 +43,7 @@ export default function OGImage() {
             fontWeight: 600,
           }}
         >
-          Physician · Climber · Builder
+          Physician · Storyteller · Builder
         </p>
 
         {/* Name */}

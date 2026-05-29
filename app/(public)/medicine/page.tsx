@@ -7,7 +7,7 @@ const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
 export const metadata: Metadata = {
   title: "Why Family Medicine?",
   description:
-    "Family Medicine wasn't a backup plan. It was the answer to a question that took years to formulate — about the space before crisis and caring for the whole picture.",
+    "Family Medicine wasn't a backup plan. It was the answer to a question that took years to formulate, about the space before crisis and caring for the whole picture.",
   alternates: { canonical: `${BASE}/medicine` },
 };
 

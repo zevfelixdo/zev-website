@@ -51,7 +51,7 @@ const E = (category, title, institution, location, start_date, end_date, descrip
 
 const entries = [
   // Clinical training
-  E("training", "Preliminary Surgery Resident (PGY-1)", "UCSF East Bay (Highland / Alameda Health)", "Oakland, CA", "Jun 2025", null, "Current.", null, 0),
+  E("training", "Preliminary Surgery Resident (PGY-1)", "UCSF East Bay (Highland / Alameda Health)", "Oakland, CA", "Jun 2025", "Jun 2026", "Current.", null, 0),
 
   // Education
   E("education", "Doctor of Osteopathic Medicine (DO)", "Touro University California, College of Osteopathic Medicine (TUCOM)", "Vallejo, CA", "2021", "2025", null, null, 0),
@@ -59,14 +59,15 @@ const entries = [
   E("education", "B.S., Business Administration (Cinematic Arts emphasis)", "University of Southern California", "Los Angeles, CA", "2008", "2012", "Minor: Web Technologies & Applications. GPA 3.60. International enrichment: Chulalongkorn University, Bangkok (2010); Learning About International Commerce, Hong Kong (2009).", null, 2),
 
   // Experience
-  E("experience", "Co-Founder & Creative Director (Business & Marketing)", "Camp Grounded — Summer Camp for Adults", "Oakland, CA", "2013", "2018", "Built nationally recognized, screen-free retreats promoting presence, community, and well-being. Directed 200+ staff and volunteers to deliver 17 camps and 12 events for 3,000+ attendees across the U.S.", null, 0),
+  E("experience", "Co-Founder & Creative Director (Business & Marketing)", "Camp Grounded (Summer Camp for Adults)", "Oakland, CA", "2013", "2018", "Built nationally recognized, screen-free retreats promoting presence, community, and well-being. Directed 200+ staff and volunteers to deliver 17 camps and 12 events for 3,000+ attendees across the U.S.", null, 0),
   E("experience", "Graphic Designer & Web Developer", "Digital Detox", "Oakland, CA", "2012", "2013", "Relaunched the company website and brand assets; produced marketing materials for statewide events.", null, 1),
-  E("experience", "Medical Assistant", "Weiwei Xu, MD — Urology", "Castro Valley, CA", "2020", "2021", "Supported urologic procedures and patient education; implemented COVID-19 safety protocols; streamlined scheduling, documentation, and specimen handling.", null, 2),
+  E("experience", "Medical Assistant", "Weiwei Xu, MD (Urology)", "Castro Valley, CA", "2020", "2021", "Supported urologic procedures and patient education; implemented COVID-19 safety protocols; streamlined scheduling, documentation, and specimen handling.", null, 2),
   E("experience", "Founder & Owner", "Pink Buffalo T-Shirt Co.", "Fresno, CA", "2005", "2010", null, null, 3),
   E("experience", "Selected Internships (Film & Media)", "Sony Pictures, Anisa Productions (America's Next Top Model), Chromatic Films, Lucent Dossier, Project Comet", "Los Angeles / Santa Monica, CA", "2010", "2011", null, null, 4),
-  E("experience", "Health Coach Volunteer", "Lifelong Medical Care — Trust Clinic", "Oakland, CA", "2019", "2020", "Assisted with social-determinants-of-health navigation (housing), care access, and weekly food-pantry operations.", null, 5),
+  E("experience", "Health Coach Volunteer", "Lifelong Medical Care, Trust Clinic", "Oakland, CA", "2019", "2020", "Assisted with social-determinants-of-health navigation (housing), care access, and weekly food-pantry operations.", null, 5),
   E("experience", "COVID-19 Testing Volunteer", "Umoja Health & Unidos en Salud", "Oakland, CA", "2020", "2021", "Provided free testing and resource access for underserved communities.", null, 6),
-  E("experience", "Sexual Health Education Facilitator", "Touro Med Teaches Sex Ed — Berkeley Youth Alternatives", "Berkeley, CA", "2022", "2023", "Delivered comprehensive, age-appropriate sexual health education.", null, 7),
+  E("experience", "Sexual Health Education Facilitator", "Touro Med Teaches Sex Ed, Berkeley Youth Alternatives", "Berkeley, CA", "2022", "2023", "Delivered comprehensive, age-appropriate sexual health education.", null, 7),
+  E("experience", "Touro Pediatric Mask-Making Initiative", "Touro University California (TUCOM)", "Vallejo, CA", "Fall 2021", null, "Supported on-campus health promotion and disease prevention events.", null, 8),
 
   // Leadership
   E("leadership", "Vice President of Communications, COMSEC", "Touro University California (TUCOM)", null, "2022", "2023", "Partnered with faculty and administration to streamline school-wide communications; led projects to enhance academic resources, study-space technology, and library facilities.", null, 0),
@@ -76,24 +77,24 @@ const entries = [
   E("leadership", "Co-Leader, Post-Bac Pre-Medical Club", "Mills College", null, "2018", "2020", null, null, 4),
   E("leadership", "Student Leadership", "University of Southern California", null, "2008", "2012", "Business of Cinematic Arts Network (Advisor & Webmaster); Freshman Mentor; Marshall Career Advantage Program; Ski & Snowboard Team; Building Government (Elected Floor Rep).", null, 5),
 
-  // Presentations — invited
+  // Presentations: invited
   E("presentations", "What Wolves, Children, and Great Wilderness Medical Providers Have in Common", "Breckwild", "Breckenridge, CO", "May 2025", null, "Invited talk.", null, 0),
-  E("presentations", "Digital Detox: Unplug and Reimagine Your Life", "Esalen Institute", "Big Sur, CA", "Feb 2019", null, "Invited workshop.", "https://www.esalen.org/faculty/zev-felix", 1),
-  E("presentations", "Digital Detox: Unplug and Reimagine Your Life", "Esalen Institute", "Big Sur, CA", "Feb 2018", null, "Invited workshop.", "https://www.esalen.org/faculty/zev-felix", 2),
-  // Presentations — clinical/academic (selected)
-  E("presentations", "Starling's Law of Capillary Water Movement (Basic Science Presentation)", "UCSF East Bay Grand Rounds", null, "2025", null, null, null, 3),
-  E("presentations", "The Sternal Brace: a novel osteopathic diagnostic screening tool to rule out cardiac chest pain in the ED (Journal Club)", "Live Oak Medicine", null, "2024", null, null, null, 4),
+  E("presentations", "Digital Detox: Unplug and Reimagine Your Life (Vulnerability & Expressing Yourself Through Body Paint)", "Esalen Institute", "Big Sur, CA", "Feb 2019", null, "Invited workshop.", "https://www.esalen.org/faculty/zev-felix", 1),
+  E("presentations", "Digital Detox: Unplug and Reimagine Your Life (Finding Your Creativity)", "Esalen Institute", "Big Sur, CA", "Feb 2018", null, "Invited workshop.", "https://www.esalen.org/faculty/zev-felix", 2),
+  // Presentations: clinical/academic (selected)
+  E("presentations", "Starling Law of Capillary Water Movement (Basic Science Presentation)", "UCSF East Bay Grand Rounds", null, "2025", null, null, null, 3),
+  E("presentations", "The Sternal Brace: a novel osteopathic diagnostic screening tool to rule out cardiac chest pain in the emergency department (Journal Club)", "Live Oak Medicine", null, "2024", null, null, null, 4),
   E("presentations", "Autonomic Nervous System & Treatment of the Acutely Ill Hospitalized Patient: An Osteopathic Approach with OMM", "Live Oak Medicine", null, "2024", null, null, null, 5),
   E("presentations", "An 81-year-old male with Toxic Epidermal Necrolysis (Case Study)", "NorthBay Medical Center", "Fairfield, CA", "2024", null, null, null, 6),
   E("presentations", "Identifying Acute Compartment Syndrome: A Brief Overview for the Surgical Patient", "NorthBay Medical Center", "Fairfield, CA", "2024", null, null, null, 7),
   E("presentations", "Obesity & Metabolic and Bariatric Surgery (MBS): Indications and Overview", "NorthBay Medical Center", "Fairfield, CA", "2024", null, null, null, 8),
-  E("presentations", "The Crucial Role of RSV Vaccine in Pregnancy", "NorthBay Medical Center", "Fairfield, CA", "2023", null, null, null, 9),
+  E("presentations", "The Crucial Role of RSV Vaccine in Pregnancy: Preventing Pregnancy-Related Complications & Protecting Infants", "NorthBay Medical Center", "Fairfield, CA", "2023", null, null, null, 9),
 
   // Awards
   E("awards", "Alpha Lambda Delta Honor Society", "University of Southern California", null, "2008", "2012", null, null, 0),
 
   // Other
-  E("other", "Interests", null, null, null, null, "Traditional outdoor rock climbing, wilderness medicine, swimming, gardening, baking, cooking and hot-sauce making, and community building. Shaolin Kung Fu & meditation intensive (Kunming, China) — 3-month training in 2018. Euclid Manor co-housing community contributor (event production & engagement) — 6 years.", null, 0),
+  E("other", "Interests", null, null, null, null, "Traditional outdoor rock climbing, wilderness medicine, swimming, gardening, baking, cooking and hot-sauce making, and community building. Shaolin Kung Fu & meditation intensive (Kunming, China): 3-month training in 2018. Euclid Manor co-housing community contributor (event production & engagement) for 6 years.", null, 0),
 ];
 
 // Replace existing data
