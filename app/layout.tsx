@@ -78,7 +78,7 @@ const personJsonLd = {
   description:
     "Family medicine physician in training, former surgical resident, co-founder of Digital Detox and Camp Grounded.",
   sameAs: [
-    "https://linkedin.com/in/zevfelix",
+    "https://www.linkedin.com/in/zev-felix-09b94a13",
   ],
 };
 

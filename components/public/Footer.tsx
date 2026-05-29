@@ -46,10 +46,10 @@ export function Footer({ settings = defaultSettings }: FooterProps) {
               <ul className="flex flex-col gap-2">
                 {[
                   { label: "About", href: "/about" },
-                  { label: "Writing", href: "/writing" },
-                  { label: "My Path", href: "/path" },
-                  { label: "Unplugged", href: "/unplugged" },
-                  { label: "Medicine", href: "/medicine" },
+                  { label: "Family Medicine", href: "/medicine" },
+                  { label: "Balance", href: "/balance" },
+                  { label: "Technology", href: "/technology" },
+                  { label: "Philosophy", href: "/philosophy" },
                 ].map((link) => (
                   <li key={link.href}>
                     <Link
@@ -69,7 +69,8 @@ export function Footer({ settings = defaultSettings }: FooterProps) {
               <ul className="flex flex-col gap-2">
                 {[
                   { label: "Outdoors", href: "/outdoors" },
-                  { label: "Work", href: "/work" },
+                  { label: "Projects", href: "/work" },
+                  { label: "Writing", href: "/writing" },
                   { label: "CV", href: "/cv" },
                   { label: "Contact", href: "/contact" },
                 ].map((link) => (
