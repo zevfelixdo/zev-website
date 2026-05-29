@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fonts are loaded via next/font in app/layout.tsx — no @import needed */
+
+/* ----------------------------------------
+   Base reset & sensible defaults
+---------------------------------------- */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: var(--font-size-base, 16px);
+    line-height: var(--line-height-base, 1.7);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans, var(--font-inter, system-ui), sans-serif);
+    background-color: rgb(var(--color-surface));
+    color: rgb(var(--color-text-base));
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background-color: rgb(var(--color-primary) / 0.15);
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--color-primary));
+    outline-offset: 2px;
+  }
+
+  img, video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif, var(--font-lora, Georgia), serif);
+    line-height: 1.25;
+    font-weight: 600;
+  }
+
+  /* Reduce motion for users who prefer it — ScrollReveal already reads this,
+     but this catches any CSS transitions we add directly. */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ----------------------------------------
+   Prose / rich text renderer
+---------------------------------------- */
+@layer components {
+  .prose-content {
+    @apply text-text-base leading-relaxed;
+  }
+
+  .prose-content h1 { @apply text-4xl font-serif font-semibold mt-10 mb-4 text-text-base; }
+  .prose-content h2 { @apply text-3xl font-serif font-semibold mt-8 mb-3 text-text-base; }
+  .prose-content h3 { @apply text-2xl font-serif font-semibold mt-6 mb-3 text-text-base; }
+  .prose-content h4 { @apply text-xl font-serif font-semibold mt-5 mb-2 text-text-base; }
+  .prose-content p  { @apply mb-4 text-text-base; }
+  .prose-content a  { @apply text-primary underline underline-offset-2 hover:opacity-80 transition-opacity; }
+  .prose-content strong { @apply font-semibold text-text-base; }
+  .prose-content em { @apply italic; }
+  .prose-content ul { @apply list-disc pl-6 mb-4 space-y-1; }
+  .prose-content ol { @apply list-decimal pl-6 mb-4 space-y-1; }
+  .prose-content li { @apply text-text-base; }
+  .prose-content blockquote {
+    @apply border-l-4 border-accent pl-5 py-1 my-6 italic text-text-muted;
+  }
+  .prose-content code {
+    @apply font-mono text-sm bg-surface-alt px-1.5 py-0.5 rounded text-text-base;
+  }
+  .prose-content pre {
+    @apply bg-surface-alt rounded-lg p-4 my-4 overflow-x-auto;
+  }
+  .prose-content pre code {
+    @apply bg-transparent p-0;
+  }
+  .prose-content hr { @apply border-border my-8; }
+  .prose-content img { @apply rounded-lg my-6 w-full; }
+  .prose-content figure { @apply my-6; }
+  .prose-content figcaption { @apply text-xs text-center text-text-muted mt-2; }
+  /* Table support in prose */
+  .prose-content table { @apply w-full border-collapse my-6 text-sm; }
+  .prose-content th { @apply text-left font-semibold text-text-base border-b-2 border-border px-3 py-2; }
+  .prose-content td { @apply border-b border-border px-3 py-2 text-text-base; }
+}
+
+/* ----------------------------------------
+   Page section spacing
+---------------------------------------- */
+@layer utilities {
+  .section-y {
+    padding-top: var(--section-padding-y, 5rem);
+    padding-bottom: var(--section-padding-y, 5rem);
+  }
+
+  .section-x {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-content {
+    @apply max-w-content mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Screen-reader only — visually hidden but announced */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+}
+
+/* ----------------------------------------
+   Print stylesheet (CV page + general)
+---------------------------------------- */
+@media print {
+  /* Hide interactive and decorative chrome */
+  header,
+  footer,
+  nav,
+  .print\:hidden,
+  [data-print-hide],
+  /* ReadingProgress bar */
+  [role="progressbar"],
+  /* BackToTop, ShareButtons, DarkModeToggle */
+  [data-noprint] {
+    display: none !important;
+  }
+
+  body { background: white; color: black; font-size: 11pt; }
+  h1 { font-size: 24pt; }
+  h2 { font-size: 14pt; border-bottom: 1px solid #ccc; }
+  a { color: black; text-decoration: none; }
+  /* Show full URLs after links for printed CVs */
+  a[href^="http"]::after,
+  a[href^="https"]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #666;
+  }
+  /* Don't append URL for internal links */
+  a[href^="/"]::after { content: none; }
+  .section-y { padding: 1.5rem 0; }
+  .container-content { max-width: 100%; padding: 0 1cm; }
+  @page { margin: 2cm 1.5cm; }
+}
+
+/* ----------------------------------------
+   Scrollbar styling
+   webkit (Chrome, Safari, Edge) + Firefox
+---------------------------------------- */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: rgb(var(--color-surface-alt)); }
+::-webkit-scrollbar-thumb { background: rgb(var(--color-border)); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgb(var(--color-muted)); }
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--color-border)) rgb(var(--color-surface-alt));
+}
