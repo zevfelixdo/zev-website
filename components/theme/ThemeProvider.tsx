@@ -20,7 +20,7 @@ export function ThemeProvider({ config, children }: Props) {
 
   return (
     <ThemeContext.Provider value={config}>
-      <style>{`:root { ${css} }`}</style>
+      <style dangerouslySetInnerHTML={{ __html: `:root { ${css} }` }} />
       {children}
     </ThemeContext.Provider>
   );
