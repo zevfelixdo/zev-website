@@ -21,7 +21,7 @@ export function ScrollReveal({
   className,
   variant = "slide-up",
   delay = 0,
-  rootMargin = "-60px 0px",
+  rootMargin = "0px 0px 300px 0px",
   once = true,
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);

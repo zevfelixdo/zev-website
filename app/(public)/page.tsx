@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Stethoscope, Mountain, Zap, Heart, PenLine } from "lucide-react";
+import { Stethoscope, Mountain, Heart, PenLine, Scale, Cpu, Hammer, Compass } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { SearchBar } from "@/components/public/SearchBar";
 import { DynamicSections } from "@/components/public/DynamicSections";
@@ -9,54 +9,60 @@ import { ScrollReveal } from "@/components/public/ScrollReveal";
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
 
 export const metadata: Metadata = {
-  title: "Zev Felix — Physician, Climber, Builder",
+  title: "Zev Felix — Medicine, Storytelling, and the Art of Staying Human",
   description:
-    "Family medicine physician in training. Surgical background. Co-founder of Digital Detox. Interested in balance, human connection, technology, and the outdoors.",
+    "Family Medicine resident, former Camp Grounded co-founder, climber, and maker. A lifelong student of how people heal, connect, and build meaningful lives.",
   alternates: { canonical: BASE },
 };
 
 const navCards = [
   {
-    label: "About Zev",
+    label: "About",
     href: "/about",
     icon: Heart,
-    description: "Who I am, where I came from, and what I care about.",
+    description: "The long way to Family Medicine — film, camp, surgery, and a dog from Taiwan.",
   },
   {
-    label: "My Path",
-    href: "/path",
-    icon: ArrowRight,
-    description: "From film school to family medicine — the nonlinear version.",
-  },
-  {
-    label: "Unplugged",
-    href: "/unplugged",
-    icon: Zap,
-    description: "Co-founding Digital Detox and building Camp Grounded.",
-  },
-  {
-    label: "Medicine",
+    label: "Family Medicine",
     href: "/medicine",
     icon: Stethoscope,
-    description: "Surgery, trauma, and why family medicine makes sense.",
+    description: "Why I chose it, and what it means to care for the space before crisis.",
   },
   {
-    label: "Outdoors",
+    label: "Balance",
+    href: "/balance",
+    icon: Scale,
+    description: "Why balance is not the opposite of ambition.",
+  },
+  {
+    label: "Technology",
+    href: "/technology",
+    icon: Cpu,
+    description: "Why the best tools create more connection, not less.",
+  },
+  {
+    label: "Outside the Hospital",
     href: "/outdoors",
     icon: Mountain,
-    description: "Climbing, wilderness medicine, and what the mountains teach.",
+    description: "Making things, climbing, Maisy, and wilderness medicine.",
+  },
+  {
+    label: "Projects",
+    href: "/work",
+    icon: Hammer,
+    description: "Camp Grounded, Digital Detox, and building things that bring people together.",
+  },
+  {
+    label: "Philosophy of Care",
+    href: "/philosophy",
+    icon: Compass,
+    description: "What matters to you? The question that changes everything.",
   },
   {
     label: "Writing",
     href: "/writing",
     icon: PenLine,
     description: "Essays and notes on medicine, technology, and living well.",
-  },
-  {
-    label: "Work",
-    href: "/work",
-    icon: ArrowRight,
-    description: "Projects and tools I have built or contributed to.",
   },
 ];
 
@@ -67,15 +73,20 @@ export default function HomePage() {
       <section className="section-y container-content">
         <div className="max-w-3xl">
           <p className="text-sm font-medium tracking-wider uppercase text-primary mb-4">
-            Physician · Climber · Builder
+            Physician · Storyteller · Builder
           </p>
           <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-semibold text-text-base leading-tight mb-6">
-            Zev Felix
+            Medicine, Storytelling, and the Art of Staying Human
           </h1>
-          <p className="text-xl text-text-muted leading-relaxed mb-8 max-w-2xl">
-            Family medicine physician in training. Former surgical resident. Co-founder of Digital
-            Detox and Camp Grounded. Drawn to balance, human connection, technology, and the
-            outdoors.
+          <p className="text-xl text-text-muted leading-relaxed mb-4 max-w-2xl">
+            I&#8217;m Zev Felix, a Family Medicine resident, former Camp Grounded co-founder,
+            climber, maker, and lifelong student of how people heal, connect, and build meaningful
+            lives.
+          </p>
+          <p className="text-lg text-text-muted leading-relaxed mb-8 max-w-2xl">
+            My path here has wound through documentary storytelling, digital detox retreats,
+            wilderness medicine, surgery, community-building, and more than a few campfires. Family
+            Medicine is where those threads finally came together.
           </p>
           <div className="flex flex-wrap gap-3">
             <Button as="link" href="/about" size="lg">
@@ -95,19 +106,22 @@ export default function HomePage() {
       <section className="section-y container-content">
         <div className="max-w-2xl">
           <p className="text-lg text-text-base leading-relaxed">
-            I am a physician entering family medicine after training in surgery and trauma. Before
-            medicine, I helped co-found{" "}
-            <Link href="/unplugged" className="text-primary underline underline-offset-2 hover:opacity-80">
-              Digital Detox
-            </Link>{" "}
-            and run Camp Grounded — a summer camp for adults designed around putting down devices and
-            reconnecting with what matters. These two paths, one clinical and one deeply human, are
-            not as different as they sound.
+            Before medicine, I helped build a summer camp where adults handed over their phones,
+            left their job titles behind, and spent weekends rediscovering how to be present.
           </p>
           <p className="text-lg text-text-muted leading-relaxed mt-4">
-            I believe good medicine is about paying attention — to the whole person, not just the
-            symptom. I believe technology should serve life, not replace it. And I believe that the
-            outdoors has a way of clarifying what is actually important.
+            Years later, after caring for my brother through glioblastoma, training in osteopathic
+            medicine, spending long nights in trauma bays and operating rooms, and learning
+            firsthand both the power and limits of modern healthcare, I found myself drawn toward a
+            different kind of question:
+          </p>
+          <p className="font-serif text-2xl text-text-base leading-snug mt-6">
+            Not just <em>how do we treat disease?</em>
+            <br />
+            <em>How do we help people live well?</em>
+          </p>
+          <p className="text-lg text-text-muted leading-relaxed mt-6">
+            That question still guides everything I do.
           </p>
         </div>
       </section>

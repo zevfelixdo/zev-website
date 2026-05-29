@@ -9,9 +9,9 @@ export const revalidate = 60;
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
 
 export const metadata: Metadata = {
-  title: "About Zev",
+  title: "The Long Way Here",
   description:
-    "California background, USC education, osteopathic training, surgery, family medicine, and a dog named Maisy.",
+    "How Zev Felix found his way to Family Medicine — through film school, Camp Grounded and Digital Detox, his brother Levi, surgery, and a rescue dog from Taiwan.",
   alternates: { canonical: `${BASE}/about` },
 };
 
@@ -41,11 +41,12 @@ export default async function AboutPage() {
             About
           </p>
           <h1 className="font-serif text-5xl sm:text-6xl font-semibold text-text-base leading-tight mb-6">
-            About Zev
+            The Long Way Here
           </h1>
           <p className="text-xl text-text-muted leading-relaxed">
-            Physician, climber, tinkerer, and occasional cook. Trying to do meaningful work
-            and stay present while doing it.
+            The first thing most people want to know about a doctor is where they trained.
+            That&#8217;s fair. The more interesting question is how they ended up there in the
+            first place.
           </p>
         </div>
       </section>
@@ -58,54 +59,83 @@ export default async function AboutPage() {
           <div className="lg:col-span-2 space-y-6 text-text-base leading-relaxed">
             <ScrollReveal variant="fade">
               <p className="text-lg">
-                I grew up in California and ended up at the University of Southern California, where I
-                studied business and found myself spending more and more time in the documentary film
-                program. I was drawn to stories — to what makes people the way they are, and why
-                communities become what they become.
+                My path to Family Medicine has taken me through film school, startup culture,
+                Chinese martial arts training, adult summer camps, surgery, wilderness medicine,
+                woodworking shops, climbing walls, and one very patient rescue dog from Taiwan.
               </p>
             </ScrollReveal>
             <ScrollReveal variant="fade" delay={80}>
               <p>
-                For a while, I thought that meant film. It turned out it meant medicine.
+                At USC, I studied business and cinematic arts because I was fascinated by stories.
+                Not fictional stories so much as real ones. Why people make the decisions they do.
+                How communities form. How identity gets built.
               </p>
             </ScrollReveal>
             <ScrollReveal variant="fade" delay={120}>
               <p>
-                After USC, I did a post-baccalaureate pre-medical program and eventually enrolled in
-                osteopathic medical school. Osteopathic medicine appealed to me because of its
-                emphasis on the whole person — the idea that the body, mind, and context of a person's
-                life are inseparable from their health. That framing felt right.
+                After college, those interests led me somewhere unexpected. Together with my brother
+                Levi and a group of remarkably creative friends, I helped build Camp Grounded and
+                Digital Detox — device-free retreats where adults stepped away from phones, work
+                identities, and constant connectivity for a few days.
               </p>
             </ScrollReveal>
             <ScrollReveal variant="fade" delay={160}>
-              <p>
-                I trained in surgery and spent time in burn surgery, acute care surgery, and
-                ICU/trauma settings. Surgery is technically demanding, fast, and unambiguous in a
-                certain way — you either fixed the problem or you did not. I respect that. But over
-                time I found myself more drawn to the parts of care that happen before the operating
-                room, and after. The conversations. The prevention. The continuity.
+              <p className="font-serif text-xl text-text-base">
+                The idea sounds simple. The results were not.
               </p>
             </ScrollReveal>
             <ScrollReveal variant="fade" delay={200}>
               <p>
-                I am currently training in family medicine, which I think of as the most complete
-                version of the kind of physician I want to be. Whole-person care. Prevention.
-                Behavioral health. Long-term relationships with patients and communities.
+                People arrived exhausted. By the end of the weekend they were singing around
+                campfires, making things with their hands, having difficult conversations,
+                reconnecting with old dreams, and remembering parts of themselves that had been
+                buried beneath calendars, deadlines, and notifications.
               </p>
             </ScrollReveal>
             <ScrollReveal variant="fade" delay={240}>
               <p>
-                In between, I co-founded a company called Digital Detox and helped run Camp Grounded —
-                a summer camp for adults built around disconnecting from devices and reconnecting with
-                people, creativity, and nature. My brother and I built it together. He died several
-                years ago, and that experience shaped me in ways that are still becoming clear.
+                Long before I entered medicine, I found myself captivated by a question that would
+                follow me for years: <em>What helps people feel alive?</em>
               </p>
             </ScrollReveal>
             <ScrollReveal variant="fade" delay={280}>
               <p>
-                Outside of medicine and work, I rock climb — trad and top rope, mostly in Yosemite
-                and the Sierra. I cook, make things, and spend time outside whenever possible. I have a
-                dog named Maisy who is the most sensible member of my household.
+                That question became far more personal when my brother Levi was diagnosed with
+                glioblastoma. Watching him move through surgeries, treatments, setbacks, difficult
+                conversations, and eventually hospice changed what I noticed about healthcare.
+              </p>
+            </ScrollReveal>
+            <ScrollReveal variant="fade" delay={320}>
+              <p>
+                I paid attention to the physicians who could explain complicated things clearly. The
+                nurses who knew when to speak and when to sit quietly. The small acts of competence
+                that created trust. The moments of presence that helped families carry impossible
+                situations.
+              </p>
+            </ScrollReveal>
+            <ScrollReveal variant="fade" delay={360}>
+              <p className="font-serif text-xl text-text-base">
+                Medicine stopped being an abstract profession. It became deeply human.
+              </p>
+            </ScrollReveal>
+            <ScrollReveal variant="fade" delay={400}>
+              <p>
+                Years later, I entered osteopathic medical school and eventually completed a
+                preliminary year in General Surgery at UCSF East Bay in Oakland. Surgery taught me
+                urgency, discipline, teamwork, and how to function when things become complicated
+                very quickly.
+              </p>
+            </ScrollReveal>
+            <ScrollReveal variant="fade" delay={440}>
+              <p>
+                It also clarified what I wanted most. I wanted continuity. I wanted relationships. I
+                wanted to help people before they arrived in crisis.
+              </p>
+            </ScrollReveal>
+            <ScrollReveal variant="fade" delay={480}>
+              <p>
+                Family Medicine felt less like changing directions and more like finally arriving at
+                the place where all the pieces belonged.
               </p>
             </ScrollReveal>
           </div>
@@ -135,11 +165,10 @@ export default async function AboutPage() {
                 </p>
                 <ul className="space-y-2 text-sm text-text-base">
                   <li>California raised</li>
-                  <li>USC — Business &amp; Documentary Film</li>
-                  <li>Osteopathic medical training (DO)</li>
-                  <li>General surgery residency</li>
-                  <li>Burn &amp; acute care surgery</li>
-                  <li>Family medicine (current)</li>
+                  <li>USC — Business &amp; Cinematic Arts</li>
+                  <li>Osteopathic medical school (DO)</li>
+                  <li>Preliminary year, General Surgery (UCSF East Bay)</li>
+                  <li>Family Medicine resident (current)</li>
                 </ul>
               </div>
             </ScrollReveal>

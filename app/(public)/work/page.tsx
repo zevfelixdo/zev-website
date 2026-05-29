@@ -12,9 +12,9 @@ import { ScrollReveal } from "@/components/public/ScrollReveal";
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
 
 export const metadata: Metadata = {
-  title: "Work & Projects",
+  title: "Building Things That Bring People Together",
   description:
-    "Medical projects, writing, web apps, technology and healthcare tools, and creative projects.",
+    "Camp Grounded, Digital Detox, telemedicine research, medical education, community health, and technology projects — all versions of the same question: how do we make things work better for humans?",
   alternates: { canonical: `${BASE}/work` },
 };
 
@@ -55,22 +55,61 @@ export default async function WorkPage() {
       <section className="section-y container-content">
         <div className="max-w-3xl">
           <p className="text-sm font-medium tracking-wider uppercase text-primary mb-4">
-            Work &amp; Projects
+            Projects
           </p>
           <h1 className="font-serif text-5xl sm:text-6xl font-semibold text-text-base leading-tight mb-6">
-            Things I have built
+            Building Things That Bring People Together
           </h1>
           <p className="text-xl text-text-muted leading-relaxed">
-            Medical projects, writing, web tools, and creative work. Some are finished. Some are
-            ongoing. Some are just ideas.
+            I&#8217;ve spent much of my life building things. Some of those things are tangible &mdash;
+            furniture, websites, events, community spaces. Some are harder to see &mdash; experiences,
+            conversations, relationships, communities.
           </p>
         </div>
       </section>
 
       <div className="border-t border-border" />
 
-      {/* Projects grid */}
+      {/* Narrative */}
       <section className="section-y container-content">
+        <div className="max-w-2xl space-y-5 text-text-base leading-relaxed">
+          <p>
+            Before medicine, I helped create Camp Grounded and Digital Detox, organizations built
+            around helping people reconnect with themselves and each other in an increasingly
+            connected world.
+          </p>
+          <p>
+            Since entering healthcare, I&#8217;ve continued exploring similar questions through
+            telemedicine research, medical education, community health initiatives, and technology
+            projects.
+          </p>
+          <p className="font-serif text-xl text-text-base">
+            The specific projects change. The underlying interest stays remarkably consistent.
+          </p>
+          <div className="space-y-2 font-serif text-xl text-text-base leading-snug border-l-4 border-accent pl-5">
+            <p>How do we help people connect?</p>
+            <p>How do we reduce unnecessary barriers?</p>
+            <p>
+              How do we design systems that support human flourishing rather than simply efficiency?
+            </p>
+          </div>
+          <p>
+            Whether I&#8217;m building a website, designing a presentation, conducting research,
+            organizing an event, or caring for patients, I&#8217;m usually trying to solve some
+            version of the same problem.
+          </p>
+          <p className="font-serif text-2xl text-text-base leading-snug">
+            How do we make things work better for humans?
+          </p>
+        </div>
+      </section>
+
+      {/* Projects grid */}
+      <section className="section-y bg-surface-alt">
+        <div className="container-content">
+          <h2 className="font-serif text-3xl font-semibold text-text-base mb-10">
+            Selected work
+          </h2>
         {projects.length === 0 ? (
           <p className="text-text-muted">Projects coming soon.</p>
         ) : (
@@ -134,6 +173,7 @@ export default async function WorkPage() {
             ))}
           </div>
         )}
+        </div>
       </section>
       <DynamicSections pageSlug="work" />
     </>
