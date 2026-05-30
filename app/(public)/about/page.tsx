@@ -1,8 +1,7 @@
 import { DynamicSections } from "@/components/public/DynamicSections";
 import type { Metadata } from "next";
-import Image from "next/image";
 import { ScrollReveal } from "@/components/public/ScrollReveal";
-import { createClient } from "@/lib/supabase/server";
+import { PlacedImage } from "@/components/public/PlacedImage";
 
 export const revalidate = 60;
 
@@ -15,23 +14,7 @@ export const metadata: Metadata = {
   alternates: { canonical: `${BASE}/about` },
 };
 
-async function getProfilePhotoUrl(): Promise<string | null> {
-  try {
-    const supabase = createClient();
-    const { data } = await supabase
-      .from("site_settings")
-      .select("value")
-      .eq("key", "profile_photo_url")
-      .single();
-    return (data?.value as string) ?? null;
-  } catch {
-    return null;
-  }
-}
-
 export default async function AboutPage() {
-  const profilePhotoUrl = await getProfilePhotoUrl();
-
   return (
     <>
       {/* Hero */}
@@ -142,21 +125,16 @@ export default async function AboutPage() {
 
           {/* Sidebar */}
           <div className="space-y-8">
-            {/* Profile photo */}
-            {profilePhotoUrl && (
-              <ScrollReveal variant="scale">
-                <div className="relative w-full aspect-square rounded-lg overflow-hidden border border-border shadow-card">
-                  <Image
-                    src={profilePhotoUrl}
-                    alt="Zev Felix"
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 320px"
-                    priority
-                  />
-                </div>
-              </ScrollReveal>
-            )}
+            {/* Profile photo (assigned via Admin → Image Placements) */}
+            <ScrollReveal variant="scale">
+              <PlacedImage
+                area="about.profile"
+                aspect="4/5"
+                priority
+                sizes="(max-width: 1024px) 100vw, 320px"
+                className="border border-border shadow-card"
+              />
+            </ScrollReveal>
 
             <ScrollReveal variant="slide-up" delay={100}>
               <div>

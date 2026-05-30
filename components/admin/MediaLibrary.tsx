@@ -11,6 +11,8 @@ import { Upload, Trash2, Edit2, Search, Image, FileVideo, FileText, File } from 
 import toast from "react-hot-toast";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
+import { CropModal } from "@/components/admin/CropModal";
+import { Crop } from "lucide-react";
 
 function MediaIcon({ mimeType }: { mimeType: string }) {
   if (isImageMimeType(mimeType)) return <Image size={20} className="text-purple-500" />;
@@ -238,6 +240,10 @@ export function MediaLibraryClient({ initialMedia }: MediaLibraryClientProps) {
               setMedia((prev) => prev.map((x) => (x.id === m.id ? m : x)));
               setSelected(m);
             }}
+            onCreated={(m) => {
+              setMedia((prev) => [m, ...prev]);
+              setSelected(m);
+            }}
             onClose={() => setSelected(null)}
           />
         )}
@@ -263,14 +269,17 @@ const clampPct = (n: number) => Math.min(100, Math.max(0, Math.round(n)));
 function MediaEditor({
   media,
   onSaved,
+  onCreated,
   onClose,
 }: {
   media: Media;
   onSaved: (m: Media) => void;
+  onCreated: (m: Media) => void;
   onClose: () => void;
 }) {
   const supabase = createClient();
   const isImage = isImageMimeType(media.mime_type);
+  const [cropOpen, setCropOpen] = useState(false);
   const [altText, setAltText] = useState(media.alt_text ?? "");
   const [caption, setCaption] = useState(media.caption ?? "");
   const [credit, setCredit] = useState(media.credit ?? "");
@@ -377,13 +386,24 @@ function MediaEditor({
         <div><span className="block">Uploaded</span><span className="text-text-base">{formatDate(media.created_at, { month: "short", day: "numeric", year: "numeric" })}</span></div>
       </div>
 
-      <div className="flex items-center justify-between pt-1">
-        {media.is_hidden ? <Badge variant="warning">Hidden</Badge> : <span />}
+      <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
+        <div className="flex items-center gap-3">
+          {media.is_hidden && <Badge variant="warning">Hidden</Badge>}
+          {isImage && (
+            <Button variant="outline" onClick={() => setCropOpen(true)}>
+              <Crop size={14} className="mr-1.5" /> Crop &amp; resize
+            </Button>
+          )}
+        </div>
         <div className="flex gap-3">
           <Button variant="ghost" onClick={onClose}>Close</Button>
           <Button onClick={save} loading={saving}>Save changes</Button>
         </div>
       </div>
+
+      {cropOpen && (
+        <CropModal media={media} onClose={() => setCropOpen(false)} onCreated={onCreated} />
+      )}
     </div>
   );
 }
