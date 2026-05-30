@@ -6,6 +6,8 @@ import { SearchBar } from "@/components/public/SearchBar";
 import { DynamicSections } from "@/components/public/DynamicSections";
 import { PlacedImage } from "@/components/public/PlacedImage";
 import { HeroWithPortrait } from "@/components/public/HeroWithPortrait";
+import { SmartImage } from "@/components/public/SmartImage";
+import { getPlacements } from "@/lib/placements";
 import { ScrollReveal } from "@/components/public/ScrollReveal";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
@@ -22,53 +24,62 @@ const navCards = [
     label: "About",
     href: "/about",
     icon: Heart,
+    area: "home.card.about",
     description: "The long way to Family Medicine: film, camp, surgery, and a dog from Taiwan.",
   },
   {
     label: "Family Medicine",
     href: "/medicine",
     icon: Stethoscope,
+    area: "home.card.medicine",
     description: "Why I chose it, and what it means to care for the space before crisis.",
   },
   {
     label: "Balance",
     href: "/balance",
     icon: Scale,
+    area: "home.card.balance",
     description: "Why balance is not the opposite of ambition.",
   },
   {
     label: "Technology",
     href: "/technology",
     icon: Cpu,
+    area: "home.card.technology",
     description: "Why the best tools create more connection, not less.",
   },
   {
     label: "Outside the Hospital",
     href: "/outdoors",
     icon: Mountain,
+    area: "home.card.outdoors",
     description: "Making things, climbing, Maisy, and wilderness medicine.",
   },
   {
     label: "Projects",
     href: "/work",
     icon: Hammer,
+    area: "home.card.projects",
     description: "Camp Grounded, Digital Detox, and building things that bring people together.",
   },
   {
     label: "Philosophy of Care",
     href: "/philosophy",
     icon: Compass,
+    area: "home.card.philosophy",
     description: "What matters to you? The question that changes everything.",
   },
   {
     label: "Writing",
     href: "/writing",
     icon: PenLine,
+    area: "home.card.writing",
     description: "Essays and notes on medicine, technology, and living well.",
   },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const cardImages = await getPlacements(navCards.map((c) => c.area));
   return (
     <>
       {/* Hero */}
@@ -140,24 +151,41 @@ export default function HomePage() {
             Explore the site
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {navCards.map(({ label, href, icon: Icon, description }, i) => (
+            {navCards.map(({ label, href, icon: Icon, description, area }, i) => {
+              const cover = cardImages[area];
+              return (
               <ScrollReveal key={href} delay={i * 60} variant="slide-up">
               <Link
                 href={href}
-                className="group flex flex-col gap-3 p-6 bg-surface border border-border rounded-lg shadow-card hover:shadow-dropdown hover:border-primary/30 transition-all duration-200 h-full"
+                className="group flex flex-col bg-surface border border-border rounded-lg shadow-card hover:shadow-dropdown hover:border-primary/30 transition-all duration-200 h-full overflow-hidden"
               >
-                <div className="flex items-center gap-3">
-                  <span className="p-2 rounded bg-primary/8 text-primary">
-                    <Icon size={18} />
-                  </span>
-                  <span className="font-serif font-semibold text-text-base group-hover:text-primary transition-colors">
-                    {label}
-                  </span>
+                {cover?.media && (
+                  <SmartImage
+                    src={cover.media.public_url}
+                    alt={cover.alt_override ?? cover.media.alt_text}
+                    focalX={cover.focal_x}
+                    focalY={cover.focal_y}
+                    fit={cover.fit}
+                    aspect="16/10"
+                    rounded={false}
+                    sizes="(min-width:1024px) 360px, (min-width:640px) 50vw, 100vw"
+                  />
+                )}
+                <div className="flex flex-col gap-3 p-6">
+                  <div className="flex items-center gap-3">
+                    <span className="p-2 rounded bg-primary/8 text-primary">
+                      <Icon size={18} />
+                    </span>
+                    <span className="font-serif font-semibold text-text-base group-hover:text-primary transition-colors">
+                      {label}
+                    </span>
+                  </div>
+                  <p className="text-sm text-text-muted leading-relaxed">{description}</p>
                 </div>
-                <p className="text-sm text-text-muted leading-relaxed">{description}</p>
               </Link>
               </ScrollReveal>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

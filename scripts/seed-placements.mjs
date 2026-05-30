@@ -34,6 +34,15 @@ const placements = {
   "outdoors.hero": { file: "ZevFelixDO-44.jpg", fx: 50, fy: 50, alt: "Yosemite Valley" },
   "outdoors.climbing": { file: "ZevFelixDO-56.jpg", fx: 50, fy: 40, alt: "Rock climbing in Yosemite" },
   "outdoors.maisy": { file: "ZevFelixDO-30.jpg", fx: 45, fy: 45, alt: "Maisy, a rescue dog, among California poppies" },
+  // Home "Explore the site" card covers
+  "home.card.about": { file: "ZevFelixDO.jpg", fx: 50, fy: 30, alt: "Zev Felix" },
+  "home.card.medicine": { file: "ZevFelixDO-33.jpg", fx: 50, fy: 28, alt: "Zev Felix with a stethoscope" },
+  "home.card.balance": { file: "ZevFelixDO-45.jpg", fx: 50, fy: 50, alt: "A mountain landscape" },
+  "home.card.technology": { file: "ZevFelixDO-34.jpg", fx: 50, fy: 28, alt: "Zev Felix" },
+  "home.card.outdoors": { file: "ZevFelixDO-56.jpg", fx: 50, fy: 35, alt: "Rock climbing in Yosemite" },
+  "home.card.projects": { file: "ZevFelixDO-2.jpg", fx: 50, fy: 45, alt: "The Camp Grounded community" },
+  "home.card.philosophy": { file: "ZevFelixDO-62.jpg", fx: 50, fy: 35, alt: "Zev Felix" },
+  "home.card.writing": { file: "ZevFelixDO-47.jpg", fx: 50, fy: 50, alt: "Yosemite Valley" },
   // Camp grid
   "unplugged.hero": { file: "ZevFelixDO-2.jpg", fx: 50, fy: 45, alt: "Campers at Camp Grounded in the redwoods" },
   "unplugged.camp1": { file: "ZevFelixDO-5.jpg", fx: 50, fy: 38, alt: "A playful moment at Camp Grounded" },
