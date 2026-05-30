@@ -339,7 +339,7 @@ function MediaEditor({
             <p className="text-xs text-text-muted mt-1">Focal: {fx}% / {fy}%</p>
           </div>
           {/* Live crop previews */}
-          <div className="flex sm:flex-col gap-3">
+          <div className="flex flex-wrap sm:flex-col gap-3">
             {[
               { label: "Wide", w: 160, h: 90 },
               { label: "Square", w: 96, h: 96 },

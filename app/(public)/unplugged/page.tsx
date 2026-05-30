@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { DynamicSections } from "@/components/public/DynamicSections";
+import { PlacedImage } from "@/components/public/PlacedImage";
 import type { Metadata } from "next";
 
 export const revalidate = 60;
@@ -40,7 +41,12 @@ export default function UnpluggedPage() {
         </div>
       </section>
 
-      <div className="border-t border-border" />
+      {/* Hero image (renders only if assigned) */}
+      <section className="container-content">
+        <PlacedImage area="unplugged.hero" aspect="3/2" priority sizes="(min-width:1280px) 1100px, 100vw" />
+      </section>
+
+      <div className="border-t border-border mt-12" />
 
       {/* The origin */}
       <section className="section-y container-content">
@@ -157,6 +163,15 @@ export default function UnpluggedPage() {
               I try to build into my own life.
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* Scenes from camp (each tile renders only if assigned) */}
+      <section className="section-y container-content">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+          <PlacedImage area="unplugged.camp1" aspect="1/1" sizes="(min-width:640px) 33vw, 50vw" />
+          <PlacedImage area="unplugged.camp2" aspect="1/1" sizes="(min-width:640px) 33vw, 50vw" />
+          <PlacedImage area="unplugged.camp3" aspect="1/1" sizes="(min-width:640px) 33vw, 100vw" className="col-span-2 sm:col-span-1" />
         </div>
       </section>
 

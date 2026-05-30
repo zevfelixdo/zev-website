@@ -4,6 +4,7 @@ import { Stethoscope, Mountain, Heart, PenLine, Scale, Cpu, Hammer, Compass } fr
 import { Button } from "@/components/ui/Button";
 import { SearchBar } from "@/components/public/SearchBar";
 import { DynamicSections } from "@/components/public/DynamicSections";
+import { PlacedImage } from "@/components/public/PlacedImage";
 import { ScrollReveal } from "@/components/public/ScrollReveal";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
@@ -126,8 +127,13 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Feature band (renders only if assigned) */}
+      <section className="container-content">
+        <PlacedImage area="home.feature" aspect="21/9" sizes="(min-width:1280px) 1100px, 100vw" />
+      </section>
+
       {/* Navigation cards */}
-      <section className="section-y bg-surface-alt">
+      <section className="section-y bg-surface-alt mt-16">
         <div className="container-content">
           <h2 className="font-serif text-2xl font-semibold text-text-base mb-8">
             Explore the site

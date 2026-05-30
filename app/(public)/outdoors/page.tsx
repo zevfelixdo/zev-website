@@ -1,4 +1,5 @@
 import { DynamicSections } from "@/components/public/DynamicSections";
+import { PlacedImage } from "@/components/public/PlacedImage";
 import type { Metadata } from "next";
 
 export const revalidate = 60;
@@ -31,7 +32,12 @@ export default function OutdoorsPage() {
         </div>
       </section>
 
-      <div className="border-t border-border" />
+      {/* Hero image (only renders if an admin has assigned one) */}
+      <section className="container-content">
+        <PlacedImage area="outdoors.hero" aspect="16/9" priority sizes="(min-width:1280px) 1100px, 100vw" />
+      </section>
+
+      <div className="border-t border-border mt-12" />
 
       {/* Making things */}
       <section className="section-y container-content">
@@ -71,6 +77,7 @@ export default function OutdoorsPage() {
               <p>Stay present.</p>
               <p>Take the next step.</p>
             </div>
+            <PlacedImage area="outdoors.climbing" aspect="4/5" sizes="(min-width:1024px) 44vw, 100vw" />
           </div>
           <div className="space-y-5 text-text-base leading-relaxed">
             <h2 className="font-serif text-3xl font-semibold text-text-base">Maisy</h2>
@@ -83,6 +90,7 @@ export default function OutdoorsPage() {
               Earning that trust required patience, consistency, and letting progress happen on her
               timeline rather than mine.
             </p>
+            <PlacedImage area="outdoors.maisy" aspect="4/5" sizes="(min-width:1024px) 44vw, 100vw" />
           </div>
         </div>
       </section>
