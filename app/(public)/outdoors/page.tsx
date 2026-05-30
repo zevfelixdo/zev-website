@@ -1,5 +1,6 @@
 import { DynamicSections } from "@/components/public/DynamicSections";
 import { PlacedImage } from "@/components/public/PlacedImage";
+import { PlacedParallax } from "@/components/public/PlacedParallax";
 import type { Metadata } from "next";
 
 export const revalidate = 60;
@@ -32,10 +33,8 @@ export default function OutdoorsPage() {
         </div>
       </section>
 
-      {/* Hero image (only renders if an admin has assigned one) */}
-      <section className="container-content">
-        <PlacedImage area="outdoors.hero" aspect="16/9" priority sizes="(min-width:1280px) 1100px, 100vw" />
-      </section>
+      {/* Hero parallax band (only renders if an admin has assigned an image) */}
+      <PlacedParallax area="outdoors.hero" height="lg" />
 
       <div className="border-t border-border mt-12" />
 

@@ -115,6 +115,7 @@ export type SectionType =
   | "quote"
   | "callout"
   | "gallery"
+  | "parallax"
   | "video"
   | "timeline"
   | "cards"

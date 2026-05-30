@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { DynamicSections } from "@/components/public/DynamicSections";
 import { PlacedImage } from "@/components/public/PlacedImage";
+import { PlacedGallery } from "@/components/public/PlacedGallery";
 import type { Metadata } from "next";
 
 export const revalidate = 60;
@@ -166,13 +167,15 @@ export default function UnpluggedPage() {
         </div>
       </section>
 
-      {/* Scenes from camp (each tile renders only if assigned) */}
+      {/* Scenes from camp — interactive masonry gallery with lightbox */}
       <section className="section-y container-content">
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-          <PlacedImage area="unplugged.camp1" aspect="1/1" sizes="(min-width:640px) 33vw, 50vw" />
-          <PlacedImage area="unplugged.camp2" aspect="1/1" sizes="(min-width:640px) 33vw, 50vw" />
-          <PlacedImage area="unplugged.camp3" aspect="1/1" sizes="(min-width:640px) 33vw, 100vw" className="col-span-2 sm:col-span-1" />
-        </div>
+        <h2 className="font-serif text-2xl font-semibold text-text-base mb-6">Scenes from camp</h2>
+        <PlacedGallery
+          areas={["unplugged.camp1", "unplugged.camp2", "unplugged.camp3"]}
+          layout="masonry"
+          columns={3}
+          caption="Tap any photo to view it full-screen."
+        />
       </section>
 
       {/* Press */}

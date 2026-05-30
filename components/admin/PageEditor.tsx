@@ -46,8 +46,9 @@ const SECTION_TYPES: { value: SectionType; label: string }[] = [
   { value: "image_text", label: "Image + Text" },
   { value: "quote", label: "Quote" },
   { value: "callout", label: "Callout Box" },
-  { value: "gallery", label: "Gallery" },
-  { value: "video", label: "Video" },
+  { value: "gallery", label: "Gallery (grid / masonry / carousel)" },
+  { value: "parallax", label: "Parallax Banner" },
+  { value: "video", label: "Video (upload or YouTube/Vimeo)" },
   { value: "timeline", label: "Timeline" },
   { value: "cards", label: "Cards Grid" },
   { value: "divider", label: "Divider" },
@@ -166,20 +167,37 @@ function GalleryEditor({
     setImages(next);
   };
 
+  const galleryLayout = (content.layout as string) ?? "grid";
+
   return (
     <div className="space-y-4">
-      <div>
-        <label className="text-sm font-medium text-text-base mb-1.5 block">Columns</label>
-        <select
-          value={columns}
-          onChange={(e) => onChange({ ...content, columns: parseInt(e.target.value) })}
-          className="w-32 rounded border border-border bg-surface px-3 py-2.5 text-sm text-text-base focus:outline-none focus:ring-2 focus:ring-primary"
-        >
-          <option value={2}>2 columns</option>
-          <option value={3}>3 columns</option>
-          <option value={4}>4 columns</option>
-        </select>
+      <div className="flex flex-wrap gap-4">
+        <div>
+          <label className="text-sm font-medium text-text-base mb-1.5 block">Layout</label>
+          <select
+            value={galleryLayout}
+            onChange={(e) => onChange({ ...content, layout: e.target.value })}
+            className="w-44 rounded border border-border bg-surface px-3 py-2.5 text-sm text-text-base focus:outline-none focus:ring-2 focus:ring-primary"
+          >
+            <option value="grid">Grid (square tiles)</option>
+            <option value="masonry">Masonry (varied heights)</option>
+            <option value="carousel">Carousel (swipeable)</option>
+          </select>
+        </div>
+        <div>
+          <label className="text-sm font-medium text-text-base mb-1.5 block">Columns</label>
+          <select
+            value={columns}
+            onChange={(e) => onChange({ ...content, columns: parseInt(e.target.value) })}
+            className="w-32 rounded border border-border bg-surface px-3 py-2.5 text-sm text-text-base focus:outline-none focus:ring-2 focus:ring-primary"
+          >
+            <option value={2}>2 columns</option>
+            <option value={3}>3 columns</option>
+            <option value={4}>4 columns</option>
+          </select>
+        </div>
       </div>
+      <p className="text-xs text-text-muted">Click any image on the site to open it full-screen (lightbox). Carousels and the lightbox support swipe on touch devices.</p>
 
       <div className="space-y-3">
         {images.map((img, i) => (
@@ -290,6 +308,36 @@ function SectionContentEditor({
     case "gallery":
       return (
         <GalleryEditor content={content} onChange={onChange} />
+      );
+    case "parallax":
+      return (
+        <div className="space-y-3">
+          <div>
+            <label className="text-sm font-medium text-text-base mb-1.5 block">Background image</label>
+            <ImagePicker value={(content.imageUrl as string) ?? ""} onChange={(url) => set("imageUrl", url)} placeholder="Pick a wide landscape from the library" />
+          </div>
+          <Input label="Alt text" value={(content.alt as string) ?? ""} onChange={(e) => set("alt", e.target.value)} helper="Describe the image; leave blank if purely decorative" />
+          <Input label="Heading (optional, shown over the image)" value={(content.heading as string) ?? ""} onChange={(e) => set("heading", e.target.value)} />
+          <Input label="Subheading (optional)" value={(content.subheading as string) ?? ""} onChange={(e) => set("subheading", e.target.value)} />
+          <div className="flex flex-wrap gap-4">
+            <div>
+              <label className="text-sm font-medium text-text-base mb-1.5 block">Height</label>
+              <select value={(content.height as string) ?? "md"} onChange={(e) => set("height", e.target.value)} className="w-36 rounded border border-border bg-surface px-3 py-2.5 text-sm text-text-base focus:outline-none focus:ring-2 focus:ring-primary">
+                <option value="sm">Short</option>
+                <option value="md">Medium</option>
+                <option value="lg">Tall</option>
+              </select>
+            </div>
+            <div>
+              <label className="text-sm font-medium text-text-base mb-1.5 block">Vertical focal ({(content.focalY as number) ?? 50}%)</label>
+              <input type="range" min={0} max={100} value={(content.focalY as number) ?? 50} onChange={(e) => set("focalY", parseInt(e.target.value))} className="w-40 accent-primary mt-3" />
+            </div>
+          </div>
+          <label className="flex items-center gap-2.5 text-sm text-text-base cursor-pointer">
+            <input type="checkbox" checked={content.overlay !== false} onChange={(e) => set("overlay", e.target.checked)} className="rounded border-border" />
+            Darken image for text legibility
+          </label>
+        </div>
       );
     case "video":
       return (

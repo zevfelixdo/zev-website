@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import type { PageSection } from "@/types/database";
 import { VideoEmbed } from "./VideoEmbed";
-import { ImageGallery, type GalleryImage } from "./ImageGallery";
+import { ImageGallery, type GalleryImage, type GalleryLayout } from "./ImageGallery";
+import { Parallax } from "./Parallax";
 import { ContactForm } from "./ContactForm";
 import { NewsletterForm } from "./NewsletterForm";
 import { cn } from "@/lib/utils";
@@ -219,6 +220,7 @@ function GallerySection({ content }: { content: Record<string, unknown> }) {
   }));
 
   const columns = (content.columns as 2 | 3 | 4) ?? 3;
+  const layout = (content.layout as GalleryLayout) ?? "grid";
   const heading = content.heading as string | undefined;
   const caption = content.caption as string | undefined;
 
@@ -228,9 +230,25 @@ function GallerySection({ content }: { content: Record<string, unknown> }) {
         {heading && (
           <h2 className="font-serif text-3xl font-semibold text-text-base mb-6">{heading}</h2>
         )}
-        <ImageGallery images={images} columns={columns} caption={caption} />
+        <ImageGallery images={images} columns={columns} layout={layout} caption={caption} />
       </div>
     </section>
+  );
+}
+
+function ParallaxSection({ content }: { content: Record<string, unknown> }) {
+  const src = (content.imageUrl ?? content.url) as string | undefined;
+  if (!src) return null;
+  return (
+    <Parallax
+      src={src}
+      alt={(content.alt as string) ?? ""}
+      heading={content.heading as string | undefined}
+      subheading={content.subheading as string | undefined}
+      height={(content.height as "sm" | "md" | "lg") ?? "md"}
+      focalY={(content.focalY as number) ?? 50}
+      overlay={content.overlay !== false}
+    />
   );
 }
 
@@ -438,6 +456,7 @@ export function SectionRenderer({ section }: SectionRendererProps) {
     case "intro_text":    return <IntroTextSection content={content} />;
     case "image_text":    return <ImageTextSection content={content} />;
     case "gallery":       return <GallerySection content={content} />;
+    case "parallax":      return <ParallaxSection content={content} />;
     case "video":         return <VideoSection content={content} />;
     case "quote":         return <QuoteSection content={content} />;
     case "callout":       return <CalloutSection content={content} />;
