@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/server";
 import type { CvEntry, Publication } from "@/types/database";
 import { ExternalLink } from "lucide-react";
 import { PrintButton } from "@/components/public/PrintButton";
+import { HeroWithPortrait } from "@/components/public/HeroWithPortrait";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
 
@@ -79,7 +80,7 @@ export default async function CvPage() {
     <>
       {/* Hero */}
       <section className="section-y container-content">
-        <div className="max-w-3xl">
+        <HeroWithPortrait area="cv.portrait">
           <p className="text-sm font-medium tracking-wider uppercase text-primary mb-4">
             CV / Background
           </p>
@@ -91,7 +92,7 @@ export default async function CvPage() {
             neatly on a page but end up there anyway.
           </p>
           <PrintButton />
-        </div>
+        </HeroWithPortrait>
       </section>
 
       <div className="border-t border-border" />

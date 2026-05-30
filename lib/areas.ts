@@ -14,13 +14,34 @@ export interface AreaDef {
 }
 
 export const PLACEMENT_AREAS: AreaDef[] = [
+  // Home
+  { area: "home.portrait", label: "Home — hero portrait", page: "/", aspect: "4/5", note: "Portrait beside the intro" },
   { area: "home.feature", label: "Home — feature band", page: "/", aspect: "21/9", note: "Wide landscape works best" },
+  // About
   { area: "about.profile", label: "About — profile photo", page: "/about", aspect: "4/5", note: "Portrait of Zev" },
+  // Path
+  { area: "path.hero", label: "Path — hero", page: "/path", aspect: "3/2", note: "A scene from the journey" },
+  // Family Medicine
+  { area: "medicine.portrait", label: "Family Medicine — portrait", page: "/medicine", aspect: "4/5", note: "Clinical / professional portrait" },
+  // Balance
+  { area: "balance.hero", label: "Balance — hero", page: "/balance", aspect: "16/9", note: "Calming landscape" },
+  // Technology
+  { area: "technology.portrait", label: "Technology — portrait", page: "/technology", aspect: "4/5", note: "Portrait" },
+  // Outdoors
   { area: "outdoors.hero", label: "Outdoors — hero", page: "/outdoors", aspect: "16/9", note: "Landscape" },
   { area: "outdoors.climbing", label: "Outdoors — Climbing", page: "/outdoors", aspect: "4/5", note: "Portrait" },
   { area: "outdoors.maisy", label: "Outdoors — Maisy", page: "/outdoors", aspect: "4/5", note: "Portrait" },
+  // Projects / Work
+  { area: "work.hero", label: "Projects — hero", page: "/work", aspect: "3/2", note: "Community / building scene" },
+  // Philosophy
+  { area: "philosophy.portrait", label: "Philosophy — portrait", page: "/philosophy", aspect: "4/5", note: "Warm portrait" },
+  // Unplugged
   { area: "unplugged.hero", label: "Unplugged — hero", page: "/unplugged", aspect: "3/2", note: "Camp scene" },
   { area: "unplugged.camp1", label: "Unplugged — camp tile 1", page: "/unplugged", aspect: "1/1", note: "Square" },
   { area: "unplugged.camp2", label: "Unplugged — camp tile 2", page: "/unplugged", aspect: "1/1", note: "Square" },
   { area: "unplugged.camp3", label: "Unplugged — camp tile 3", page: "/unplugged", aspect: "1/1", note: "Square" },
+  // CV
+  { area: "cv.portrait", label: "CV — portrait", page: "/cv", aspect: "4/5", note: "Professional headshot" },
+  // Contact
+  { area: "contact.portrait", label: "Contact — portrait", page: "/contact", aspect: "4/5", note: "Friendly portrait" },
 ];

@@ -1,4 +1,5 @@
 import { DynamicSections } from "@/components/public/DynamicSections";
+import { HeroWithPortrait } from "@/components/public/HeroWithPortrait";
 import type { Metadata } from "next";
 import { ContactForm } from "@/components/public/ContactForm";
 import { NewsletterForm } from "@/components/public/NewsletterForm";
@@ -16,7 +17,7 @@ export default function ContactPage() {
     <>
       {/* Hero */}
       <section className="section-y container-content">
-        <div className="max-w-3xl">
+        <HeroWithPortrait area="contact.portrait">
           <p className="text-sm font-medium tracking-wider uppercase text-primary mb-4">
             Contact
           </p>
@@ -27,7 +28,7 @@ export default function ContactPage() {
             Whether you have a question, want to collaborate, or just want to say hello, I would
             love to hear from you.
           </p>
-        </div>
+        </HeroWithPortrait>
       </section>
 
       <div className="border-t border-border" />

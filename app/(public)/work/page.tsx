@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/Badge";
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import { ScrollReveal } from "@/components/public/ScrollReveal";
+import { PlacedImage } from "@/components/public/PlacedImage";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
 
@@ -68,7 +69,12 @@ export default async function WorkPage() {
         </div>
       </section>
 
-      <div className="border-t border-border" />
+      {/* Hero band (renders only if assigned) */}
+      <section className="container-content">
+        <PlacedImage area="work.hero" aspect="3/2" priority sizes="(min-width:1280px) 1100px, 100vw" />
+      </section>
+
+      <div className="border-t border-border mt-12" />
 
       {/* Narrative */}
       <section className="section-y container-content">

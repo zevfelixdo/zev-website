@@ -18,14 +18,27 @@ const sb = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_
 
 // area -> { file, fit, fx, fy, alt, caption }
 const placements = {
+  // Portraits
+  "home.portrait": { file: "ZevFelixDO-35.jpg", fx: 50, fy: 30, alt: "Zev Felix" },
+  "about.profile": { file: "ZevFelixDO.jpg", fx: 50, fy: 35, alt: "Zev Felix" },
+  "medicine.portrait": { file: "ZevFelixDO-33.jpg", fx: 50, fy: 30, alt: "Zev Felix, Family Medicine resident" },
+  "technology.portrait": { file: "ZevFelixDO-34.jpg", fx: 50, fy: 30, alt: "Zev Felix" },
+  "philosophy.portrait": { file: "ZevFelixDO-61.jpg", fx: 50, fy: 35, alt: "Zev Felix" },
+  "cv.portrait": { file: "ZevFelixDO-38.jpg", fx: 50, fy: 30, alt: "Zev Felix" },
+  "contact.portrait": { file: "ZevFelixDO-62.jpg", fx: 50, fy: 35, alt: "Zev Felix" },
+  // Landscapes / scenes
   "home.feature": { file: "ZevFelixDO-50.jpg", fx: 50, fy: 50, alt: "A Sierra Nevada alpine lake" },
+  "balance.hero": { file: "ZevFelixDO-48.jpg", fx: 50, fy: 50, alt: "A quiet mountain landscape at dusk" },
+  "path.hero": { file: "ZevFelixDO-64.jpg", fx: 50, fy: 50, alt: "A temple in China, from a season of martial arts training" },
+  "work.hero": { file: "ZevFelixDO-26.jpg", fx: 50, fy: 45, alt: "A community gathering" },
   "outdoors.hero": { file: "ZevFelixDO-44.jpg", fx: 50, fy: 50, alt: "Yosemite Valley" },
-  "outdoors.climbing": { file: "ZevFelixDO-56.jpg", fx: 50, fy: 40, alt: "Rock climbing" },
+  "outdoors.climbing": { file: "ZevFelixDO-56.jpg", fx: 50, fy: 40, alt: "Rock climbing in Yosemite" },
   "outdoors.maisy": { file: "ZevFelixDO-30.jpg", fx: 45, fy: 45, alt: "Maisy, a rescue dog, among California poppies" },
+  // Camp grid
   "unplugged.hero": { file: "ZevFelixDO-2.jpg", fx: 50, fy: 45, alt: "Campers at Camp Grounded in the redwoods" },
   "unplugged.camp1": { file: "ZevFelixDO-5.jpg", fx: 50, fy: 38, alt: "A playful moment at Camp Grounded" },
   "unplugged.camp2": { file: "ZevFelixDO-8.jpg", fx: 50, fy: 40, alt: "Campers gathered at Camp Grounded" },
-  "unplugged.camp3": { file: "ZevFelixDO-9.jpg", fx: 50, fy: 45, alt: "Camp Grounded in the redwoods" },
+  "unplugged.camp3": { file: "ZevFelixDO-6.jpg", fx: 50, fy: 45, alt: "Campers relaxing on a couch in the redwoods at Camp Grounded" },
 };
 
 // project slug -> photo

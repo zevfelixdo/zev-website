@@ -1,4 +1,5 @@
 import { DynamicSections } from "@/components/public/DynamicSections";
+import { HeroWithPortrait } from "@/components/public/HeroWithPortrait";
 import type { Metadata } from "next";
 
 export const revalidate = 60;
@@ -16,7 +17,7 @@ export default function PhilosophyPage() {
     <>
       {/* Hero */}
       <section className="section-y container-content">
-        <div className="max-w-3xl">
+        <HeroWithPortrait area="philosophy.portrait">
           <p className="text-sm font-medium tracking-wider uppercase text-primary mb-4">
             Philosophy of Care
           </p>
@@ -26,7 +27,7 @@ export default function PhilosophyPage() {
           <p className="text-xl text-text-muted leading-relaxed">
             One of the most important questions in medicine is also one of the simplest.
           </p>
-        </div>
+        </HeroWithPortrait>
       </section>
 
       <div className="border-t border-border" />

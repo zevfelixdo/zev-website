@@ -1,4 +1,5 @@
 import { DynamicSections } from "@/components/public/DynamicSections";
+import { HeroWithPortrait } from "@/components/public/HeroWithPortrait";
 import type { Metadata } from "next";
 
 export const revalidate = 60;
@@ -16,7 +17,7 @@ export default function TechnologyPage() {
     <>
       {/* Hero */}
       <section className="section-y container-content">
-        <div className="max-w-3xl">
+        <HeroWithPortrait area="technology.portrait">
           <p className="text-sm font-medium tracking-wider uppercase text-primary mb-4">
             Technology
           </p>
@@ -28,7 +29,7 @@ export default function TechnologyPage() {
             create one of the earliest digital detox movements. I conduct research involving
             telemedicine. I use AI tools regularly.
           </p>
-        </div>
+        </HeroWithPortrait>
       </section>
 
       <div className="border-t border-border" />

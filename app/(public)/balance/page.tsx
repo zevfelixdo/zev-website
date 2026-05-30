@@ -1,4 +1,5 @@
 import { DynamicSections } from "@/components/public/DynamicSections";
+import { PlacedImage } from "@/components/public/PlacedImage";
 import type { Metadata } from "next";
 
 export const revalidate = 60;
@@ -30,7 +31,12 @@ export default function BalancePage() {
         </div>
       </section>
 
-      <div className="border-t border-border" />
+      {/* Hero band (renders only if assigned) */}
+      <section className="container-content">
+        <PlacedImage area="balance.hero" aspect="16/9" priority sizes="(min-width:1280px) 1100px, 100vw" />
+      </section>
+
+      <div className="border-t border-border mt-12" />
 
       {/* Narrative */}
       <section className="section-y container-content">

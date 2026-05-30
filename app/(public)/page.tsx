@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { SearchBar } from "@/components/public/SearchBar";
 import { DynamicSections } from "@/components/public/DynamicSections";
 import { PlacedImage } from "@/components/public/PlacedImage";
+import { HeroWithPortrait } from "@/components/public/HeroWithPortrait";
 import { ScrollReveal } from "@/components/public/ScrollReveal";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
@@ -72,7 +73,7 @@ export default function HomePage() {
     <>
       {/* Hero */}
       <section className="section-y container-content">
-        <div className="max-w-3xl">
+        <HeroWithPortrait area="home.portrait">
           <p className="text-sm font-medium tracking-wider uppercase text-primary mb-4">
             Physician · Storyteller · Builder
           </p>
@@ -97,7 +98,7 @@ export default function HomePage() {
               See my work
             </Button>
           </div>
-        </div>
+        </HeroWithPortrait>
       </section>
 
       {/* Divider */}

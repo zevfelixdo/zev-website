@@ -1,4 +1,5 @@
 import { DynamicSections } from "@/components/public/DynamicSections";
+import { HeroWithPortrait } from "@/components/public/HeroWithPortrait";
 import type { Metadata } from "next";
 
 export const revalidate = 60;
@@ -16,7 +17,7 @@ export default function MedicinePage() {
     <>
       {/* Hero */}
       <section className="section-y container-content">
-        <div className="max-w-3xl">
+        <HeroWithPortrait area="medicine.portrait">
           <p className="text-sm font-medium tracking-wider uppercase text-primary mb-4">
             Family Medicine
           </p>
@@ -27,7 +28,7 @@ export default function MedicinePage() {
             Family Medicine wasn&#8217;t a backup plan. It was the answer to a question that took
             years to formulate.
           </p>
-        </div>
+        </HeroWithPortrait>
       </section>
 
       <div className="border-t border-border" />
