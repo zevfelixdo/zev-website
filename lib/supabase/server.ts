@@ -7,6 +7,13 @@ export function createClient() {
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
+      // Always read live from the database. Without this, Next.js stores
+      // Supabase responses in its (persistent) Data Cache, so content edited
+      // via the admin/scripts would not appear on the deployed site.
+      global: {
+        fetch: (input: RequestInfo | URL, init?: RequestInit) =>
+          fetch(input, { ...init, cache: "no-store" }),
+      },
       cookies: {
         getAll() {
           return cookieStore.getAll();
