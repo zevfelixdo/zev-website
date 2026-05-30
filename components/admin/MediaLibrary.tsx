@@ -228,36 +228,18 @@ export function MediaLibraryClient({ initialMedia }: MediaLibraryClientProps) {
         <UploadModal onUploaded={handleUploaded} onClose={() => setUploadOpen(false)} />
       </Modal>
 
-      {/* Media detail modal */}
-      <Modal open={!!selected} onClose={() => setSelected(null)} title="Media details" size="lg">
+      {/* Media editor modal */}
+      <Modal open={!!selected} onClose={() => setSelected(null)} title="Edit image" size="lg">
         {selected && (
-          <div className="p-6 space-y-4">
-            {isImageMimeType(selected.mime_type) && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={selected.public_url} alt={selected.alt_text ?? selected.name} className="w-full rounded-lg max-h-64 object-contain bg-surface-alt" />
-            )}
-            <div className="grid grid-cols-2 gap-3 text-sm">
-              <div><p className="text-text-muted text-xs mb-0.5">Name</p><p className="text-text-base font-medium break-all">{selected.name}</p></div>
-              <div><p className="text-text-muted text-xs mb-0.5">Size</p><p className="text-text-base">{formatBytes(selected.size_bytes)}</p></div>
-              <div><p className="text-text-muted text-xs mb-0.5">Type</p><p className="text-text-base">{selected.mime_type}</p></div>
-              <div><p className="text-text-muted text-xs mb-0.5">Uploaded</p><p className="text-text-base">{formatDate(selected.created_at, { month: "short", day: "numeric", year: "numeric" })}</p></div>
-            </div>
-            {selected.alt_text && <div><p className="text-text-muted text-xs mb-0.5">Alt text</p><p className="text-text-base text-sm">{selected.alt_text}</p></div>}
-            {selected.tags.length > 0 && (
-              <div className="flex flex-wrap gap-1.5">
-                {selected.tags.map((t) => <Badge key={t}>{t}</Badge>)}
-              </div>
-            )}
-            <div>
-              <p className="text-text-muted text-xs mb-1">Public URL</p>
-              <input
-                readOnly
-                value={selected.public_url}
-                className="w-full text-xs border border-border rounded px-2 py-1.5 bg-surface-alt text-text-muted font-mono"
-                onClick={(e) => (e.target as HTMLInputElement).select()}
-              />
-            </div>
-          </div>
+          <MediaEditor
+            key={selected.id}
+            media={selected}
+            onSaved={(m) => {
+              setMedia((prev) => prev.map((x) => (x.id === m.id ? m : x)));
+              setSelected(m);
+            }}
+            onClose={() => setSelected(null)}
+          />
         )}
       </Modal>
 
@@ -272,5 +254,136 @@ export function MediaLibraryClient({ initialMedia }: MediaLibraryClientProps) {
         </div>
       </Modal>
     </>
+  );
+}
+
+const clampPct = (n: number) => Math.min(100, Math.max(0, Math.round(n)));
+
+/** Full image editor: metadata, credit, visibility, and click-to-set focal point. */
+function MediaEditor({
+  media,
+  onSaved,
+  onClose,
+}: {
+  media: Media;
+  onSaved: (m: Media) => void;
+  onClose: () => void;
+}) {
+  const supabase = createClient();
+  const isImage = isImageMimeType(media.mime_type);
+  const [altText, setAltText] = useState(media.alt_text ?? "");
+  const [caption, setCaption] = useState(media.caption ?? "");
+  const [credit, setCredit] = useState(media.credit ?? "");
+  const [description, setDescription] = useState(media.description ?? "");
+  const [tags, setTags] = useState(media.tags.join(", "));
+  const [hidden, setHidden] = useState(media.is_hidden ?? false);
+  const [fx, setFx] = useState(media.focal_x ?? 50);
+  const [fy, setFy] = useState(media.focal_y ?? 50);
+  const [saving, setSaving] = useState(false);
+  const stageRef = useRef<HTMLButtonElement>(null);
+
+  const setFocal = (e: React.MouseEvent) => {
+    const el = stageRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    setFx(clampPct(((e.clientX - r.left) / r.width) * 100));
+    setFy(clampPct(((e.clientY - r.top) / r.height) * 100));
+  };
+
+  const save = async () => {
+    setSaving(true);
+    const patch = {
+      alt_text: altText || null,
+      caption: caption || null,
+      credit: credit || null,
+      description: description || null,
+      tags: tags.split(",").map((t) => t.trim()).filter(Boolean),
+      is_hidden: hidden,
+      focal_x: fx,
+      focal_y: fy,
+    };
+    const { data, error } = await supabase.from("media").update(patch).eq("id", media.id).select().single();
+    setSaving(false);
+    if (error) {
+      toast.error(error.message.includes("focal_x") ? "Run migration 005 first (image controls)." : error.message);
+      return;
+    }
+    toast.success("Saved");
+    onSaved(data as Media);
+  };
+
+  return (
+    <div className="p-6 space-y-5 max-h-[80vh] overflow-y-auto">
+      {isImage && (
+        <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-4">
+          {/* Focal-point stage: click to set the framing anchor */}
+          <div>
+            <p className="text-xs font-medium text-text-muted mb-1.5">
+              Focal point <span className="opacity-70">(click the image to set where it stays in view when cropped)</span>
+            </p>
+            <button
+              ref={stageRef}
+              type="button"
+              onClick={setFocal}
+              className="relative block w-full rounded-lg overflow-hidden border border-border cursor-crosshair"
+              style={{ maxHeight: 320 }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={media.public_url} alt={altText || media.name} className="w-full max-h-80 object-contain bg-surface-alt" />
+              <span
+                className="absolute w-5 h-5 rounded-full border-2 border-white bg-primary/70 ring-2 ring-primary shadow -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+                style={{ left: `${fx}%`, top: `${fy}%` }}
+                aria-hidden
+              />
+            </button>
+            <p className="text-xs text-text-muted mt-1">Focal: {fx}% / {fy}%</p>
+          </div>
+          {/* Live crop previews */}
+          <div className="flex sm:flex-col gap-3">
+            {[
+              { label: "Wide", w: 160, h: 90 },
+              { label: "Square", w: 96, h: 96 },
+              { label: "Portrait", w: 80, h: 110 },
+            ].map((p) => (
+              <div key={p.label} className="text-center">
+                <div className="rounded-md overflow-hidden border border-border" style={{ width: p.w, height: p.h }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={media.public_url}
+                    alt=""
+                    className="w-full h-full object-cover"
+                    style={{ objectPosition: `${fx}% ${fy}%` }}
+                  />
+                </div>
+                <p className="text-[10px] text-text-muted mt-1">{p.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <Input label="Alt text" value={altText} onChange={(e) => setAltText(e.target.value)} helper="Describe the image for screen readers and SEO" />
+      <Input label="Caption" value={caption} onChange={(e) => setCaption(e.target.value)} helper="Shown under the image where used" />
+      <Input label="Credit / source" value={credit} onChange={(e) => setCredit(e.target.value)} helper="Photographer or source attribution" />
+      <Input label="Tags" value={tags} onChange={(e) => setTags(e.target.value)} helper="Comma-separated: camp, climbing, portrait" />
+
+      <label className="flex items-center gap-2.5 text-sm text-text-base cursor-pointer">
+        <input type="checkbox" checked={hidden} onChange={(e) => setHidden(e.target.checked)} className="rounded border-border" />
+        Hide from the site (keeps it in the library)
+      </label>
+
+      <div className="grid grid-cols-2 gap-3 text-xs text-text-muted pt-1 border-t border-border">
+        <div><span className="block">Size</span><span className="text-text-base">{formatBytes(media.size_bytes)}{media.width ? ` · ${media.width}×${media.height}` : ""}</span></div>
+        <div><span className="block">Uploaded</span><span className="text-text-base">{formatDate(media.created_at, { month: "short", day: "numeric", year: "numeric" })}</span></div>
+      </div>
+
+      <div className="flex items-center justify-between pt-1">
+        {media.is_hidden ? <Badge variant="warning">Hidden</Badge> : <span />}
+        <div className="flex gap-3">
+          <Button variant="ghost" onClick={onClose}>Close</Button>
+          <Button onClick={save} loading={saving}>Save changes</Button>
+        </div>
+      </div>
+    </div>
   );
 }

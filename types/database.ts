@@ -139,6 +139,31 @@ export interface Media {
   tags: string[];
   uploaded_by: string | null;
   created_at: string;
+  // Image-control layer (migration 005). Optional so code compiles pre-migration.
+  focal_x?: number;
+  focal_y?: number;
+  is_hidden?: boolean;
+  credit?: string | null;
+}
+
+export type ImageFit = "cover" | "contain" | "fill" | "original";
+
+export interface ImagePlacement {
+  id: string;
+  area: string;
+  media_id: string | null;
+  fit: ImageFit;
+  focal_x: number;
+  focal_y: number;
+  focal_x_mobile: number | null;
+  focal_y_mobile: number | null;
+  aspect: string | null;
+  alt_override: string | null;
+  caption: string | null;
+  credit: string | null;
+  is_visible: boolean;
+  updated_at: string;
+  media?: Media | null;
 }
 
 export interface Project {
