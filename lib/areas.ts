@@ -25,6 +25,14 @@ export const PLACEMENT_AREAS: AreaDef[] = [
   { area: "home.card.projects", label: "Home card — Projects", page: "/", aspect: "16/10", note: "Card cover" },
   { area: "home.card.philosophy", label: "Home card — Philosophy", page: "/", aspect: "16/10", note: "Card cover" },
   { area: "home.card.writing", label: "Home card — Writing", page: "/", aspect: "16/10", note: "Card cover" },
+  { area: "home.glimpse1", label: "Home — glimpses gallery 1", page: "/", aspect: "1/1", note: "Square" },
+  { area: "home.glimpse2", label: "Home — glimpses gallery 2", page: "/", aspect: "1/1", note: "Square" },
+  { area: "home.glimpse3", label: "Home — glimpses gallery 3", page: "/", aspect: "1/1", note: "Square" },
+  // Body side-images
+  { area: "balance.side", label: "Balance — side image", page: "/balance", aspect: "4/5", note: "Beside the closing" },
+  { area: "technology.side", label: "Technology — side image", page: "/technology", aspect: "4/5", note: "Beside the closing" },
+  { area: "philosophy.opening", label: "Philosophy — opening side image", page: "/philosophy", aspect: "4/5", note: "Beside the opening" },
+  { area: "philosophy.goal", label: "Philosophy — goal side image", page: "/philosophy", aspect: "4/5", note: "Beside the goal" },
   // About
   { area: "about.profile", label: "About — profile photo", page: "/about", aspect: "4/5", note: "Portrait of Zev" },
   // Path

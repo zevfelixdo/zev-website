@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { SearchBar } from "@/components/public/SearchBar";
 import { DynamicSections } from "@/components/public/DynamicSections";
 import { PlacedImage } from "@/components/public/PlacedImage";
+import { PlacedGallery } from "@/components/public/PlacedGallery";
 import { HeroWithPortrait } from "@/components/public/HeroWithPortrait";
 import { SmartImage } from "@/components/public/SmartImage";
 import { getPlacements } from "@/lib/placements";
@@ -137,6 +138,16 @@ export default async function HomePage() {
             That question still guides everything I do.
           </p>
         </div>
+      </section>
+
+      {/* Glimpses gallery (renders only if assigned) */}
+      <section className="section-y container-content">
+        <PlacedGallery
+          areas={["home.glimpse1", "home.glimpse2", "home.glimpse3"]}
+          layout="grid"
+          columns={3}
+          caption="A few glimpses, in and out of the white coat. Tap to enlarge."
+        />
       </section>
 
       {/* Feature band (renders only if assigned) */}

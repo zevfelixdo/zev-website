@@ -1,5 +1,6 @@
 import { DynamicSections } from "@/components/public/DynamicSections";
 import { PlacedImage } from "@/components/public/PlacedImage";
+import { TextImageRow } from "@/components/public/TextImageRow";
 import type { Metadata } from "next";
 
 export const revalidate = 60;
@@ -83,13 +84,15 @@ export default function BalancePage() {
       {/* Closing */}
       <section className="section-y bg-surface-alt">
         <div className="container-content">
-          <div className="max-w-2xl space-y-3 font-serif text-2xl text-text-base leading-snug">
-            <p>The goal isn&#8217;t perfection.</p>
-            <p>
-              The goal is building a life that works well enough to keep showing up for the things
-              that matter.
-            </p>
-          </div>
+          <TextImageRow area="balance.side" imageSide="left">
+            <div className="space-y-3 font-serif text-2xl text-text-base leading-snug">
+              <p>The goal isn&#8217;t perfection.</p>
+              <p>
+                The goal is building a life that works well enough to keep showing up for the things
+                that matter.
+              </p>
+            </div>
+          </TextImageRow>
         </div>
       </section>
       <DynamicSections pageSlug="balance" />

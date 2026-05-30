@@ -34,6 +34,15 @@ const placements = {
   "outdoors.hero": { file: "ZevFelixDO-44.jpg", fx: 50, fy: 50, alt: "Yosemite Valley" },
   "outdoors.climbing": { file: "ZevFelixDO-56.jpg", fx: 50, fy: 40, alt: "Rock climbing in Yosemite" },
   "outdoors.maisy": { file: "ZevFelixDO-30.jpg", fx: 45, fy: 45, alt: "Maisy, a rescue dog, among California poppies" },
+  // Home glimpses gallery
+  "home.glimpse1": { file: "ZevFelixDO-46.jpg", fx: 50, fy: 40, alt: "Zev Felix climbing in Yosemite" },
+  "home.glimpse2": { file: "ZevFelixDO-14.jpg", fx: 50, fy: 35, alt: "Maisy, a rescue dog" },
+  "home.glimpse3": { file: "ZevFelixDO-66.jpg", fx: 50, fy: 45, alt: "Friends gathered around a table" },
+  // Body side-images
+  "balance.side": { file: "ZevFelixDO-28.jpg", fx: 50, fy: 40, alt: "Resting with friends on a winter mountain trip" },
+  "technology.side": { file: "ZevFelixDO-69.jpg", fx: 50, fy: 45, alt: "People gathered around a meal" },
+  "philosophy.opening": { file: "ZevFelixDO-57.jpg", fx: 50, fy: 45, alt: "Looking out over Yosemite Valley" },
+  "philosophy.goal": { file: "ZevFelixDO-20.jpg", fx: 50, fy: 40, alt: "Outdoors with a friend" },
   // Home "Explore the site" card covers
   "home.card.about": { file: "ZevFelixDO.jpg", fx: 50, fy: 30, alt: "Zev Felix" },
   "home.card.medicine": { file: "ZevFelixDO-33.jpg", fx: 50, fy: 28, alt: "Zev Felix with a stethoscope" },

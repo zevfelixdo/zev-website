@@ -1,5 +1,6 @@
 import { DynamicSections } from "@/components/public/DynamicSections";
 import { HeroWithPortrait } from "@/components/public/HeroWithPortrait";
+import { TextImageRow } from "@/components/public/TextImageRow";
 import type { Metadata } from "next";
 
 export const revalidate = 60;
@@ -72,22 +73,24 @@ export default function TechnologyPage() {
       {/* Closing question */}
       <section className="section-y bg-surface-alt">
         <div className="container-content">
-          <div className="max-w-2xl space-y-5 text-text-base leading-relaxed">
-            <p>
-              My interest in medicine, telemedicine, digital wellness, and emerging technologies all
-              comes back to a simple question:
-            </p>
-            <p className="font-serif text-2xl text-text-base leading-snug">
-              Does this help people live better lives?
-            </p>
-            <p>
-              If the answer is yes, I&#8217;m interested. If it creates more noise than value,
-              I&#8217;m not.
-            </p>
-            <p>
-              The future of healthcare will involve technology. I just hope it remains deeply human.
-            </p>
-          </div>
+          <TextImageRow area="technology.side" imageSide="right">
+            <div className="space-y-5 text-text-base leading-relaxed">
+              <p>
+                My interest in medicine, telemedicine, digital wellness, and emerging technologies all
+                comes back to a simple question:
+              </p>
+              <p className="font-serif text-2xl text-text-base leading-snug">
+                Does this help people live better lives?
+              </p>
+              <p>
+                If the answer is yes, I&#8217;m interested. If it creates more noise than value,
+                I&#8217;m not.
+              </p>
+              <p>
+                The future of healthcare will involve technology. I just hope it remains deeply human.
+              </p>
+            </div>
+          </TextImageRow>
         </div>
       </section>
       <DynamicSections pageSlug="technology" />

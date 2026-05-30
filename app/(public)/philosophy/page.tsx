@@ -1,5 +1,6 @@
 import { DynamicSections } from "@/components/public/DynamicSections";
 import { HeroWithPortrait } from "@/components/public/HeroWithPortrait";
+import { TextImageRow } from "@/components/public/TextImageRow";
 import type { Metadata } from "next";
 
 export const revalidate = 60;
@@ -34,11 +35,13 @@ export default function PhilosophyPage() {
 
       {/* Opening */}
       <section className="section-y container-content">
-        <div className="max-w-2xl space-y-4 font-serif text-2xl text-text-base leading-snug">
-          <p>What matters to you?</p>
-          <p className="text-text-muted">Not what&#8217;s the matter with you.</p>
-          <p>What matters to you.</p>
-        </div>
+        <TextImageRow area="philosophy.opening" imageSide="right">
+          <div className="space-y-4 font-serif text-2xl text-text-base leading-snug">
+            <p>What matters to you?</p>
+            <p className="text-text-muted">Not what&#8217;s the matter with you.</p>
+            <p>What matters to you.</p>
+          </div>
+        </TextImageRow>
       </section>
 
       {/* Narrative */}
@@ -60,25 +63,27 @@ export default function PhilosophyPage() {
 
       {/* Goal */}
       <section className="section-y container-content">
-        <div className="max-w-2xl space-y-5 text-text-base leading-relaxed">
-          <p>
-            My goal as a physician is not to create perfect patients. It&#8217;s to help people make
-            meaningful progress.
-          </p>
-          <div className="space-y-1 text-lg text-text-base">
-            <p>Sometimes that means medication.</p>
-            <p>Sometimes it means a procedure.</p>
+        <TextImageRow area="philosophy.goal" imageSide="left">
+          <div className="space-y-5 text-text-base leading-relaxed">
             <p>
-              Sometimes it means sleep, movement, connection, therapy, nutrition, boundaries,
-              community, or a difficult conversation.
+              My goal as a physician is not to create perfect patients. It&#8217;s to help people make
+              meaningful progress.
             </p>
-            <p>Usually it&#8217;s some combination of all of them.</p>
+            <div className="space-y-1 text-lg text-text-base">
+              <p>Sometimes that means medication.</p>
+              <p>Sometimes it means a procedure.</p>
+              <p>
+                Sometimes it means sleep, movement, connection, therapy, nutrition, boundaries,
+                community, or a difficult conversation.
+              </p>
+              <p>Usually it&#8217;s some combination of all of them.</p>
+            </div>
+            <p>
+              The most effective healthcare I&#8217;ve seen is rarely the most complicated. It&#8217;s
+              the care that meets people where they are and helps them move forward from there.
+            </p>
           </div>
-          <p>
-            The most effective healthcare I&#8217;ve seen is rarely the most complicated. It&#8217;s
-            the care that meets people where they are and helps them move forward from there.
-          </p>
-        </div>
+        </TextImageRow>
       </section>
       <DynamicSections pageSlug="philosophy" />
     </>
