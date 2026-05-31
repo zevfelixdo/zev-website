@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { SearchBar } from "@/components/public/SearchBar";
@@ -11,11 +10,10 @@ import { RevealHeading } from "@/components/public/RevealHeading";
 import { Reveal } from "@/components/public/Reveal";
 import { Marquee } from "@/components/public/Marquee";
 import { MagneticButton } from "@/components/public/MagneticButton";
-import { ParallaxView } from "@/components/public/ParallaxView";
 import { Cartoon } from "@/components/public/Cartoon";
 import { Blob } from "@/components/public/Blob";
 import { Doodle } from "@/components/public/Doodle";
-import { getPlacement, getPlacements } from "@/lib/placements";
+import { getPlacements } from "@/lib/placements";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
 
@@ -48,11 +46,7 @@ const threads = [
 ];
 
 export default async function HomePage() {
-  const [hero, cardMap] = await Promise.all([
-    getPlacement("home.portrait"),
-    getPlacements(exploreItems.map((i) => i.area)),
-  ]);
-  const heroImg = hero?.media ?? null;
+  const cardMap = await getPlacements(exploreItems.map((i) => i.area));
 
   const items: ExploreItem[] = exploreItems.map((it) => {
     const p = cardMap[it.area];
@@ -68,27 +62,43 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* ── Hero ─────────────────────────────────────────── */}
+      {/* ── Hero — a playful, type-forward scene ─────────── */}
       <section className="relative overflow-hidden">
-        <div className="container-content grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-center min-h-[86vh] py-16 lg:py-20">
-          <div>
+        <div className="container-content relative flex flex-col items-center justify-center text-center min-h-[90vh] py-20 lg:py-24">
+          {/* bright background shapes */}
+          <Blob variant={1} float className="absolute -top-[4%] -left-[12%] h-[48%] w-[48%] text-fun-sky/25 blur-[2px]" />
+          <Blob variant={3} float className="absolute top-[6%] -right-[12%] h-[44%] w-[44%] text-fun-sun/30 blur-[2px]" />
+          <Blob variant={2} float className="absolute bottom-[2%] left-[26%] h-[46%] w-[46%] text-fun-coral/15 blur-[2px]" />
+
+          {/* scattered doodles (corners, clear of the centered text) */}
+          <Doodle name="sparkle" size={42} float className="absolute left-[8%] top-[15%] text-fun-coral" />
+          <Doodle name="sun" size={46} float className="absolute right-[9%] top-[17%] text-fun-tangerine" />
+          <Doodle name="star" size={26} className="absolute left-[14%] bottom-[24%] text-fun-sky" />
+          <Doodle name="loops" size={84} strokeWidth={4} className="hidden sm:block absolute right-[12%] bottom-[26%] text-fun-leaf/70" />
+
+          {/* side cartoons framing the headline (wide screens only) */}
+          <Cartoon name="drinking-coffee" width={210} float decorative className="hidden xl:block absolute left-0 bottom-[10%] w-[180px] h-auto sticker" />
+          <Cartoon name="hiking-standing" width={200} float decorative className="hidden xl:block absolute right-0 bottom-[9%] w-[172px] h-auto sticker" />
+
+          {/* center text */}
+          <div className="relative z-10 max-w-3xl">
             <p className="eyebrow rise" style={{ animationDelay: "40ms" }}>
               Physician · Storyteller · Builder
             </p>
-            <h1 className="font-serif text-display text-text-base mt-6 mb-7">
+            <h1 className="font-serif text-display text-text-base mt-5 mb-6">
               <RevealHeading text="Medicine, Storytelling, and the Art of Staying Human" trigger="mount" stagger={55} delay={120} />
             </h1>
-            <p className="text-lg sm:text-xl text-text-muted leading-relaxed max-w-xl rise" style={{ animationDelay: "620ms" }}>
+            <p className="text-lg sm:text-xl text-text-muted leading-relaxed max-w-2xl mx-auto rise" style={{ animationDelay: "620ms" }}>
               I&#8217;m Zev Felix, a Family Medicine resident, former Camp Grounded co-founder,
               climber, maker, and lifelong student of how people heal, connect, and build meaningful
               lives.
             </p>
-            <p className="text-base text-text-muted/90 leading-relaxed max-w-xl mt-4 rise" style={{ animationDelay: "720ms" }}>
+            <p className="text-base text-text-muted/90 leading-relaxed max-w-2xl mx-auto mt-4 rise" style={{ animationDelay: "720ms" }}>
               My path here has wound through documentary storytelling, digital detox retreats,
               wilderness medicine, surgery, community-building, and more than a few campfires.
               Family Medicine is where those threads finally came together.
             </p>
-            <div className="flex flex-wrap gap-3 mt-9 rise" style={{ animationDelay: "820ms" }}>
+            <div className="flex flex-wrap gap-3 mt-8 justify-center rise" style={{ animationDelay: "820ms" }}>
               <MagneticButton>
                 <Button as="link" href="/about" size="lg">Read my story</Button>
               </MagneticButton>
@@ -96,48 +106,22 @@ export default async function HomePage() {
             </div>
           </div>
 
-          {heroImg && (
-            <div className="relative rise" style={{ animationDelay: "160ms" }}>
-              {/* bright shapes behind the portrait */}
-              <Blob variant={2} float className="absolute -inset-[7%] z-0 h-[114%] w-[114%] text-fun-sky/25 blur-[1px]" />
-              <Blob variant={1} float className="absolute -right-[5%] bottom-[2%] z-0 h-[46%] w-[46%] text-fun-tangerine/25 blur-[1px]" />
-              {/* doodles */}
-              <Doodle name="sparkle" size={40} float className="absolute -top-3 right-8 z-20 text-fun-coral" />
-              <Doodle name="sun" size={30} float className="absolute -left-3 top-1/3 z-20 text-fun-sun" />
-              <Doodle name="star" size={22} className="absolute -right-2 bottom-24 z-20 text-fun-tangerine" />
-
-              <ParallaxView speed={0.05} className="relative z-10">
-                <div className="hover-zoom relative w-full aspect-[4/5] lg:aspect-auto lg:h-[78vh] rounded-lg overflow-hidden bg-surface-alt shadow-card">
-                  <Image
-                    src={heroImg.public_url}
-                    alt={hero?.alt_override ?? heroImg.alt_text ?? "Zev Felix"}
-                    fill
-                    priority
-                    sizes="(min-width:1024px) 46vw, 100vw"
-                    className="object-cover"
-                    style={{ objectPosition: `${hero?.focal_x ?? 50}% ${hero?.focal_y ?? 50}%` }}
-                  />
-                  <span className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-surface/85 backdrop-blur px-3 py-1.5 text-xs font-medium tracking-wide text-text-base shadow-card">
-                    <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />
-                    Family Medicine resident
-                  </span>
-                </div>
-              </ParallaxView>
-
-              {/* playful cartoon peeking in front */}
-              <Cartoon
-                name="petting-maisy"
-                width={170}
-                float
-                decorative
-                className="absolute -bottom-4 left-0 z-20 w-[140px] sm:w-[160px] h-auto sticker"
-              />
-            </div>
-          )}
+          {/* the star of the scene — Zev biking with Maisy */}
+          <div className="relative z-10 mt-10 rise" style={{ animationDelay: "900ms" }}>
+            <Doodle name="path" size={120} className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-[125%] text-fun-tangerine/45" />
+            <Cartoon
+              name="bike-w-maisy"
+              width={380}
+              priority
+              decorative
+              float
+              className="relative w-[270px] sm:w-[330px] lg:w-[380px] h-auto"
+            />
+          </div>
         </div>
 
         {/* Scroll cue */}
-        <div className="hidden lg:flex absolute bottom-7 left-1/2 -translate-x-1/2 flex-col items-center gap-1.5 text-text-muted">
+        <div className="hidden lg:flex absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center gap-1.5 text-text-muted">
           <span className="text-[0.68rem] uppercase tracking-[0.24em]">Scroll</span>
           <ChevronDown size={18} className="scroll-cue" aria-hidden="true" />
         </div>
