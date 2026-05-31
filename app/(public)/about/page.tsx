@@ -41,9 +41,11 @@ export default async function AboutPage() {
 
           {/* collage cluster */}
           <div className="relative mx-auto w-full max-w-[460px] aspect-square lg:aspect-[5/6]">
-            <Blob variant={2} float className="absolute -inset-[12%] h-[124%] w-[124%] text-primary/10 blur-[1px]" />
-            <Doodle name="sparkle" size={40} float className="absolute right-3 top-1 z-30 text-accent" />
-            <Doodle name="star" size={22} className="absolute bottom-12 left-0 z-30 text-primary/50" />
+            <Blob variant={2} float className="absolute -inset-[12%] h-[124%] w-[124%] text-fun-sky/30 blur-[1px]" />
+            <Blob variant={1} float className="absolute -left-[8%] top-[6%] h-[55%] w-[55%] text-fun-tangerine/25 blur-[1px]" />
+            <Doodle name="sparkle" size={40} float className="absolute right-3 top-1 z-30 text-fun-coral" />
+            <Doodle name="star" size={22} className="absolute bottom-12 left-0 z-30 text-fun-tangerine" />
+            <Doodle name="sun" size={26} float className="absolute right-8 bottom-16 z-30 text-fun-sun" />
 
             <ParallaxView speed={0.05} className="absolute right-1 top-1 z-10 w-[63%]">
               <div className="polaroid -rotate-3 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:!rotate-0">

@@ -5,6 +5,7 @@ const config: Config = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./lib/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   darkMode: "class",
   theme: {
@@ -20,6 +21,14 @@ const config: Config = {
         "text-base": "rgb(var(--color-text-base) / <alpha-value>)",
         "text-muted": "rgb(var(--color-text-muted) / <alpha-value>)",
         border: "rgb(var(--color-border) / <alpha-value>)",
+        // Bright, playful palette for decorative shapes/doodles (not theme tokens)
+        fun: {
+          sky: "#5BA4C9",
+          leaf: "#74B36E",
+          sun: "#F4C95D",
+          tangerine: "#EA8C46",
+          coral: "#E2785B",
+        },
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],

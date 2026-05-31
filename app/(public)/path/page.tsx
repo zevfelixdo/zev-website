@@ -1,5 +1,9 @@
 import { DynamicSections } from "@/components/public/DynamicSections";
-import { PlacedImage } from "@/components/public/PlacedImage";
+import { PlacedParallax } from "@/components/public/PlacedParallax";
+import { PageHero } from "@/components/public/PageHero";
+import { Reveal } from "@/components/public/Reveal";
+import { Cartoon } from "@/components/public/Cartoon";
+import { Doodle } from "@/components/public/Doodle";
 import type { Metadata } from "next";
 
 export const revalidate = 60;
@@ -58,31 +62,30 @@ const timeline = [
 export default function PathPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="section-y container-content">
-        <div className="max-w-3xl">
-          <p className="text-sm font-medium tracking-wider uppercase text-primary mb-4">
-            My Path
-          </p>
-          <h1 className="font-serif text-5xl sm:text-6xl font-semibold text-text-base leading-tight mb-6">
-            From Film to Family Medicine
-          </h1>
-          <p className="text-xl text-text-muted leading-relaxed">
-            The route was not a straight line, and I am glad it was not. Each detour taught me
-            something I now use as a physician. Here it is, in order.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="My Path"
+        heading="From Film to Family Medicine"
+        collage={{ cartoon: "walking", blobVariant: 2, blobClass: "text-primary/10", doodle: "path", doodleClass: "text-accent" }}
+      >
+        <p>
+          The route was not a straight line, and I am glad it was not. Each detour taught me
+          something I now use as a physician. Here it is, in order.
+        </p>
+      </PageHero>
 
       {/* Hero band (renders only if assigned) */}
-      <section className="container-content">
-        <PlacedImage area="path.hero" aspect="3/2" priority sizes="(min-width:1280px) 1100px, 100vw" />
-      </section>
-
-      <div className="border-t border-border mt-12" />
+      <PlacedParallax area="path.hero" height="lg" />
 
       {/* Timeline */}
-      <section className="section-y container-content">
+      <section className="relative section-y container-content overflow-x-clip">
+        <Cartoon
+          name="hiking-walking"
+          width={180}
+          float
+          decorative
+          className="hidden xl:block absolute right-4 top-40 w-[160px] h-auto sticker"
+        />
+        <Doodle name="path" size={120} className="hidden xl:block absolute right-10 top-12 text-accent/40" />
         <div className="max-w-2xl">
           <div className="relative">
             {/* Vertical line */}
@@ -90,20 +93,22 @@ export default function PathPage() {
 
             <ol className="space-y-10">
               {timeline.map((item, i) => (
-                <li key={i} className="relative pl-14 sm:pl-16">
-                  {/* Dot */}
-                  <div
-                    className="absolute left-2.5 sm:left-4 top-1.5 w-3 h-3 rounded-full bg-primary ring-4 ring-surface"
-                    aria-hidden
-                  />
-                  <p className="text-xs font-semibold uppercase tracking-wider text-primary mb-1">
-                    {item.period}
-                  </p>
-                  <h2 className="font-serif text-xl font-semibold text-text-base mb-2">
-                    {item.title}
-                  </h2>
-                  <p className="text-text-muted leading-relaxed">{item.body}</p>
-                </li>
+                <Reveal key={i} delay={i * 60}>
+                  <li className="relative pl-14 sm:pl-16">
+                    {/* Dot */}
+                    <div
+                      className="absolute left-2.5 sm:left-4 top-1.5 w-3 h-3 rounded-full bg-primary ring-4 ring-surface"
+                      aria-hidden
+                    />
+                    <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary mb-1">
+                      {item.period}
+                    </p>
+                    <h2 className="font-serif text-2xl font-semibold text-text-base mb-2">
+                      {item.title}
+                    </h2>
+                    <p className="text-text-muted leading-relaxed">{item.body}</p>
+                  </li>
+                </Reveal>
               ))}
             </ol>
           </div>
