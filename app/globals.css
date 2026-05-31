@@ -251,6 +251,13 @@
   }
   .scroll-cue { animation: scrollcue 1.9s ease-in-out infinite; }
 
+  /* Gentle bob for spot illustrations (cartoons) */
+  @keyframes floaty {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50%      { transform: translateY(-10px) rotate(-0.6deg); }
+  }
+  .float-soft { animation: floaty 6.5s ease-in-out infinite; }
+
   /* Hover image zoom helper — apply to a clipping wrapper around an <img>/Image */
   .hover-zoom { overflow: hidden; }
   .hover-zoom img {
@@ -278,6 +285,7 @@
   .rule-draw { transform: none !important; }
   .marquee-track { animation: none !important; }
   .scroll-cue { animation: none !important; }
+  .float-soft { animation: none !important; }
   .grain-overlay { display: none; }
 }
 

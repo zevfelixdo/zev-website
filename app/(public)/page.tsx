@@ -12,6 +12,7 @@ import { Reveal } from "@/components/public/Reveal";
 import { Marquee } from "@/components/public/Marquee";
 import { MagneticButton } from "@/components/public/MagneticButton";
 import { ParallaxView } from "@/components/public/ParallaxView";
+import { Cartoon } from "@/components/public/Cartoon";
 import { getPlacement, getPlacements } from "@/lib/placements";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
@@ -131,7 +132,14 @@ export default async function HomePage() {
       </div>
 
       {/* ── 01 Introduction ──────────────────────────────── */}
-      <section className="section-y container-content">
+      <section className="section-y container-content relative">
+        <Cartoon
+          name="walking"
+          width={190}
+          float
+          decorative
+          className="hidden xl:block absolute right-2 top-[44%] -translate-y-1/2 w-[170px] h-auto"
+        />
         <div className="grid lg:grid-cols-[auto_1fr] gap-5 lg:gap-16">
           <p className="section-index lg:pt-3 whitespace-nowrap">01 — Introduction</p>
           <div className="max-w-2xl space-y-6">
@@ -214,7 +222,7 @@ export default async function HomePage() {
       <section className="section-y container-content">
         <Reveal>
           <div className="relative overflow-hidden rounded-xl border border-border bg-surface-alt px-6 sm:px-12 py-14 sm:py-16">
-            <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-12 items-center">
               <div>
                 <p className="eyebrow mb-5">Stay a while</p>
                 <h2 className="font-serif text-display-sm text-text-base leading-tight">
@@ -230,14 +238,22 @@ export default async function HomePage() {
                   </MagneticButton>
                   <Button as="link" href="/writing" size="lg" variant="outline">Read the writing</Button>
                 </div>
+
+                <div className="mt-10 pt-8 border-t border-border max-w-md">
+                  <h3 className="font-serif text-lg text-text-base mb-3">Looking for something?</h3>
+                  <SearchBar variant="compact" />
+                </div>
               </div>
 
-              <div className="lg:border-l lg:border-border lg:pl-16">
-                <h3 className="font-serif text-xl text-text-base mb-3">Looking for something?</h3>
-                <p className="text-text-muted mb-5 text-sm">
-                  Search across every page, project, and essay on the site.
-                </p>
-                <SearchBar variant="compact" />
+              <div className="flex justify-center lg:justify-end">
+                <Cartoon
+                  name="laying-with-maisy"
+                  width={460}
+                  float
+                  decorative
+                  sizes="(min-width:1024px) 36vw, 70vw"
+                  className="w-full max-w-[260px] sm:max-w-[340px] lg:max-w-[440px] h-auto"
+                />
               </div>
             </div>
           </div>
