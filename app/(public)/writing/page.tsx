@@ -6,6 +6,9 @@ import { DynamicSections } from "@/components/public/DynamicSections";
 import { Badge } from "@/components/ui/Badge";
 import { formatDate } from "@/lib/utils";
 import { Clock, Rss, X } from "lucide-react";
+import { PageHero } from "@/components/public/PageHero";
+import { Reveal } from "@/components/public/Reveal";
+import { Doodle } from "@/components/public/Doodle";
 
 export const revalidate = 60;
 
@@ -74,34 +77,31 @@ export default async function WritingPage({ searchParams }: Props) {
   return (
     <>
       {/* Hero */}
-      <section className="section-y container-content">
-        <div className="max-w-3xl flex items-end justify-between gap-6 flex-wrap">
-          <div>
-            <p className="text-sm font-medium tracking-wider uppercase text-primary mb-4">
-              Writing
-            </p>
-            <h1 className="font-serif text-5xl sm:text-6xl font-semibold text-text-base leading-tight mb-6">
-              Essays &amp; notes
-            </h1>
-            <p className="text-xl text-text-muted leading-relaxed">
-              Occasional thoughts on medicine, technology, the outdoors, and what it means to live
-              well. Written when I have something worth saying.
-            </p>
-          </div>
-          <a
-            href="/feed.xml"
-            className="flex items-center gap-1.5 text-sm text-text-muted hover:text-primary transition-colors flex-shrink-0"
-            aria-label="RSS feed"
-          >
-            <Rss size={16} />
-            RSS
-          </a>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Writing"
+        heading="Essays & notes"
+        minH="min-h-[50vh]"
+        underDoodle={null}
+        collage={{ cartoon: "sitting", blobVariant: 1, doodle: "sparkle" }}
+      >
+        <p>
+          Occasional thoughts on medicine, technology, the outdoors, and what it means to live
+          well. Written when I have something worth saying.
+        </p>
+        <a
+          href="/feed.xml"
+          className="inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary transition-colors"
+          aria-label="RSS feed"
+        >
+          <Rss size={16} />
+          RSS feed
+        </a>
+      </PageHero>
 
       <div className="border-t border-border" />
 
-      <section className="section-y container-content">
+      <section className="relative section-y container-content overflow-x-clip">
+        <Doodle name="loops" size={80} strokeWidth={4} className="hidden lg:block absolute right-[6%] top-12 text-fun-sky/50" />
         {/* Tag filter bar */}
         {allTags.length > 0 && (
           <div className="flex flex-wrap items-center gap-2 mb-10 max-w-3xl">

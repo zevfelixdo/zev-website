@@ -11,6 +11,8 @@ import { sanitizePostHtml } from "@/lib/sanitize";
 import { ShareButtons } from "@/components/public/ShareButtons";
 import { ReadingProgress } from "@/components/public/ReadingProgress";
 import { RelatedPosts } from "@/components/public/RelatedPosts";
+import { RevealHeading } from "@/components/public/RevealHeading";
+import { Doodle } from "@/components/public/Doodle";
 
 export const revalidate = 300; // re-fetch at most every 5 minutes
 
@@ -127,7 +129,8 @@ export default async function PostPage({ params }: Props) {
       </div>
 
       {/* Hero */}
-      <article className="container-content py-10 max-w-3xl" id="article-body">
+      <article className="relative container-content py-10 max-w-3xl overflow-x-clip" id="article-body">
+        <Doodle name="sparkle" size={30} float className="hidden xl:block absolute right-2 top-12 text-fun-coral" />
         {/* Cover image */}
         {coverUrl && (
           <div className="relative w-full h-72 sm:h-96 rounded-lg overflow-hidden mb-10">
@@ -149,7 +152,7 @@ export default async function PostPage({ params }: Props) {
               <Link
                 key={tag}
                 href={`/writing?tag=${encodeURIComponent(tag)}`}
-                className="inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-full bg-primary/8 text-primary font-medium hover:bg-primary/14 transition-colors"
+                className="inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-full bg-primary/10 text-primary font-medium hover:bg-primary/20 transition-colors"
               >
                 <Tag size={10} />
                 {tag}
@@ -160,7 +163,7 @@ export default async function PostPage({ params }: Props) {
 
         {/* Title */}
         <h1 className="font-serif text-4xl sm:text-5xl font-semibold text-text-base leading-tight mb-5">
-          {post.title}
+          <RevealHeading text={post.title} trigger="mount" stagger={38} />
         </h1>
 
         {/* Meta */}
