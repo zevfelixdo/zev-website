@@ -85,7 +85,7 @@ export default function PathPage() {
           decorative
           className="hidden xl:block absolute right-4 top-40 w-[160px] h-auto sticker"
         />
-        <Doodle name="path" size={120} className="hidden xl:block absolute right-10 top-12 text-accent/40" />
+        <Doodle name="path" size={120} className="hidden xl:block absolute right-10 top-12 text-fun-tangerine/60" />
         <div className="max-w-2xl">
           <div className="relative">
             {/* Vertical line */}

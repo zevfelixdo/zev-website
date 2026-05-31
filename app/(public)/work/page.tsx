@@ -110,7 +110,7 @@ export default async function WorkPage() {
 
       {/* Projects grid */}
       <section className="relative bg-surface-alt section-y overflow-hidden">
-        <Doodle name="loops" size={90} strokeWidth={4} className="absolute right-[8%] top-10 text-accent/40" />
+        <Doodle name="loops" size={90} strokeWidth={4} className="absolute right-[8%] top-10 text-fun-leaf/60" />
         <div className="container-content relative">
           <Reveal>
             <h2 className="font-serif text-display-sm text-text-base mb-10">Selected work</h2>

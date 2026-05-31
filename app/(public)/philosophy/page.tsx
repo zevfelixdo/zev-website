@@ -45,7 +45,7 @@ export default function PhilosophyPage() {
 
       {/* Narrative */}
       <section className="relative bg-surface-alt section-y overflow-hidden">
-        <Doodle name="star" size={26} className="absolute right-[12%] top-12 text-primary/20" />
+        <Doodle name="star" size={26} className="absolute right-[12%] top-12 text-fun-coral/60" />
         <div className="container-content relative">
           <div className="max-w-2xl space-y-5 text-lg text-text-base leading-relaxed">
             <Reveal><p className="font-serif text-2xl text-text-base">The answer changes everything.</p></Reveal>

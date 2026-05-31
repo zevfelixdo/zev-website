@@ -66,7 +66,7 @@ export default function MedicinePage() {
 
       {/* The whole picture */}
       <section className="relative bg-surface-alt section-y overflow-hidden">
-        <Doodle name="sparkle" size={34} float className="absolute right-[12%] top-10 text-accent/50" />
+        <Doodle name="sparkle" size={34} float className="absolute right-[12%] top-10 text-fun-sun" />
         <div className="container-content relative">
           <div className="max-w-2xl space-y-4 font-serif text-2xl sm:text-3xl text-text-base leading-snug">
             <Reveal><p>A sore knee and the person attached to it.</p></Reveal>

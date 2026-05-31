@@ -32,7 +32,7 @@ export default function ContactPage() {
 
       {/* Forms */}
       <section className="relative section-y container-content overflow-x-clip">
-        <Doodle name="loops" size={90} strokeWidth={4} className="hidden lg:block absolute right-[6%] top-10 text-accent/40" />
+        <Doodle name="loops" size={90} strokeWidth={4} className="hidden lg:block absolute right-[6%] top-10 text-fun-sky/60" />
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-4xl">
           <Reveal>
             <div>

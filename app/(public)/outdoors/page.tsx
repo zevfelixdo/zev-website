@@ -93,7 +93,7 @@ export default function OutdoorsPage() {
 
       {/* Reflection */}
       <section className="relative bg-surface-alt section-y overflow-hidden">
-        <Doodle name="squiggle" size={90} strokeWidth={4} className="absolute right-[10%] top-10 text-accent/40" />
+        <Doodle name="squiggle" size={90} strokeWidth={4} className="absolute right-[10%] top-10 text-fun-coral/60" />
         <div className="container-content relative">
           <div className="max-w-2xl space-y-4 text-text-base leading-relaxed">
             <Reveal>

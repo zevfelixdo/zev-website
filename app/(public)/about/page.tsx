@@ -36,7 +36,7 @@ export default async function AboutPage() {
               That&#8217;s fair. The more interesting question is how they ended up there in the
               first place.
             </p>
-            <Doodle name="loops" size={120} className="hidden sm:block text-accent/60 mt-8 rise" strokeWidth={4} />
+            <Doodle name="loops" size={120} className="hidden sm:block text-fun-coral/80 mt-8 rise" strokeWidth={4} />
           </div>
 
           {/* collage cluster */}
@@ -136,7 +136,7 @@ export default async function AboutPage() {
 
       {/* ── 03 Levi (reverent, cartoon-free) ─────────────── */}
       <section className="relative bg-surface-alt section-y overflow-hidden">
-        <Doodle name="star" size={26} className="absolute right-[12%] top-10 text-primary/20" />
+        <Doodle name="star" size={26} className="absolute right-[12%] top-10 text-fun-sky/50" />
         <div className="container-content max-w-2xl relative">
           <Reveal><p className="section-index mb-6">03 — Levi</p></Reveal>
           <div className="space-y-6 text-lg text-text-base leading-relaxed">
@@ -215,7 +215,7 @@ export default async function AboutPage() {
 
       {/* ── Facts band ───────────────────────────────────── */}
       <section className="relative bg-primary text-surface section-y overflow-hidden">
-        <Doodle name="sparkle" size={30} float className="absolute left-[6%] top-10 text-surface/30" />
+        <Doodle name="sparkle" size={30} float className="absolute left-[6%] top-10 text-fun-sun/70" />
         <div className="container-content relative">
           <div className="grid lg:grid-cols-[1fr_1fr_1fr_auto] gap-10 lg:gap-12 items-start">
             <Reveal>

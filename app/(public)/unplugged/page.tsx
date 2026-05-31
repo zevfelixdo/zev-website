@@ -99,7 +99,7 @@ export default function UnpluggedPage() {
 
       {/* Levi — reverent, cartoon-free */}
       <section className="relative section-y container-content overflow-hidden">
-        <Doodle name="star" size={24} className="absolute right-[14%] top-10 text-primary/20" />
+        <Doodle name="star" size={24} className="absolute right-[14%] top-10 text-fun-sky/50" />
         <div className="max-w-2xl space-y-5 text-lg text-text-base leading-relaxed relative">
           <Reveal><h2 className="font-serif text-display-sm text-text-base">My brother Levi</h2></Reveal>
           <Reveal delay={80}><p>None of this would have existed without my brother Levi.</p></Reveal>

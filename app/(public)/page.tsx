@@ -13,6 +13,8 @@ import { Marquee } from "@/components/public/Marquee";
 import { MagneticButton } from "@/components/public/MagneticButton";
 import { ParallaxView } from "@/components/public/ParallaxView";
 import { Cartoon } from "@/components/public/Cartoon";
+import { Blob } from "@/components/public/Blob";
+import { Doodle } from "@/components/public/Doodle";
 import { getPlacement, getPlacements } from "@/lib/placements";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
@@ -95,23 +97,42 @@ export default async function HomePage() {
           </div>
 
           {heroImg && (
-            <ParallaxView speed={0.05} className="rise" >
-              <div className="hover-zoom relative w-full aspect-[4/5] lg:aspect-auto lg:h-[78vh] rounded-lg overflow-hidden bg-surface-alt shadow-card">
-                <Image
-                  src={heroImg.public_url}
-                  alt={hero?.alt_override ?? heroImg.alt_text ?? "Zev Felix"}
-                  fill
-                  priority
-                  sizes="(min-width:1024px) 46vw, 100vw"
-                  className="object-cover"
-                  style={{ objectPosition: `${hero?.focal_x ?? 50}% ${hero?.focal_y ?? 50}%` }}
-                />
-                <span className="absolute left-4 bottom-4 inline-flex items-center gap-2 rounded-full bg-surface/85 backdrop-blur px-3 py-1.5 text-xs font-medium tracking-wide text-text-base shadow-card">
-                  <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />
-                  Family Medicine resident
-                </span>
-              </div>
-            </ParallaxView>
+            <div className="relative rise" style={{ animationDelay: "160ms" }}>
+              {/* bright shapes behind the portrait */}
+              <Blob variant={2} float className="absolute -inset-[7%] z-0 h-[114%] w-[114%] text-fun-sky/25 blur-[1px]" />
+              <Blob variant={1} float className="absolute -right-[5%] bottom-[2%] z-0 h-[46%] w-[46%] text-fun-tangerine/25 blur-[1px]" />
+              {/* doodles */}
+              <Doodle name="sparkle" size={40} float className="absolute -top-3 right-8 z-20 text-fun-coral" />
+              <Doodle name="sun" size={30} float className="absolute -left-3 top-1/3 z-20 text-fun-sun" />
+              <Doodle name="star" size={22} className="absolute -right-2 bottom-24 z-20 text-fun-tangerine" />
+
+              <ParallaxView speed={0.05} className="relative z-10">
+                <div className="hover-zoom relative w-full aspect-[4/5] lg:aspect-auto lg:h-[78vh] rounded-lg overflow-hidden bg-surface-alt shadow-card">
+                  <Image
+                    src={heroImg.public_url}
+                    alt={hero?.alt_override ?? heroImg.alt_text ?? "Zev Felix"}
+                    fill
+                    priority
+                    sizes="(min-width:1024px) 46vw, 100vw"
+                    className="object-cover"
+                    style={{ objectPosition: `${hero?.focal_x ?? 50}% ${hero?.focal_y ?? 50}%` }}
+                  />
+                  <span className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-surface/85 backdrop-blur px-3 py-1.5 text-xs font-medium tracking-wide text-text-base shadow-card">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />
+                    Family Medicine resident
+                  </span>
+                </div>
+              </ParallaxView>
+
+              {/* playful cartoon peeking in front */}
+              <Cartoon
+                name="petting-maisy"
+                width={170}
+                float
+                decorative
+                className="absolute -bottom-4 left-0 z-20 w-[140px] sm:w-[160px] h-auto sticker"
+              />
+            </div>
           )}
         </div>
 
@@ -123,22 +144,26 @@ export default async function HomePage() {
       </section>
 
       {/* ── Threads marquee ──────────────────────────────── */}
-      <div className="full-bleed border-y border-border bg-surface-alt/50 py-5 sm:py-6">
-        <Marquee
-          items={threads}
-          duration={40}
-          itemClassName="font-serif italic text-2xl sm:text-3xl text-text-base/80"
-        />
+      <div className="overflow-x-clip">
+        <div className="full-bleed border-y border-border bg-surface-alt/50 py-5 sm:py-6">
+          <Marquee
+            items={threads}
+            duration={40}
+            itemClassName="font-serif italic text-2xl sm:text-3xl text-text-base/80"
+          />
+        </div>
       </div>
 
       {/* ── 01 Introduction ──────────────────────────────── */}
-      <section className="section-y container-content relative">
+      <section className="section-y container-content relative overflow-x-clip">
+        <Blob variant={3} float className="hidden xl:block absolute right-0 top-[44%] -translate-y-1/2 z-0 h-[280px] w-[280px] text-fun-leaf/25 blur-[1px]" />
+        <Doodle name="sparkle" size={30} float className="hidden xl:block absolute right-40 top-[26%] z-20 text-fun-tangerine" />
         <Cartoon
           name="walking"
           width={190}
           float
           decorative
-          className="hidden xl:block absolute right-2 top-[44%] -translate-y-1/2 w-[170px] h-auto"
+          className="hidden xl:block absolute right-2 top-[44%] -translate-y-1/2 z-10 w-[170px] h-auto sticker"
         />
         <div className="grid lg:grid-cols-[auto_1fr] gap-5 lg:gap-16">
           <p className="section-index lg:pt-3 whitespace-nowrap">01 — Introduction</p>
@@ -169,6 +194,9 @@ export default async function HomePage() {
           style={{ background: "radial-gradient(closest-side, rgb(var(--color-accent)), transparent)" }}
           aria-hidden="true"
         />
+        <Doodle name="sparkle" size={34} float className="absolute left-[9%] top-14 text-fun-sun/80" />
+        <Doodle name="star" size={26} className="absolute right-[11%] bottom-14 text-fun-coral/80" />
+        <Doodle name="loops" size={70} strokeWidth={4} className="hidden sm:block absolute right-[14%] top-16 text-fun-sky/50" />
         <div className="container-content max-w-3xl text-center relative">
           <Reveal variant="rule-draw" className="mx-auto mb-8 h-px w-16 bg-surface/40" />
           <p className="eyebrow !text-surface/60 mb-8">The question that guides everything</p>
@@ -188,7 +216,12 @@ export default async function HomePage() {
       <section className="section-y container-content">
         <Reveal>
           <div className="flex items-end justify-between gap-4 mb-8">
-            <h2 className="font-serif text-display-sm text-text-base">A few glimpses</h2>
+            <h2 className="font-serif text-display-sm text-text-base">
+              <span className="relative inline-block">
+                A few glimpses
+                <Doodle name="underline" stretch strokeWidth={3} className="absolute -bottom-2 left-0 h-3 w-full text-fun-tangerine/70" />
+              </span>
+            </h2>
             <p className="section-index hidden sm:block">In &amp; out of the white coat</p>
           </div>
         </Reveal>
@@ -203,7 +236,8 @@ export default async function HomePage() {
       </section>
 
       {/* ── 02 Explore ───────────────────────────────────── */}
-      <section className="section-y container-content">
+      <section className="relative section-y container-content overflow-x-clip">
+        <Doodle name="star" size={26} float className="hidden lg:block absolute right-6 top-16 text-fun-sky" />
         <Reveal>
           <div className="grid lg:grid-cols-[auto_1fr] gap-5 lg:gap-16 mb-12">
             <p className="section-index lg:pt-3 whitespace-nowrap">02 — Explore</p>
@@ -245,14 +279,18 @@ export default async function HomePage() {
                 </div>
               </div>
 
-              <div className="flex justify-center lg:justify-end">
+              <div className="relative flex justify-center lg:justify-end">
+                <Blob variant={2} float className="absolute inset-0 m-auto h-[112%] w-[112%] text-fun-sky/25 blur-[1px]" />
+                <Blob variant={1} float className="absolute right-2 bottom-2 h-[55%] w-[55%] text-fun-sun/30 blur-[1px]" />
+                <Doodle name="heart" size={28} float className="absolute right-6 top-1 z-20 text-fun-coral" />
+                <Doodle name="sparkle" size={22} float className="absolute left-6 bottom-8 z-20 text-fun-tangerine" />
                 <Cartoon
                   name="laying-with-maisy"
                   width={460}
                   float
                   decorative
                   sizes="(min-width:1024px) 36vw, 70vw"
-                  className="w-full max-w-[260px] sm:max-w-[340px] lg:max-w-[440px] h-auto"
+                  className="relative z-10 w-full max-w-[260px] sm:max-w-[340px] lg:max-w-[440px] h-auto"
                 />
               </div>
             </div>
