@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Stethoscope, Mountain, Heart, PenLine, Scale, Cpu, Hammer, Compass } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { SearchBar } from "@/components/public/SearchBar";
 import { DynamicSections } from "@/components/public/DynamicSections";
-import { PlacedImage } from "@/components/public/PlacedImage";
 import { PlacedGallery } from "@/components/public/PlacedGallery";
-import { HeroWithPortrait } from "@/components/public/HeroWithPortrait";
-import { SmartImage } from "@/components/public/SmartImage";
-import { getPlacements } from "@/lib/placements";
-import { ScrollReveal } from "@/components/public/ScrollReveal";
+import { PlacedParallax } from "@/components/public/PlacedParallax";
+import { ExploreIndex, type ExploreItem } from "@/components/public/ExploreIndex";
+import { getPlacement, getPlacements } from "@/lib/placements";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
 
@@ -20,201 +17,152 @@ export const metadata: Metadata = {
   alternates: { canonical: BASE },
 };
 
-const navCards = [
-  {
-    label: "About",
-    href: "/about",
-    icon: Heart,
-    area: "home.card.about",
-    description: "The long way to Family Medicine: film, camp, surgery, and a dog from Taiwan.",
-  },
-  {
-    label: "Family Medicine",
-    href: "/medicine",
-    icon: Stethoscope,
-    area: "home.card.medicine",
-    description: "Why I chose it, and what it means to care for the space before crisis.",
-  },
-  {
-    label: "Balance",
-    href: "/balance",
-    icon: Scale,
-    area: "home.card.balance",
-    description: "Why balance is not the opposite of ambition.",
-  },
-  {
-    label: "Technology",
-    href: "/technology",
-    icon: Cpu,
-    area: "home.card.technology",
-    description: "Why the best tools create more connection, not less.",
-  },
-  {
-    label: "Outside the Hospital",
-    href: "/outdoors",
-    icon: Mountain,
-    area: "home.card.outdoors",
-    description: "Making things, climbing, Maisy, and wilderness medicine.",
-  },
-  {
-    label: "Projects",
-    href: "/work",
-    icon: Hammer,
-    area: "home.card.projects",
-    description: "Camp Grounded, Digital Detox, and building things that bring people together.",
-  },
-  {
-    label: "Philosophy of Care",
-    href: "/philosophy",
-    icon: Compass,
-    area: "home.card.philosophy",
-    description: "What matters to you? The question that changes everything.",
-  },
-  {
-    label: "Writing",
-    href: "/writing",
-    icon: PenLine,
-    area: "home.card.writing",
-    description: "Essays and notes on medicine, technology, and living well.",
-  },
+const exploreItems = [
+  { label: "About", href: "/about", area: "home.card.about", description: "The long way to Family Medicine: film, camp, surgery, and a dog from Taiwan." },
+  { label: "Family Medicine", href: "/medicine", area: "home.card.medicine", description: "Why I chose it, and caring for the space before crisis." },
+  { label: "Balance", href: "/balance", area: "home.card.balance", description: "Why balance is not the opposite of ambition." },
+  { label: "Technology", href: "/technology", area: "home.card.technology", description: "Why the best tools create more connection, not less." },
+  { label: "Outside the Hospital", href: "/outdoors", area: "home.card.outdoors", description: "Making things, climbing, Maisy, and wilderness medicine." },
+  { label: "Projects", href: "/work", area: "home.card.projects", description: "Camp Grounded, Digital Detox, and building things that bring people together." },
+  { label: "Philosophy of Care", href: "/philosophy", area: "home.card.philosophy", description: "What matters to you? The question that changes everything." },
+  { label: "Writing", href: "/writing", area: "home.card.writing", description: "Essays and notes on medicine, technology, and living well." },
 ];
 
 export default async function HomePage() {
-  const cardImages = await getPlacements(navCards.map((c) => c.area));
+  const [hero, cardMap] = await Promise.all([
+    getPlacement("home.portrait"),
+    getPlacements(exploreItems.map((i) => i.area)),
+  ]);
+  const heroImg = hero?.media ?? null;
+
+  const items: ExploreItem[] = exploreItems.map((it) => {
+    const p = cardMap[it.area];
+    return {
+      label: it.label,
+      href: it.href,
+      description: it.description,
+      imageUrl: p?.media?.public_url ?? null,
+      focalX: p?.focal_x ?? 50,
+      focalY: p?.focal_y ?? 50,
+    };
+  });
+
   return (
     <>
-      {/* Hero */}
-      <section className="section-y container-content">
-        <HeroWithPortrait area="home.portrait">
-          <p className="text-sm font-medium tracking-wider uppercase text-primary mb-4">
-            Physician · Storyteller · Builder
-          </p>
-          <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-semibold text-text-base leading-tight mb-6">
-            Medicine, Storytelling, and the Art of Staying Human
-          </h1>
-          <p className="text-xl text-text-muted leading-relaxed mb-4 max-w-2xl">
-            I&#8217;m Zev Felix, a Family Medicine resident, former Camp Grounded co-founder,
-            climber, maker, and lifelong student of how people heal, connect, and build meaningful
-            lives.
-          </p>
-          <p className="text-lg text-text-muted leading-relaxed mb-8 max-w-2xl">
-            My path here has wound through documentary storytelling, digital detox retreats,
-            wilderness medicine, surgery, community-building, and more than a few campfires. Family
-            Medicine is where those threads finally came together.
-          </p>
-          <div className="flex flex-wrap gap-3">
-            <Button as="link" href="/about" size="lg">
-              Learn more about me
-            </Button>
-            <Button as="link" href="/work" size="lg" variant="outline">
-              See my work
-            </Button>
+      {/* ── Hero ─────────────────────────────────────────── */}
+      <section className="relative overflow-hidden">
+        <div className="container-content grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-center min-h-[78vh] py-14 lg:py-20">
+          <div>
+            <p className="eyebrow rise" style={{ animationDelay: "40ms" }}>
+              Physician · Storyteller · Builder
+            </p>
+            <h1 className="font-serif text-display text-text-base mt-6 mb-7 rise" style={{ animationDelay: "120ms" }}>
+              Medicine, Storytelling, and the Art of Staying Human
+            </h1>
+            <p className="text-lg sm:text-xl text-text-muted leading-relaxed max-w-xl rise" style={{ animationDelay: "200ms" }}>
+              I&#8217;m Zev Felix, a Family Medicine resident, former Camp Grounded co-founder,
+              climber, maker, and lifelong student of how people heal, connect, and build meaningful
+              lives.
+            </p>
+            <p className="text-base text-text-muted/90 leading-relaxed max-w-xl mt-4 rise" style={{ animationDelay: "240ms" }}>
+              My path here has wound through documentary storytelling, digital detox retreats,
+              wilderness medicine, surgery, community-building, and more than a few campfires.
+              Family Medicine is where those threads finally came together.
+            </p>
+            <div className="flex flex-wrap gap-3 mt-9 rise" style={{ animationDelay: "300ms" }}>
+              <Button as="link" href="/about" size="lg">Read my story</Button>
+              <Button as="link" href="/work" size="lg" variant="outline">See my work</Button>
+            </div>
           </div>
-        </HeroWithPortrait>
-      </section>
 
-      {/* Divider */}
-      <div className="border-t border-border" />
-
-      {/* Intro paragraph */}
-      <section className="section-y container-content">
-        <div className="max-w-2xl">
-          <p className="text-lg text-text-base leading-relaxed">
-            Before medicine, I helped build a summer camp where adults handed over their phones,
-            left their job titles behind, and spent weekends rediscovering how to be present.
-          </p>
-          <p className="text-lg text-text-muted leading-relaxed mt-4">
-            Years later, after caring for my brother through glioblastoma, training in osteopathic
-            medicine, spending long nights in trauma bays and operating rooms, and learning
-            firsthand both the power and limits of modern healthcare, I found myself drawn toward a
-            different kind of question:
-          </p>
-          <p className="font-serif text-2xl text-text-base leading-snug mt-6">
-            Not just <em>how do we treat disease?</em>
-            <br />
-            <em>How do we help people live well?</em>
-          </p>
-          <p className="text-lg text-text-muted leading-relaxed mt-6">
-            That question still guides everything I do.
-          </p>
+          {heroImg && (
+            <div className="rise" style={{ animationDelay: "160ms" }}>
+              <div className="relative w-full aspect-[4/5] lg:aspect-auto lg:h-[78vh] rounded-lg overflow-hidden bg-surface-alt shadow-card">
+                <Image
+                  src={heroImg.public_url}
+                  alt={hero?.alt_override ?? heroImg.alt_text ?? "Zev Felix"}
+                  fill
+                  priority
+                  sizes="(min-width:1024px) 46vw, 100vw"
+                  className="object-cover"
+                  style={{ objectPosition: `${hero?.focal_x ?? 50}% ${hero?.focal_y ?? 50}%` }}
+                />
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* Glimpses gallery (renders only if assigned) */}
+      {/* ── 01 Introduction ──────────────────────────────── */}
       <section className="section-y container-content">
+        <div className="grid lg:grid-cols-[auto_1fr] gap-5 lg:gap-16">
+          <p className="section-index lg:pt-3 whitespace-nowrap">01 — Introduction</p>
+          <div className="max-w-2xl space-y-6">
+            <p className="font-serif text-2xl sm:text-3xl text-text-base leading-snug">
+              Before medicine, I helped build a summer camp where adults handed over their phones,
+              left their job titles behind, and spent weekends rediscovering how to be present.
+            </p>
+            <p className="text-lg text-text-muted leading-relaxed">
+              Years later, after caring for my brother through glioblastoma, training in osteopathic
+              medicine, spending long nights in trauma bays and operating rooms, and learning
+              firsthand both the power and limits of modern healthcare, I found myself drawn toward a
+              different kind of question.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Pull-quote band (deep green) ─────────────────── */}
+      <section className="bg-primary text-surface section-y">
+        <div className="container-content max-w-3xl text-center">
+          <p className="eyebrow !text-surface/60 mb-8">The question that guides everything</p>
+          <p className="font-serif text-display-sm leading-tight">
+            Not just <em>how do we treat disease?</em>
+          </p>
+          <p className="font-serif text-display-sm leading-tight mt-2">
+            <em>How do we help people live well?</em>
+          </p>
+          <p className="text-surface/75 text-lg mt-10">That question still guides everything I do.</p>
+        </div>
+      </section>
+
+      {/* ── Glimpses ─────────────────────────────────────── */}
+      <section className="section-y container-content">
+        <div className="flex items-end justify-between gap-4 mb-8">
+          <h2 className="font-serif text-display-sm text-text-base">A few glimpses</h2>
+          <p className="section-index hidden sm:block">In &amp; out of the white coat</p>
+        </div>
         <PlacedGallery
           areas={["home.glimpse1", "home.glimpse2", "home.glimpse3"]}
           layout="grid"
           columns={3}
-          caption="A few glimpses, in and out of the white coat. Tap to enlarge."
+          caption="Tap any photo to view it full-screen."
         />
       </section>
 
-      {/* Feature band (renders only if assigned) */}
-      <section className="container-content">
-        <PlacedImage area="home.feature" aspect="21/9" sizes="(min-width:1280px) 1100px, 100vw" />
-      </section>
-
-      {/* Navigation cards */}
-      <section className="section-y bg-surface-alt mt-16">
-        <div className="container-content">
-          <h2 className="font-serif text-2xl font-semibold text-text-base mb-8">
-            Explore the site
+      {/* ── 02 Explore ───────────────────────────────────── */}
+      <section className="section-y container-content">
+        <div className="grid lg:grid-cols-[auto_1fr] gap-5 lg:gap-16 mb-12">
+          <p className="section-index lg:pt-3 whitespace-nowrap">02 — Explore</p>
+          <h2 className="font-serif text-display-sm text-text-base max-w-2xl">
+            Wander through the threads that make up a life, and a way of practicing.
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {navCards.map(({ label, href, icon: Icon, description, area }, i) => {
-              const cover = cardImages[area];
-              return (
-              <ScrollReveal key={href} delay={i * 60} variant="slide-up">
-              <Link
-                href={href}
-                className="group flex flex-col bg-surface border border-border rounded-lg shadow-card hover:shadow-dropdown hover:border-primary/30 transition-all duration-200 h-full overflow-hidden"
-              >
-                {cover?.media && (
-                  <SmartImage
-                    src={cover.media.public_url}
-                    alt={cover.alt_override ?? cover.media.alt_text}
-                    focalX={cover.focal_x}
-                    focalY={cover.focal_y}
-                    fit={cover.fit}
-                    aspect="16/10"
-                    rounded={false}
-                    sizes="(min-width:1024px) 360px, (min-width:640px) 50vw, 100vw"
-                  />
-                )}
-                <div className="flex flex-col gap-3 p-6">
-                  <div className="flex items-center gap-3">
-                    <span className="p-2 rounded bg-primary/8 text-primary">
-                      <Icon size={18} />
-                    </span>
-                    <span className="font-serif font-semibold text-text-base group-hover:text-primary transition-colors">
-                      {label}
-                    </span>
-                  </div>
-                  <p className="text-sm text-text-muted leading-relaxed">{description}</p>
-                </div>
-              </Link>
-              </ScrollReveal>
-              );
-            })}
-          </div>
         </div>
+        <ExploreIndex items={items} />
       </section>
 
-      {/* Quick search */}
+      {/* ── Feature (parallax, renders only if assigned) ── */}
+      <PlacedParallax area="home.feature" height="lg" />
+
+      {/* ── Search ───────────────────────────────────────── */}
       <section className="section-y container-content">
         <div className="max-w-xl">
-          <h2 className="font-serif text-2xl font-semibold text-text-base mb-3">
-            Looking for something?
-          </h2>
-          <p className="text-text-muted mb-6">
-            Search across all pages, projects, and writing on this site.
-          </p>
+          <h2 className="font-serif text-2xl font-semibold text-text-base mb-3">Looking for something?</h2>
+          <p className="text-text-muted mb-6">Search across all pages, projects, and writing on this site.</p>
           <SearchBar variant="compact" />
         </div>
       </section>
 
-      {/* Admin-added sections (images, videos, galleries, etc.) */}
       <DynamicSections pageSlug="home" />
     </>
   );

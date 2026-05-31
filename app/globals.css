@@ -133,6 +133,63 @@
 }
 
 /* ----------------------------------------
+   Editorial design language (redesign)
+---------------------------------------- */
+@layer components {
+  /* Small uppercase label / kicker */
+  .eyebrow {
+    @apply text-xs font-medium uppercase tracking-[0.22em] text-primary;
+  }
+
+  /* Numbered section index, e.g. "01 — Introduction" */
+  .section-index {
+    @apply text-xs font-medium uppercase tracking-[0.22em] text-text-muted;
+  }
+
+  /* Big editorial display headline (fluid) */
+  .text-display {
+    font-size: clamp(2.5rem, 6.5vw, 5.75rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+  }
+  .text-display-sm {
+    font-size: clamp(1.9rem, 4.2vw, 3.25rem);
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+  }
+
+  /* Animated underline for inline links */
+  .link-anim {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+  }
+  .link-anim:hover,
+  .link-anim:focus-visible {
+    background-size: 100% 1px;
+  }
+}
+
+@layer utilities {
+  /* Gentle on-load entrance (disabled under prefers-reduced-motion via base rule) */
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .rise { animation: rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+  /* Full-bleed escape from a centered container */
+  .full-bleed {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+  }
+}
+
+/* ----------------------------------------
    Print stylesheet (CV page + general)
 ---------------------------------------- */
 @media print {
