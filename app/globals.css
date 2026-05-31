@@ -190,6 +190,98 @@
 }
 
 /* ----------------------------------------
+   Motion & texture (redesign v2)
+   Kinetic type, scroll reveals, marquee,
+   scroll cue, film grain, hover zoom.
+   All guarded for reduced-motion + no-JS.
+---------------------------------------- */
+@layer utilities {
+  /* Kinetic headline — each word rides up from behind a clip mask.
+     The clip (.kin-line) wraps each word; the moving part is .kin-word.
+     Spaces are rendered between wrappers so the headline still wraps. */
+  .kin-line {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    padding-bottom: 0.16em;
+    margin-bottom: -0.16em;
+  }
+  .kin-word {
+    display: inline-block;
+    transform: translateY(112%);
+    transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+
+  /* Scroll reveal — hidden until the .is-in class is toggled by <Reveal>. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.is-in { opacity: 1; transform: none; }
+
+  /* Reveal a thin rule by scaling it from the left */
+  .rule-draw {
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .rule-draw.is-in { transform: scaleX(1); }
+
+  /* Marquee — track holds the content twice and slides one copy width. */
+  .marquee { overflow: hidden; }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee var(--marquee-duration, 40s) linear infinite;
+  }
+  .marquee[data-reverse="true"] .marquee-track { animation-direction: reverse; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  @keyframes marquee {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(-50%, 0, 0); }
+  }
+
+  /* Bouncing scroll cue */
+  @keyframes scrollcue {
+    0%, 100% { transform: translateY(0); opacity: 0.45; }
+    50%      { transform: translateY(7px); opacity: 1; }
+  }
+  .scroll-cue { animation: scrollcue 1.9s ease-in-out infinite; }
+
+  /* Hover image zoom helper — apply to a clipping wrapper around an <img>/Image */
+  .hover-zoom { overflow: hidden; }
+  .hover-zoom img {
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+  .hover-zoom:hover img { transform: scale(1.045); }
+
+  /* Subtle film grain overlay (placed once in the root layout) */
+  .grain-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.04;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  :root[data-theme="dark"] .grain-overlay { mix-blend-mode: screen; opacity: 0.05; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kin-word { transform: none !important; transition: none !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .rule-draw { transform: none !important; }
+  .marquee-track { animation: none !important; }
+  .scroll-cue { animation: none !important; }
+  .grain-overlay { display: none; }
+}
+
+/* ----------------------------------------
    Print stylesheet (CV page + general)
 ---------------------------------------- */
 @media print {

@@ -97,6 +97,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
+        {/* No-JS safety: scroll-reveal / kinetic content must never stay hidden */}
+        <noscript>
+          <style>{`.reveal{opacity:1!important;transform:none!important}.kin-word{transform:none!important}.rule-draw{transform:none!important}`}</style>
+        </noscript>
       </head>
       <body className="flex flex-col min-h-screen">
         <SkipLink />
@@ -105,6 +109,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <BackToTop />
           <Toaster position="bottom-right" />
         </ThemeProvider>
+        {/* Subtle film grain over the whole page for editorial warmth */}
+        <div className="grain-overlay" aria-hidden="true" />
       </body>
     </html>
   );
