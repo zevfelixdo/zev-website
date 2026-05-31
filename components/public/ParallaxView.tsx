@@ -44,7 +44,7 @@ export function ParallaxView({ children, speed = 0.08, className }: ParallaxView
   }, [speed]);
 
   return (
-    <div ref={ref} className={className} style={{ willChange: "transform" }}>
+    <div ref={ref} className={className}>
       {children}
     </div>
   );

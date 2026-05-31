@@ -35,6 +35,11 @@ export const PLACEMENT_AREAS: AreaDef[] = [
   { area: "philosophy.goal", label: "Philosophy — goal side image", page: "/philosophy", aspect: "4/5", note: "Beside the goal" },
   // About
   { area: "about.profile", label: "About — profile photo", page: "/about", aspect: "4/5", note: "Portrait of Zev" },
+  { area: "about.curiosity", label: "About — Curiosity (ch.01)", page: "/about", aspect: "4/5", note: "Early years / stories / martial arts" },
+  { area: "about.camp", label: "About — Camp Grounded (ch.02)", page: "/about", aspect: "4/5", note: "A Camp Grounded moment" },
+  { area: "about.surgery", label: "About — Surgery (ch.04)", page: "/about", aspect: "4/5", note: "Clinical / scrubs portrait" },
+  { area: "about.family", label: "About — Family Medicine (ch.05)", page: "/about", aspect: "4/5", note: "Warm portrait" },
+  { area: "about.maisy", label: "About — Maisy (facts band)", page: "/about", aspect: "4/5", note: "Maisy the dog" },
   // Path
   { area: "path.hero", label: "Path — hero", page: "/path", aspect: "3/2", note: "A scene from the journey" },
   // Family Medicine
