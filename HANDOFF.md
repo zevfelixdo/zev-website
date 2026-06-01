@@ -9,8 +9,8 @@ _Last updated: 2026-06-01. This doc is the single source of truth for resuming w
 - **What it is:** Personal/professional site for **Zev Felix, DO** (Family Medicine resident). Next.js 14 (App Router) + TypeScript + Tailwind + Supabase (Postgres/Auth/Storage) + TipTap. Deployed on Vercel.
 - **Live:** https://zev-website.vercel.app · **Admin:** https://zev-website.vercel.app/admin · **GitHub:** github.com/zevfelixdo/zev-website
 - **Local:** `/Users/zevfelix/zev-website`
-- **State:** A large **playful redesign + CMS/admin upgrade is complete and on `main`** (now `77c3856`). `main` and `redesign` are identical and pushed. Homepage text is CMS-bound and per-page SEO is wired site-wide (see CMS section).
-- **⚠️ Deploy lag (2026-06-01):** Production now serves **`443a5b3`** (full redesign + CMS + "Zev Felix, DO" wordmark + new hero — confirmed live). Two newer commits — `d37c624` (homepage CMS binding) + `77c3856` (site-wide per-page SEO) — are on `main` but **not yet deployed**: Vercel's free-tier **daily build limit** is hit again (latest commit status = failure → build-rate-limit). They deploy together via the scheduled job below (it builds current `main`) or a manual redeploy once the window resets.
+- **State:** A large **playful redesign + CMS/admin upgrade is complete and on `main`** (now `f486154`). `main` and `redesign` are identical and pushed. **Every public page's text is now CMS-bound** and per-page SEO is wired site-wide (see CMS section).
+- **⚠️ Deploy lag (2026-06-01):** Production now serves **`443a5b3`** (full redesign + CMS + "Zev Felix, DO" wordmark + new hero — confirmed live). FIVE newer commits — `d37c624` (home binding), `77c3856` (site-wide SEO), `bf6270d` + `f486154` (page-text binding), `42d0e48` (docs) — are on `main` but **not yet deployed**: Vercel's free-tier **daily build limit** is hit again (latest commit status = failure → build-rate-limit). They deploy together via the scheduled job below (it builds current `main`) or a manual redeploy once the window resets. The pending work is invisible until an admin edits copy (fallbacks = original text), so there's no visual regression risk.
 
 ---
 
@@ -57,18 +57,36 @@ Warm editorial + **playful "childlike wonder"** collage: kinetic type, organic b
 
 **CMS content-binding (migration in progress):** to make a hardcoded page's text editable WITHOUT changing its design, we bind each text field to the DB:
 - `lib/pageContent.ts` = `PAGE_CONTENT_SCHEMA` (per-slug field list) + `field()` helper (client-safe). `lib/pageContent.server.ts` = `getPageContent(slug)` (reads `site_settings` key `page:<slug>`). Admin edits via the **`PageContentEditor`** panel inside the page editor (shown for any slug with a schema).
-- **Bound so far: `/medicine`, `/about`, and `/` (home)** (full text + per-page SEO). Pattern to migrate another page: add a `PAGE_CONTENT_SCHEMA` entry + make the page `async` + replace strings with `f("key", "exact fallback")`. (Home also added a `buildPageMetadata({ absoluteTitle })` option so its bespoke title skips the `%s | Zev Felix` template.) Long-term cleaner home = a dedicated `page_content` table (needs a Supabase migration).
+- **Bound: EVERY public content page** (home, about, medicine, balance, technology, philosophy, outdoors, work, unplugged, path, cv, writing, contact) sources its copy from the admin. Lists use a `lines()` one-per-line textarea; path's timeline and unplugged's inline cross-links are bound too. Edit at `/admin/pages/<id>` → "Page text content"; every field falls back to the original copy, so clearing it restores the design. To bind a NEW page: add a `PAGE_CONTENT_SCHEMA` entry + make the page `async` + replace strings with `f("key", "exact fallback")`. (Home uses `buildPageMetadata({ absoluteTitle })` so its bespoke title skips the `%s | Zev Felix` template.) Long-term cleaner home = a dedicated `page_content` table (needs a Supabase migration).
 
 **SEO controls (wired site-wide):** `lib/seo.ts`. Root layout default title/description ← Settings→SEO (`getSeoDefaults`, safe fallbacks). Per-page SEO ← `pages` row via `buildPageMetadata`, now applied on **every content page** (home, medicine, about, balance, technology, philosophy, outdoors, work, unplugged, path, cv, contact) via `generateMetadata`. Each `pages` row was seeded to the page's current title/description (also the in-code fallback) so nothing regressed; `scripts/seed-pages-seo.mjs` re-seeds them (parsing values straight from the page files) and `scripts/seed-home-seo.mjs` seeds home. balance/technology/philosophy `pages` rows were CREATED (none existed).
 
 ---
 
 ## Recommended next steps
-1. ~~Bind the Home page text~~ **DONE** (`d37c624`): home text + per-page SEO are CMS-bound (and the bespoke title is now `absolute`).
-2. ~~Per-page SEO sweep + create balance/technology/philosophy rows~~ **DONE** (`77c3856`): every content page uses `generateMetadata → buildPageMetadata`; rows seeded via `scripts/seed-pages-seo.mjs`.
-3. **Bind more page TEXT** (optional, same `f()` + `PAGE_CONTENT_SCHEMA` pattern as home/medicine/about) for the still-hardcoded pages: outdoors, work, philosophy, balance, technology, unplugged, path, cv, contact, writing. Each page's copy currently lives in its `page.tsx`.
-4. **3 draft blog posts** are seeded (status=draft) awaiting review/publish at `/admin/writing`.
-5. Longer-term: dedicated `page_content` table; reusable content blocks; granular editor vs admin roles; multi-site = add a `site_id` column + scope queries/RLS.
+1. ~~Bind the Home page text~~ **DONE** (`d37c624`).
+2. ~~Per-page SEO sweep + create balance/technology/philosophy rows~~ **DONE** (`77c3856`).
+3. ~~Bind the rest of the pages' text~~ **DONE** (`bf6270d`, `f486154`): every public content page is now CMS-editable.
+4. **Connect the custom domain `zevfelix.com`** (purchased on Porkbun) — see "Connecting the custom domain" below.
+5. **3 draft blog posts** are seeded (status=draft) awaiting review/publish at `/admin/writing`.
+6. **Deploy** the pending commits (scheduled job, or manual once the build-limit window resets).
+7. Longer-term: dedicated `page_content` table; reusable content blocks; granular editor vs admin roles; multi-site = add a `site_id` column + scope queries/RLS.
+
+---
+
+## Connecting the custom domain (zevfelix.com)
+
+Purchased on **Porkbun** (nameservers `*.ns.porkbun.com`; currently on Porkbun parking). Not yet connected — automation wasn't possible from the machine (no usable Vercel API token: the cached CLI token returns `forbidden`/expired; no Porkbun API creds). Steps:
+
+1. **Porkbun DNS** (porkbun.com → Domain Management → zevfelix.com → DNS): delete the existing parking records, then add:
+   - `A` record, host blank/`@` → `76.76.21.21`
+   - `CNAME` record, host `www` → `cname.vercel-dns.com`
+   (Porkbun also supports `ALIAS @ → cname.vercel-dns.com` for the apex if preferred.)
+2. **Vercel** (project `zev-website` → Settings → Domains): add `zevfelix.com` (set primary) and `www.zevfelix.com` (redirect to apex). Vercel shows the authoritative records — use those if they differ. It verifies once DNS propagates (minutes to ~an hour).
+3. **Vercel env** (Settings → Environment Variables): set `NEXT_PUBLIC_SITE_URL=https://zevfelix.com` (Production), then redeploy. Drives canonical URLs, OG tags, sitemap, RSS (code fallback is already `https://zevfelix.com`; prod currently overrides it to the `.vercel.app` URL).
+4. **Supabase** (dashboard → Authentication → URL Configuration): set Site URL to `https://zevfelix.com` and add it to the redirect allowlist (so admin login / auth emails use the new domain).
+
+To automate instead: provide a Vercel API token (vercel.com/account/tokens) + Porkbun API key & secret (porkbun.com/account/api) and steps 1–3 can be scripted; the Supabase Auth URL (step 4) still needs the dashboard or a Supabase access token.
 
 ---
 
