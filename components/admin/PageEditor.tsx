@@ -51,8 +51,81 @@ const SECTION_TYPES: { value: SectionType; label: string }[] = [
   { value: "video", label: "Video (upload or YouTube/Vimeo)" },
   { value: "timeline", label: "Timeline" },
   { value: "cards", label: "Cards Grid" },
+  { value: "faq", label: "FAQ (expandable)" },
+  { value: "testimonials", label: "Testimonials" },
   { value: "divider", label: "Divider" },
 ];
+
+// Field types for the generic repeatable-items editor
+type ItemField = { key: string; label: string; type?: "text" | "textarea" | "image" | "rich" };
+
+function ItemsEditor({
+  content,
+  onChange,
+  fields,
+  itemsKey = "items",
+  addLabel = "Add item",
+}: {
+  content: Record<string, unknown>;
+  onChange: (c: Record<string, unknown>) => void;
+  fields: ItemField[];
+  itemsKey?: string;
+  addLabel?: string;
+}) {
+  const items: Record<string, string>[] = Array.isArray(content[itemsKey])
+    ? (content[itemsKey] as Record<string, string>[])
+    : [];
+  const setItems = (next: Record<string, string>[]) => onChange({ ...content, [itemsKey]: next });
+  const add = () => setItems([...items, Object.fromEntries(fields.map((f) => [f.key, ""]))]);
+  const remove = (i: number) => setItems(items.filter((_, idx) => idx !== i));
+  const move = (i: number, dir: -1 | 1) => {
+    const j = i + dir;
+    if (j < 0 || j >= items.length) return;
+    const next = [...items];
+    [next[i], next[j]] = [next[j], next[i]];
+    setItems(next);
+  };
+  const upd = (i: number, key: string, value: string) =>
+    setItems(items.map((it, idx) => (idx === i ? { ...it, [key]: value } : it)));
+
+  return (
+    <div className="space-y-3">
+      {items.map((it, i) => (
+        <div key={i} className="border border-border rounded-lg p-3 space-y-2 bg-surface-alt">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-medium text-text-muted">Item {i + 1}</span>
+            <div className="flex items-center gap-1">
+              <button type="button" onClick={() => move(i, -1)} disabled={i === 0} className="px-1.5 text-text-muted hover:text-text-base disabled:opacity-30" aria-label="Move up">↑</button>
+              <button type="button" onClick={() => move(i, 1)} disabled={i === items.length - 1} className="px-1.5 text-text-muted hover:text-text-base disabled:opacity-30" aria-label="Move down">↓</button>
+              <button type="button" onClick={() => remove(i)} className="text-xs text-red-500 hover:text-red-700 ml-1">Remove</button>
+            </div>
+          </div>
+          {fields.map((f) =>
+            f.type === "textarea" ? (
+              <div key={f.key}>
+                <label className="text-sm font-medium text-text-base mb-1.5 block">{f.label}</label>
+                <textarea value={it[f.key] ?? ""} onChange={(e) => upd(i, f.key, e.target.value)} rows={2} className="w-full rounded border border-border bg-surface px-3 py-2.5 text-sm text-text-base focus:outline-none focus:ring-2 focus:ring-primary" />
+              </div>
+            ) : f.type === "image" ? (
+              <div key={f.key}>
+                <label className="text-sm font-medium text-text-base mb-1.5 block">{f.label}</label>
+                <ImagePicker value={it[f.key] ?? ""} onChange={(url) => upd(i, f.key, url)} placeholder="Pick from library or paste URL" />
+              </div>
+            ) : f.type === "rich" ? (
+              <div key={f.key}>
+                <label className="text-sm font-medium text-text-base mb-1.5 block">{f.label}</label>
+                <RichTextEditor content={it[f.key] ?? ""} onChange={(html) => upd(i, f.key, html)} />
+              </div>
+            ) : (
+              <Input key={f.key} label={f.label} value={it[f.key] ?? ""} onChange={(e) => upd(i, f.key, e.target.value)} />
+            )
+          )}
+        </div>
+      ))}
+      <button type="button" onClick={add} className="text-sm text-primary hover:opacity-80 font-medium">+ {addLabel}</button>
+    </div>
+  );
+}
 
 interface SortableSectionProps {
   section: PageSection;
@@ -388,6 +461,103 @@ function SectionContentEditor({
             <label className="text-sm font-medium text-text-base mb-1.5 block">Body</label>
             <textarea value={(content.body as string) ?? ""} onChange={(e) => set("body", e.target.value)} rows={3} className="w-full rounded border border-border bg-surface px-3 py-2.5 text-sm text-text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" />
           </div>
+        </div>
+      );
+    case "nav_cards":
+      return (
+        <ItemsEditor
+          content={content}
+          onChange={onChange}
+          itemsKey="cards"
+          addLabel="Add card"
+          fields={[
+            { key: "label", label: "Label" },
+            { key: "href", label: "Link (e.g. /about)" },
+            { key: "description", label: "Description", type: "textarea" },
+          ]}
+        />
+      );
+    case "timeline":
+      return (
+        <div className="space-y-3">
+          <Input label="Heading (optional)" value={(content.heading as string) ?? ""} onChange={(e) => set("heading", e.target.value)} />
+          <ItemsEditor
+            content={content}
+            onChange={onChange}
+            itemsKey="items"
+            addLabel="Add timeline entry"
+            fields={[
+              { key: "period", label: "Period (e.g. 2018–2020)" },
+              { key: "title", label: "Title" },
+              { key: "body", label: "Description", type: "textarea" },
+            ]}
+          />
+        </div>
+      );
+    case "cards":
+      return (
+        <div className="space-y-3">
+          <Input label="Heading (optional)" value={(content.heading as string) ?? ""} onChange={(e) => set("heading", e.target.value)} />
+          <div>
+            <label className="text-sm font-medium text-text-base mb-1.5 block">Columns</label>
+            <select value={(content.columns as number) ?? 3} onChange={(e) => set("columns", parseInt(e.target.value))} className="w-32 rounded border border-border bg-surface px-3 py-2.5 text-sm text-text-base focus:outline-none focus:ring-2 focus:ring-primary">
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+              <option value={4}>4</option>
+            </select>
+          </div>
+          <ItemsEditor
+            content={content}
+            onChange={onChange}
+            itemsKey="cards"
+            addLabel="Add card"
+            fields={[
+              { key: "title", label: "Title" },
+              { key: "body", label: "Body", type: "textarea" },
+              { key: "imageUrl", label: "Image (optional)", type: "image" },
+            ]}
+          />
+        </div>
+      );
+    case "faq":
+      return (
+        <div className="space-y-3">
+          <Input label="Heading (optional)" value={(content.heading as string) ?? ""} onChange={(e) => set("heading", e.target.value)} />
+          <ItemsEditor
+            content={content}
+            onChange={onChange}
+            itemsKey="items"
+            addLabel="Add question"
+            fields={[
+              { key: "question", label: "Question" },
+              { key: "answer", label: "Answer", type: "rich" },
+            ]}
+          />
+        </div>
+      );
+    case "testimonials":
+      return (
+        <div className="space-y-3">
+          <Input label="Heading (optional)" value={(content.heading as string) ?? ""} onChange={(e) => set("heading", e.target.value)} />
+          <div>
+            <label className="text-sm font-medium text-text-base mb-1.5 block">Columns</label>
+            <select value={(content.columns as number) ?? 2} onChange={(e) => set("columns", parseInt(e.target.value))} className="w-32 rounded border border-border bg-surface px-3 py-2.5 text-sm text-text-base focus:outline-none focus:ring-2 focus:ring-primary">
+              <option value={1}>1</option>
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+            </select>
+          </div>
+          <ItemsEditor
+            content={content}
+            onChange={onChange}
+            itemsKey="items"
+            addLabel="Add testimonial"
+            fields={[
+              { key: "quote", label: "Quote", type: "textarea" },
+              { key: "name", label: "Name" },
+              { key: "role", label: "Role / context (optional)" },
+            ]}
+          />
         </div>
       );
     default:

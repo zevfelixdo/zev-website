@@ -119,6 +119,8 @@ export type SectionType =
   | "video"
   | "timeline"
   | "cards"
+  | "faq"
+  | "testimonials"
   | "divider"
   | "contact_form"
   | "newsletter_form"

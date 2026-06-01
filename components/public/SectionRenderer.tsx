@@ -430,6 +430,61 @@ function CardsSection({ content }: { content: Record<string, unknown> }) {
   );
 }
 
+function FaqSection({ content }: { content: Record<string, unknown> }) {
+  const heading = content.heading as string | undefined;
+  const items = content.items as { question: string; answer: string }[] | undefined;
+  if (!items?.length) return null;
+  return (
+    <section className="section-y container-content">
+      <div className="max-w-2xl">
+        {heading && (
+          <h2 className="font-serif text-display-sm text-text-base mb-8">{heading}</h2>
+        )}
+        <div className="divide-y divide-border border-t border-b border-border">
+          {items.map((item, i) => (
+            <details key={i} className="group py-4">
+              <summary className="flex cursor-pointer items-center justify-between gap-4 list-none font-serif text-lg text-text-base marker:hidden">
+                {item.question}
+                <span className="text-primary transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
+              </summary>
+              <div className="prose-content mt-3 text-text-muted" dangerouslySetInnerHTML={{ __html: item.answer }} />
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TestimonialsSection({ content }: { content: Record<string, unknown> }) {
+  const heading = content.heading as string | undefined;
+  const items = content.items as { quote: string; name?: string; role?: string }[] | undefined;
+  const columns = (content.columns as number) ?? 2;
+  if (!items?.length) return null;
+  const gridCols: Record<number, string> = { 1: "", 2: "sm:grid-cols-2", 3: "sm:grid-cols-2 lg:grid-cols-3" };
+  return (
+    <section className="section-y container-content">
+      {heading && (
+        <h2 className="font-serif text-display-sm text-text-base mb-8">{heading}</h2>
+      )}
+      <div className={cn("grid grid-cols-1 gap-6", gridCols[columns] ?? gridCols[2])}>
+        {items.map((t, i) => (
+          <figure key={i} className="bg-surface-alt border border-border rounded-xl p-6">
+            <blockquote className="font-serif text-lg text-text-base leading-relaxed">“{t.quote}”</blockquote>
+            {(t.name || t.role) && (
+              <figcaption className="mt-4 text-sm text-text-muted">
+                {t.name && <span className="font-medium text-text-base">{t.name}</span>}
+                {t.name && t.role && <span>, </span>}
+                {t.role}
+              </figcaption>
+            )}
+          </figure>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function DividerSection() {
   return (
     <div className="container-content py-4">
@@ -463,6 +518,8 @@ export function SectionRenderer({ section }: SectionRendererProps) {
     case "nav_cards":     return <NavCardsSection content={content} />;
     case "timeline":      return <TimelineSection content={content} />;
     case "cards":         return <CardsSection content={content} />;
+    case "faq":           return <FaqSection content={content} />;
+    case "testimonials":  return <TestimonialsSection content={content} />;
     case "divider":       return <DividerSection />;
     case "contact_form":  return (
       <section className="section-y container-content">

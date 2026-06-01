@@ -19,6 +19,7 @@ import {
   X,
   User,
   BookOpen,
+  Navigation,
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
@@ -27,6 +28,7 @@ import type { User as SupabaseUser } from "@supabase/supabase-js";
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { href: "/admin/pages", label: "Pages", icon: FileText },
+  { href: "/admin/navigation", label: "Navigation", icon: Navigation },
   { href: "/admin/writing", label: "Writing", icon: BookOpen },
   { href: "/admin/media", label: "Media", icon: Image },
   { href: "/admin/images", label: "Image Placements", icon: LayoutPanelTop },
