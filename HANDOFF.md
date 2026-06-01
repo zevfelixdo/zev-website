@@ -92,7 +92,7 @@ To automate instead: provide a Vercel API token (vercel.com/account/tokens) + Po
 
 ## Credentials & gotchas
 - **Supabase project:** `jmcxmzaycayzlxjauyrw` (URL `https://jmcxmzaycayzlxjauyrw.supabase.co`). Anon `sb_publishable_…xVZoCC`, service `sb_secret_…oJ93ls` (in `.env.local`). **NO DDL access** via API — schema changes need Zev to paste SQL in the Supabase SQL editor.
-- **Admin login:** `zevfelix@gmail.com`. The documented password `ZevAdmin2025` **no longer works** (looks rotated). Reset in Supabase Auth if needed.
+- **Admin login:** `zevfelix@gmail.com` / `ZevAdmin2025` — **verified working 2026-06-01** (signs in; user confirmed + has the `admin` role). Change it from the default when convenient.
 - **Vercel:** project `prj_7hozez5xKgNEppXoY5AmJvClLHLG`, team `team_dETiFfQNV24ezp9AiTEmKoGw`. Deploy hook URL above.
 - **Content rules:** NO em dashes (use colons/commas/periods; en dash only for date ranges). Voice = warm, reflective, short declarative sentences. Keep all of Zev's copy intact.
 - **Scripts** (`scripts/`, run with `node`): `seed-placements.mjs`, `seed-about-placements.mjs`, `seed-draft-posts.mjs`, `seed-home-seo.mjs`, `seed-pages-seo.mjs` — patterns for seeding via service role.
