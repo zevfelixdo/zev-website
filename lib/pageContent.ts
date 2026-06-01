@@ -24,6 +24,67 @@ export interface ContentGroup {
 }
 
 export const PAGE_CONTENT_SCHEMA: Record<string, ContentGroup[]> = {
+  about: [
+    {
+      group: "Hero",
+      fields: [
+        { key: "hero.eyebrow", label: "Eyebrow", type: "text" },
+        { key: "hero.heading", label: "Heading", type: "text" },
+        { key: "hero.lead", label: "Lead paragraph", type: "textarea" },
+      ],
+    },
+    {
+      group: "Chapter 01 — Curiosity",
+      fields: [
+        { key: "c1.label", label: "Section label", type: "text" },
+        { key: "c1.p1", label: "Paragraph 1", type: "textarea" },
+        { key: "c1.p2", label: "Paragraph 2", type: "textarea" },
+      ],
+    },
+    {
+      group: "Chapter 02 — Camp Grounded",
+      fields: [
+        { key: "c2.label", label: "Section label", type: "text" },
+        { key: "c2.p1", label: "Paragraph 1", type: "textarea" },
+        { key: "c2.quote", label: "Pull-quote", type: "textarea" },
+        { key: "c2.p2", label: "Paragraph 2", type: "textarea" },
+        { key: "c2.leadIn", label: "Question lead-in", type: "textarea" },
+        { key: "c2.phrase", label: "Highlighted question", type: "text" },
+      ],
+    },
+    {
+      group: "Chapter 03 — Levi",
+      fields: [
+        { key: "c3.label", label: "Section label", type: "text" },
+        { key: "c3.p1", label: "Paragraph 1", type: "textarea" },
+        { key: "c3.p2", label: "Paragraph 2", type: "textarea" },
+        { key: "c3.quote", label: "Pull-quote", type: "textarea" },
+      ],
+    },
+    {
+      group: "Chapter 04 — Surgery",
+      fields: [
+        { key: "c4.label", label: "Section label", type: "text" },
+        { key: "c4.p1", label: "Paragraph 1", type: "textarea" },
+        { key: "c4.p2", label: "Paragraph 2", type: "textarea" },
+      ],
+    },
+    {
+      group: "Chapter 05 — Family Medicine",
+      fields: [
+        { key: "c5.label", label: "Section label", type: "text" },
+        { key: "c5.line", label: "Closing line", type: "textarea" },
+      ],
+    },
+    {
+      group: "Facts band (one item per line)",
+      fields: [
+        { key: "facts.background", label: "Background", type: "textarea" },
+        { key: "facts.interests", label: "Interests", type: "textarea" },
+        { key: "facts.values", label: "Values", type: "textarea" },
+      ],
+    },
+  ],
   medicine: [
     {
       group: "Hero",
