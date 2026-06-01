@@ -58,8 +58,15 @@ export function Nav({ items, siteName = "Zev Felix" }: NavProps) {
             {/* Logo / Name */}
             <Link
               href="/"
-              className="font-serif text-xl font-semibold text-text-base hover:text-primary transition-colors"
+              className="group flex items-center gap-2.5 font-serif text-xl font-semibold text-text-base hover:text-primary transition-colors"
             >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/cartoons/hiking-standing.png"
+                alt=""
+                aria-hidden="true"
+                className="h-9 w-9 rounded-full object-cover object-top ring-2 ring-fun-tangerine/60 bg-surface-alt transition-transform duration-300 group-hover:-rotate-6"
+              />
               {siteName}
             </Link>
 
@@ -72,10 +79,10 @@ export function Nav({ items, siteName = "Zev Felix" }: NavProps) {
                   target={item.is_external ? "_blank" : undefined}
                   rel={item.is_external ? "noopener noreferrer" : undefined}
                   className={cn(
-                    "px-3 py-2 rounded text-sm font-medium transition-colors",
+                    "relative px-3 py-2 text-sm font-medium transition-colors after:absolute after:left-3 after:right-3 after:-bottom-0.5 after:h-[2px] after:rounded-full after:bg-fun-tangerine after:origin-left after:transition-transform after:duration-300",
                     pathname === item.href || pathname.startsWith(item.href + "/")
-                      ? "text-primary bg-primary/8"
-                      : "text-text-muted hover:text-text-base hover:bg-surface-alt"
+                      ? "text-primary after:scale-x-100"
+                      : "text-text-muted hover:text-text-base after:scale-x-0 hover:after:scale-x-100"
                   )}
                 >
                   {item.label}

@@ -14,6 +14,7 @@ import { Cartoon } from "@/components/public/Cartoon";
 import { Blob } from "@/components/public/Blob";
 import { Doodle } from "@/components/public/Doodle";
 import { CountUp } from "@/components/public/CountUp";
+import { BikeEasterEgg } from "@/components/public/BikeEasterEgg";
 import { getPlacements } from "@/lib/placements";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
@@ -113,18 +114,11 @@ export default async function HomePage() {
             </div>
           </div>
 
-          {/* the star of the scene — Zev biking with Maisy */}
+          {/* the star of the scene — Zev biking with Maisy (click me!) */}
           <div className="group relative z-10 mt-10 rise" style={{ animationDelay: "900ms" }}>
             <Doodle name="path" size={120} className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-[125%] text-fun-tangerine/45" />
             <span className="pointer-events-none absolute left-1/2 -top-2 -translate-x-1/2 whitespace-nowrap rounded-full bg-primary text-white text-xs font-medium px-3 py-1 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:-translate-y-2 shadow-card z-20">Maisy &amp; the trail</span>
-            <Cartoon
-              name="bike-w-maisy"
-              width={380}
-              priority
-              decorative
-              float
-              className="relative w-[270px] sm:w-[330px] lg:w-[380px] h-auto"
-            />
+            <BikeEasterEgg />
           </div>
         </div>
 

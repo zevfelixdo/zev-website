@@ -281,6 +281,17 @@
   /* Drop shadow that lifts a transparent cartoon off the page like a sticker */
   .sticker { filter: drop-shadow(0 12px 18px rgb(20 18 15 / 0.18)); }
 
+  /* Easter egg: click the hero bike and Zev pops a little wheelie + rides */
+  @keyframes bikeride {
+    0%   { transform: translateX(0) translateY(0) rotate(0deg); }
+    14%  { transform: translateX(6px) translateY(-16px) rotate(-7deg); }
+    30%  { transform: translateX(14px) translateY(0) rotate(0deg); }
+    46%  { transform: translateX(22px) translateY(-11px) rotate(-5deg); }
+    62%  { transform: translateX(12px) translateY(0) rotate(0deg); }
+    100% { transform: translateX(0) translateY(0) rotate(0deg); }
+  }
+  .bike-ride { animation: bikeride 1.3s cubic-bezier(0.3, 0.7, 0.4, 1) 1; }
+
   /* Hover image zoom helper — apply to a clipping wrapper around an <img>/Image */
   .hover-zoom { overflow: hidden; }
   .hover-zoom img {
@@ -309,6 +320,7 @@
   .marquee-track { animation: none !important; }
   .scroll-cue { animation: none !important; }
   .float-soft { animation: none !important; }
+  .bike-ride { animation: none !important; }
   .grain-overlay { display: none; }
 }
 

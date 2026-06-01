@@ -2,6 +2,9 @@ import Link from "next/link";
 import type { SiteSettings } from "@/types/database";
 import { Twitter, Linkedin, Instagram, Mail, Rss } from "lucide-react";
 import { FooterNewsletter } from "@/components/public/FooterNewsletter";
+import { Blob } from "@/components/public/Blob";
+import { Doodle } from "@/components/public/Doodle";
+import { Cartoon } from "@/components/public/Cartoon";
 
 interface FooterProps {
   settings?: SiteSettings["footer"];
@@ -9,7 +12,7 @@ interface FooterProps {
 
 const defaultSettings: SiteSettings["footer"] = {
   tagline: "Physician. Climber. Builder.",
-  email: "hello@zevfelix.com",
+  email: "",
   social: { twitter: "", linkedin: "", instagram: "" },
   copyright: "Zev Felix",
 };
@@ -19,12 +22,28 @@ export function Footer({ settings = defaultSettings }: FooterProps) {
   const s = settings;
 
   return (
-    <footer className="border-t border-border bg-surface-alt mt-auto">
-      <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
+    <footer className="relative border-t border-border bg-surface-alt mt-auto overflow-hidden">
+      {/* playful accents */}
+      <Blob variant={2} float className="pointer-events-none absolute -left-12 -bottom-20 h-72 w-72 text-fun-sky/15 blur-[2px]" />
+      <Doodle name="sparkle" size={26} float className="pointer-events-none absolute right-[7%] top-10 hidden text-fun-coral/70 sm:block" />
+      <Doodle name="star" size={18} className="pointer-events-none absolute left-[42%] top-16 hidden text-fun-tangerine/60 lg:block" />
+
+      {/* friendly cartoon peeking in (large screens) */}
+      <Cartoon
+        name="petting-maisy"
+        width={210}
+        decorative
+        className="pointer-events-none absolute -bottom-3 right-6 hidden w-[180px] h-auto sticker xl:block"
+      />
+
+      <div className="relative max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10">
           {/* Branding */}
           <div className="max-w-xs">
-            <p className="font-serif text-xl font-semibold text-text-base mb-2">Zev Felix</p>
+            <p className="relative inline-block font-serif text-xl font-semibold text-text-base mb-2">
+              Zev Felix
+              <Doodle name="underline" stretch strokeWidth={3} className="absolute -bottom-1.5 left-0 h-2.5 w-full text-fun-tangerine/70" />
+            </p>
             <p className="text-sm text-text-muted leading-relaxed">{s.tagline}</p>
             {s.email && (
               <a
@@ -54,7 +73,7 @@ export function Footer({ settings = defaultSettings }: FooterProps) {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-text-muted hover:text-text-base transition-colors"
+                      className="link-anim text-sm text-text-muted hover:text-text-base transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -77,7 +96,7 @@ export function Footer({ settings = defaultSettings }: FooterProps) {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-text-muted hover:text-text-base transition-colors"
+                      className="link-anim text-sm text-text-muted hover:text-text-base transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -144,7 +163,7 @@ export function Footer({ settings = defaultSettings }: FooterProps) {
         <div className="mt-10 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-text-muted">
           <p>© {year} {s.copyright}. All rights reserved.</p>
           <p>
-            Built with Next.js &amp; Supabase ·{" "}
+            Made with care, Next.js &amp; Supabase ·{" "}
             <Link href="/search" className="hover:text-text-base transition-colors">
               Search
             </Link>
