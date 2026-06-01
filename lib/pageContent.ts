@@ -190,6 +190,13 @@ export const PAGE_CONTENT_SCHEMA: Record<string, ContentGroup[]> = {
       ],
     },
     {
+      group: "Parallax band (Yosemite)",
+      fields: [
+        { key: "parallax.quote", label: "Floating quote", type: "textarea" },
+        { key: "parallax.caption", label: "Caption / attribution", type: "text" },
+      ],
+    },
+    {
       group: "Making things",
       fields: [
         { key: "make.heading", label: "Heading", type: "text" },

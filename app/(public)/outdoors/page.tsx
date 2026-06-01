@@ -38,8 +38,13 @@ export default async function OutdoorsPage() {
         </p>
       </PageHero>
 
-      {/* Big scenic band */}
-      <PlacedParallax area="outdoors.hero" height="lg" />
+      {/* Big scenic band — floating quote (editable in admin → Page text content) */}
+      <PlacedParallax
+        area="outdoors.hero"
+        height="lg"
+        heading={f("parallax.quote", "Out here, what matters gets very clear.")}
+        subheading={f("parallax.caption", "Yosemite Valley")}
+      />
 
       {/* Making things */}
       <CollageRow
