@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { RichTextEditor } from "./RichTextEditor";
 import { ImagePicker } from "./ImagePicker";
+import { PageContentEditor } from "./PageContentEditor";
 import { createClient } from "@/lib/supabase/client";
 import toast from "react-hot-toast";
 import {
@@ -728,10 +729,13 @@ export function PageEditor({ page: initialPage, sections: initialSections }: Pag
         </div>
       </div>
 
+      {/* Bound page text content (CMS migration) — shown if the page has a schema */}
+      <PageContentEditor slug={page.slug} />
+
       {/* Sections */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <h2 className="font-semibold text-text-base">Content sections</h2>
+          <h2 className="font-semibold text-text-base">Appended content sections</h2>
           <Button size="sm" variant="outline" onClick={() => setShowAddSection((v) => !v)}>
             <Plus size={14} /> Add section
           </Button>

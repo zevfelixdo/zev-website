@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 import { Inter, Lora, JetBrains_Mono } from "next/font/google";
 import { SkipLink } from "@/components/public/SkipLink";
 import { BackToTop } from "@/components/public/BackToTop";
+import { getSeoDefaults } from "@/lib/seo";
 
 // ── next/font — self-hosted on Vercel, no external round-trip ────────────────
 const inter = Inter({
@@ -29,30 +30,34 @@ const jetbrainsMono = JetBrains_Mono({
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
 
-export const metadata: Metadata = {
-  title: {
-    default: "Zev Felix",
-    template: "%s | Zev Felix",
-  },
-  description:
-    "Physician, outdoor enthusiast, and builder. Exploring medicine, technology, and what it means to live well.",
-  metadataBase: new URL(BASE),
-  alternates: { canonical: BASE },
-  openGraph: {
-    type: "website",
-    siteName: "Zev Felix",
-    locale: "en_US",
-  },
-  twitter: {
-    card: "summary_large_image",
-    creator: "@zevfelix",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true, "max-image-preview": "large" },
-  },
-};
+// Site-wide metadata defaults, sourced from the admin (Settings → SEO defaults)
+// with safe fallbacks. Per-page metadata still overrides these.
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getSeoDefaults();
+  return {
+    title: {
+      default: seo.defaultTitle,
+      template: seo.titleTemplate.includes("%s") ? seo.titleTemplate : `%s | ${seo.defaultTitle}`,
+    },
+    description: seo.defaultDescription,
+    metadataBase: new URL(BASE),
+    alternates: { canonical: BASE },
+    openGraph: {
+      type: "website",
+      siteName: seo.defaultTitle,
+      locale: "en_US",
+    },
+    twitter: {
+      card: "summary_large_image",
+      creator: "@zevfelix",
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true, "max-image-preview": "large" },
+    },
+  };
+}
 
 async function getActiveTheme(): Promise<ThemeConfig> {
   try {
