@@ -6,6 +6,8 @@ import { Reveal } from "@/components/public/Reveal";
 import { Doodle } from "@/components/public/Doodle";
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo";
+import { field } from "@/lib/pageContent";
+import { getPageContent } from "@/lib/pageContent.server";
 
 export const revalidate = 60;
 
@@ -19,18 +21,20 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-export default function OutdoorsPage() {
+export default async function OutdoorsPage() {
+  const c = await getPageContent("outdoors");
+  const f = (key: string, fallback: string) => field(c, key, fallback);
+  const lines = (s: string) => s.split("\n").map((x) => x.trim()).filter(Boolean);
+
   return (
     <>
       <PageHero
-        eyebrow="Outside the Hospital"
-        heading="The Things That Keep Me Grounded"
+        eyebrow={f("hero.eyebrow", "Outside the Hospital")}
+        heading={f("hero.heading", "The Things That Keep Me Grounded")}
         collage={{ cartoon: "hiking-standing", blobVariant: 2, blobClass: "text-primary/10", doodle: "sun", doodleClass: "text-accent" }}
       >
         <p>
-          When people hear &#8220;doctor,&#8221; they often imagine someone who spends all day
-          thinking about medicine. I like medicine. I spend plenty of time thinking about it. But I
-          don&#8217;t think a good life can be built from a single interest.
+          {f("hero.lead", "When people hear “doctor,” they often imagine someone who spends all day thinking about medicine. I like medicine. I spend plenty of time thinking about it. But I don’t think a good life can be built from a single interest.")}
         </p>
       </PageHero>
 
@@ -39,58 +43,46 @@ export default function OutdoorsPage() {
 
       {/* Making things */}
       <CollageRow
-        heading="Making things"
+        heading={f("make.heading", "Making things")}
         collage={{ cartoon: "plant", blobVariant: 3, blobClass: "text-accent/10", doodle: "sparkle" }}
       >
         <p>
-          Outside the hospital, you&#8217;ll usually find me making something. Sometimes it&#8217;s
-          a loaf of bread. Sometimes it&#8217;s fresh pasta. Sometimes it&#8217;s a woodworking
-          project that takes three times longer than expected because I convinced myself I could
-          build it without reading the instructions.
+          {f("make.p1", "Outside the hospital, you’ll usually find me making something. Sometimes it’s a loaf of bread. Sometimes it’s fresh pasta. Sometimes it’s a woodworking project that takes three times longer than expected because I convinced myself I could build it without reading the instructions.")}
         </p>
         <p>
-          I love understanding how things work. Furniture. Gardens. Knitting patterns. Human
-          bodies. They&#8217;re all systems with their own logic and constraints.
+          {f("make.p2", "I love understanding how things work. Furniture. Gardens. Knitting patterns. Human bodies. They’re all systems with their own logic and constraints.")}
         </p>
       </CollageRow>
 
       {/* Climbing */}
       <CollageRow
-        heading="Climbing"
+        heading={f("climb.heading", "Climbing")}
         mirror
         collage={{ photoArea: "outdoors.climbing", cartoon: "sports", blobVariant: 1, blobClass: "text-primary/10", doodle: "star", doodleClass: "text-accent" }}
       >
         <p>
-          I also spend as much time as possible outside. Rock climbing has shaped how I think in
-          ways I didn&#8217;t expect when I first walked into a climbing gym in Oakland more than
-          a decade ago.
+          {f("climb.p1", "I also spend as much time as possible outside. Rock climbing has shaped how I think in ways I didn’t expect when I first walked into a climbing gym in Oakland more than a decade ago.")}
         </p>
         <p>
-          Climbing rewards preparation, patience, communication, trust, and humility. Yosemite
-          remains one of my favorite places in the world because it strips away distractions and
-          makes your priorities very clear.
+          {f("climb.p2", "Climbing rewards preparation, patience, communication, trust, and humility. Yosemite remains one of my favorite places in the world because it strips away distractions and makes your priorities very clear.")}
         </p>
         <div className="font-serif text-xl text-text-base leading-relaxed border-l-2 border-accent pl-5">
-          <p>Pay attention.</p>
-          <p>Trust your partner.</p>
-          <p>Stay present.</p>
-          <p>Take the next step.</p>
+          {lines(f("climb.list", "Pay attention.\nTrust your partner.\nStay present.\nTake the next step.")).map((it, i) => (
+            <p key={i}>{it}</p>
+          ))}
         </div>
       </CollageRow>
 
       {/* Maisy */}
       <CollageRow
-        heading="Maisy"
+        heading={f("maisy.heading", "Maisy")}
         collage={{ photoArea: "outdoors.maisy", cartoon: "petting-maisy", blobVariant: 2, blobClass: "text-accent/10", doodle: "heart", doodleClass: "text-accent" }}
       >
         <p>
-          My rescue dog Maisy helps reinforce similar lessons. She spent the first years of her
-          life as a street dog in Taiwan and arrived with understandable concerns about trusting
-          humans.
+          {f("maisy.p1", "My rescue dog Maisy helps reinforce similar lessons. She spent the first years of her life as a street dog in Taiwan and arrived with understandable concerns about trusting humans.")}
         </p>
         <p>
-          Earning that trust required patience, consistency, and letting progress happen on her
-          timeline rather than mine.
+          {f("maisy.p2", "Earning that trust required patience, consistency, and letting progress happen on her timeline rather than mine.")}
         </p>
       </CollageRow>
 
@@ -101,14 +93,12 @@ export default function OutdoorsPage() {
           <div className="max-w-2xl space-y-4 text-text-base leading-relaxed">
             <Reveal>
               <p className="font-serif text-2xl sm:text-3xl text-text-base leading-snug">
-                Medicine turns out to work much the same way.
+                {f("refl.quote", "Medicine turns out to work much the same way.")}
               </p>
             </Reveal>
             <Reveal delay={100}>
               <p className="text-lg">
-                Health is rarely built in dramatic moments. More often it&#8217;s built through small,
-                repeated actions practiced over time. The same is true for friendships. Relationships.
-                Communities. And most worthwhile things in life.
+                {f("refl.p1", "Health is rarely built in dramatic moments. More often it’s built through small, repeated actions practiced over time. The same is true for friendships. Relationships. Communities. And most worthwhile things in life.")}
               </p>
             </Reveal>
           </div>
@@ -117,38 +107,28 @@ export default function OutdoorsPage() {
 
       {/* Wilderness */}
       <CollageRow
-        eyebrow="Wilderness"
-        heading={<>Learning what matters when resources don&#8217;t exist</>}
+        eyebrow={f("wild.eyebrow", "Wilderness")}
+        heading={f("wild.heading", "Learning what matters when resources don’t exist")}
         mirror
         collage={{ cartoon: "hiking-walking", blobVariant: 3, blobClass: "text-primary/10", doodle: "path", doodleClass: "text-accent" }}
       >
         <p>
-          At 2 a.m. in the mountains of Colorado, our team received coordinates for a simulated
-          plane crash. We had radios, headlamps, basic medical equipment, and whatever we could
-          carry on our backs.
+          {f("wild.p1", "At 2 a.m. in the mountains of Colorado, our team received coordinates for a simulated plane crash. We had radios, headlamps, basic medical equipment, and whatever we could carry on our backs.")}
         </p>
         <div className="font-serif text-xl text-text-base leading-relaxed border-l-2 border-accent pl-5">
-          <p>No CT scanner.</p>
-          <p>No trauma bay.</p>
-          <p>No consultant down the hall.</p>
-          <p>No convenient backup plan.</p>
+          {lines(f("wild.list", "No CT scanner.\nNo trauma bay.\nNo consultant down the hall.\nNo convenient backup plan.")).map((it, i) => (
+            <p key={i}>{it}</p>
+          ))}
         </div>
-        <p>Just terrain, weather, teamwork, and judgment.</p>
+        <p>{f("wild.p2", "Just terrain, weather, teamwork, and judgment.")}</p>
         <p>
-          Wilderness medicine fascinated me because it removes the illusion that more equipment
-          automatically creates better decisions. In austere environments, preparation matters.
-          Communication matters. Adaptability matters. Leadership matters.
+          {f("wild.p3", "Wilderness medicine fascinated me because it removes the illusion that more equipment automatically creates better decisions. In austere environments, preparation matters. Communication matters. Adaptability matters. Leadership matters.")}
         </p>
         <p>
-          The principles aren&#8217;t all that different from everyday life. Things rarely go
-          according to plan. Resources are limited. Uncertainty is unavoidable. People still need
-          help.
+          {f("wild.p4", "The principles aren’t all that different from everyday life. Things rarely go according to plan. Resources are limited. Uncertainty is unavoidable. People still need help.")}
         </p>
         <p>
-          Those experiences reinforced something I value deeply: expertise matters, but
-          resourcefulness matters too. The ability to stay calm, think clearly, adapt, and work
-          with what&#8217;s available often determines success far more than perfect conditions
-          ever will.
+          {f("wild.p5", "Those experiences reinforced something I value deeply: expertise matters, but resourcefulness matters too. The ability to stay calm, think clearly, adapt, and work with what’s available often determines success far more than perfect conditions ever will.")}
         </p>
       </CollageRow>
 

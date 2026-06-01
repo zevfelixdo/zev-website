@@ -5,6 +5,8 @@ import { Reveal } from "@/components/public/Reveal";
 import { Doodle } from "@/components/public/Doodle";
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo";
+import { field } from "@/lib/pageContent";
+import { getPageContent } from "@/lib/pageContent.server";
 
 export const revalidate = 60;
 
@@ -18,15 +20,19 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-export default function PhilosophyPage() {
+export default async function PhilosophyPage() {
+  const c = await getPageContent("philosophy");
+  const f = (key: string, fallback: string) => field(c, key, fallback);
+  const lines = (s: string) => s.split("\n").map((x) => x.trim()).filter(Boolean);
+
   return (
     <>
       <PageHero
-        eyebrow="Philosophy of Care"
-        heading="What Matters To You?"
+        eyebrow={f("hero.eyebrow", "Philosophy of Care")}
+        heading={f("hero.heading", "What Matters To You?")}
         collage={{ photoArea: "philosophy.portrait", cartoon: "talking-to-nurse", blobVariant: 2, blobClass: "text-primary/10", doodle: "heart", doodleClass: "text-accent" }}
       >
-        <p>One of the most important questions in medicine is also one of the simplest.</p>
+        <p>{f("hero.lead", "One of the most important questions in medicine is also one of the simplest.")}</p>
       </PageHero>
 
       {/* Opening */}
@@ -37,12 +43,12 @@ export default function PhilosophyPage() {
         <div className="space-y-4 font-serif text-2xl sm:text-3xl text-text-base leading-snug">
           <p>
             <span className="relative inline-block">
-              What matters to you?
+              {f("open.phrase", "What matters to you?")}
               <Doodle name="underline" stretch strokeWidth={3} className="absolute -bottom-2 left-0 h-3 w-full text-accent/70" />
             </span>
           </p>
-          <p className="text-text-muted">Not what&#8217;s the matter with you.</p>
-          <p>What matters to you.</p>
+          <p className="text-text-muted">{f("open.line2", "Not what’s the matter with you.")}</p>
+          <p>{f("open.line3", "What matters to you.")}</p>
         </div>
       </CollageRow>
 
@@ -51,17 +57,15 @@ export default function PhilosophyPage() {
         <Doodle name="star" size={26} className="absolute right-[12%] top-12 text-fun-coral/60" />
         <div className="container-content relative">
           <div className="max-w-2xl space-y-5 text-lg text-text-base leading-relaxed">
-            <Reveal><p className="font-serif text-2xl text-text-base">The answer changes everything.</p></Reveal>
+            <Reveal><p className="font-serif text-2xl text-text-base">{f("narr.q1", "The answer changes everything.")}</p></Reveal>
             <Reveal delay={90}>
               <p>
-                A treatment plan that works on paper but doesn&#8217;t fit someone&#8217;s life is
-                rarely a good plan. A recommendation that ignores family responsibilities, finances,
-                culture, values, or personal goals often fails before it starts.
+                {f("narr.p1", "A treatment plan that works on paper but doesn’t fit someone’s life is rarely a good plan. A recommendation that ignores family responsibilities, finances, culture, values, or personal goals often fails before it starts.")}
               </p>
             </Reveal>
             <Reveal delay={150}>
               <p className="font-serif text-2xl text-text-base leading-snug">
-                Health doesn&#8217;t happen in isolation. It happens within the context of a life.
+                {f("narr.q2", "Health doesn’t happen in isolation. It happens within the context of a life.")}
               </p>
             </Reveal>
           </div>
@@ -73,21 +77,15 @@ export default function PhilosophyPage() {
         collage={{ photoArea: "philosophy.goal", cartoon: "treating-person", blobVariant: 3, blobClass: "text-primary/10", doodle: "loops", doodleClass: "text-accent" }}
       >
         <p>
-          My goal as a physician is not to create perfect patients. It&#8217;s to help people make
-          meaningful progress.
+          {f("goal.p1", "My goal as a physician is not to create perfect patients. It’s to help people make meaningful progress.")}
         </p>
         <div className="space-y-1 text-lg text-text-base">
-          <p>Sometimes that means medication.</p>
-          <p>Sometimes it means a procedure.</p>
-          <p>
-            Sometimes it means sleep, movement, connection, therapy, nutrition, boundaries,
-            community, or a difficult conversation.
-          </p>
-          <p>Usually it&#8217;s some combination of all of them.</p>
+          {lines(f("goal.list", "Sometimes that means medication.\nSometimes it means a procedure.\nSometimes it means sleep, movement, connection, therapy, nutrition, boundaries, community, or a difficult conversation.\nUsually it’s some combination of all of them.")).map((it, i) => (
+            <p key={i}>{it}</p>
+          ))}
         </div>
         <p>
-          The most effective healthcare I&#8217;ve seen is rarely the most complicated. It&#8217;s
-          the care that meets people where they are and helps them move forward from there.
+          {f("goal.p2", "The most effective healthcare I’ve seen is rarely the most complicated. It’s the care that meets people where they are and helps them move forward from there.")}
         </p>
       </CollageRow>
 

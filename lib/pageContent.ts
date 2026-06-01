@@ -85,6 +85,195 @@ export const PAGE_CONTENT_SCHEMA: Record<string, ContentGroup[]> = {
       ],
     },
   ],
+  balance: [
+    {
+      group: "Hero",
+      fields: [
+        { key: "hero.eyebrow", label: "Eyebrow", type: "text" },
+        { key: "hero.heading", label: "Heading", type: "text" },
+        { key: "hero.lead", label: "Lead paragraph", type: "textarea" },
+      ],
+    },
+    {
+      group: "Narrative",
+      fields: [
+        { key: "narr.p1", label: "Paragraph 1", type: "textarea" },
+        { key: "narr.p2", label: "Paragraph 2", type: "textarea" },
+        { key: "narr.p3", label: "Paragraph 3", type: "textarea" },
+        { key: "narr.quote", label: "Pull-quote", type: "textarea" },
+        { key: "narr.principles", label: "Principles list (one per line)", type: "textarea" },
+        { key: "narr.p4", label: "Paragraph 4", type: "textarea" },
+        { key: "narr.whys", label: "Why list (one per line)", type: "textarea" },
+        { key: "narr.p5", label: "Closing line", type: "text" },
+      ],
+    },
+    {
+      group: "Closing",
+      fields: [
+        { key: "close.l1", label: "Line 1", type: "text" },
+        { key: "close.l2", label: "Line 2", type: "textarea" },
+      ],
+    },
+  ],
+  technology: [
+    {
+      group: "Hero",
+      fields: [
+        { key: "hero.eyebrow", label: "Eyebrow", type: "text" },
+        { key: "hero.heading", label: "Heading", type: "text" },
+        { key: "hero.lead", label: "Lead paragraph", type: "textarea" },
+      ],
+    },
+    {
+      group: "Narrative",
+      fields: [
+        { key: "narr.quote1", label: "Pull-quote 1", type: "textarea" },
+        { key: "narr.p1", label: "Paragraph 1", type: "textarea" },
+        { key: "narr.p2", label: "Paragraph 2", type: "textarea" },
+        { key: "narr.p3", label: "Paragraph 3", type: "textarea" },
+        { key: "narr.benefits", label: "Benefits list (one per line)", type: "textarea" },
+        { key: "narr.quote2", label: "Pull-quote 2", type: "textarea" },
+        { key: "narr.p4", label: "Paragraph 4", type: "textarea" },
+      ],
+    },
+    {
+      group: "Closing question",
+      fields: [
+        { key: "close.p1", label: "Lead-in", type: "textarea" },
+        { key: "close.phrase", label: "Highlighted question", type: "text" },
+        { key: "close.p2", label: "Paragraph", type: "textarea" },
+        { key: "close.p3", label: "Closing line", type: "textarea" },
+      ],
+    },
+  ],
+  philosophy: [
+    {
+      group: "Hero",
+      fields: [
+        { key: "hero.eyebrow", label: "Eyebrow", type: "text" },
+        { key: "hero.heading", label: "Heading", type: "text" },
+        { key: "hero.lead", label: "Lead paragraph", type: "textarea" },
+      ],
+    },
+    {
+      group: "Opening",
+      fields: [
+        { key: "open.phrase", label: "Highlighted question", type: "text" },
+        { key: "open.line2", label: "Line 2 (muted)", type: "text" },
+        { key: "open.line3", label: "Line 3", type: "text" },
+      ],
+    },
+    {
+      group: "Narrative",
+      fields: [
+        { key: "narr.q1", label: "Pull-quote 1", type: "textarea" },
+        { key: "narr.p1", label: "Paragraph", type: "textarea" },
+        { key: "narr.q2", label: "Pull-quote 2", type: "textarea" },
+      ],
+    },
+    {
+      group: "Goal",
+      fields: [
+        { key: "goal.p1", label: "Paragraph 1", type: "textarea" },
+        { key: "goal.list", label: "List (one per line)", type: "textarea" },
+        { key: "goal.p2", label: "Closing paragraph", type: "textarea" },
+      ],
+    },
+  ],
+  outdoors: [
+    {
+      group: "Hero",
+      fields: [
+        { key: "hero.eyebrow", label: "Eyebrow", type: "text" },
+        { key: "hero.heading", label: "Heading", type: "text" },
+        { key: "hero.lead", label: "Lead paragraph", type: "textarea" },
+      ],
+    },
+    {
+      group: "Making things",
+      fields: [
+        { key: "make.heading", label: "Heading", type: "text" },
+        { key: "make.p1", label: "Paragraph 1", type: "textarea" },
+        { key: "make.p2", label: "Paragraph 2", type: "textarea" },
+      ],
+    },
+    {
+      group: "Climbing",
+      fields: [
+        { key: "climb.heading", label: "Heading", type: "text" },
+        { key: "climb.p1", label: "Paragraph 1", type: "textarea" },
+        { key: "climb.p2", label: "Paragraph 2", type: "textarea" },
+        { key: "climb.list", label: "Climbing list (one per line)", type: "textarea" },
+      ],
+    },
+    {
+      group: "Maisy",
+      fields: [
+        { key: "maisy.heading", label: "Heading", type: "text" },
+        { key: "maisy.p1", label: "Paragraph 1", type: "textarea" },
+        { key: "maisy.p2", label: "Paragraph 2", type: "textarea" },
+      ],
+    },
+    {
+      group: "Reflection",
+      fields: [
+        { key: "refl.quote", label: "Pull-quote", type: "textarea" },
+        { key: "refl.p1", label: "Paragraph", type: "textarea" },
+      ],
+    },
+    {
+      group: "Wilderness",
+      fields: [
+        { key: "wild.eyebrow", label: "Eyebrow", type: "text" },
+        { key: "wild.heading", label: "Heading", type: "text" },
+        { key: "wild.p1", label: "Paragraph 1", type: "textarea" },
+        { key: "wild.list", label: "List (one per line)", type: "textarea" },
+        { key: "wild.p2", label: "Paragraph 2", type: "textarea" },
+        { key: "wild.p3", label: "Paragraph 3", type: "textarea" },
+        { key: "wild.p4", label: "Paragraph 4", type: "textarea" },
+        { key: "wild.p5", label: "Paragraph 5", type: "textarea" },
+      ],
+    },
+  ],
+  path: [
+    {
+      group: "Hero",
+      fields: [
+        { key: "hero.eyebrow", label: "Eyebrow", type: "text" },
+        { key: "hero.heading", label: "Heading", type: "text" },
+        { key: "hero.lead", label: "Lead paragraph", type: "textarea" },
+      ],
+    },
+    {
+      group: "Timeline (8 entries)",
+      fields: [
+        { key: "t1.period", label: "1 — Period", type: "text" },
+        { key: "t1.title", label: "1 — Title", type: "text" },
+        { key: "t1.body", label: "1 — Body", type: "textarea" },
+        { key: "t2.period", label: "2 — Period", type: "text" },
+        { key: "t2.title", label: "2 — Title", type: "text" },
+        { key: "t2.body", label: "2 — Body", type: "textarea" },
+        { key: "t3.period", label: "3 — Period", type: "text" },
+        { key: "t3.title", label: "3 — Title", type: "text" },
+        { key: "t3.body", label: "3 — Body", type: "textarea" },
+        { key: "t4.period", label: "4 — Period", type: "text" },
+        { key: "t4.title", label: "4 — Title", type: "text" },
+        { key: "t4.body", label: "4 — Body", type: "textarea" },
+        { key: "t5.period", label: "5 — Period", type: "text" },
+        { key: "t5.title", label: "5 — Title", type: "text" },
+        { key: "t5.body", label: "5 — Body", type: "textarea" },
+        { key: "t6.period", label: "6 — Period", type: "text" },
+        { key: "t6.title", label: "6 — Title", type: "text" },
+        { key: "t6.body", label: "6 — Body", type: "textarea" },
+        { key: "t7.period", label: "7 — Period", type: "text" },
+        { key: "t7.title", label: "7 — Title", type: "text" },
+        { key: "t7.body", label: "7 — Body", type: "textarea" },
+        { key: "t8.period", label: "8 — Period", type: "text" },
+        { key: "t8.title", label: "8 — Title", type: "text" },
+        { key: "t8.body", label: "8 — Body", type: "textarea" },
+      ],
+    },
+  ],
   about: [
     {
       group: "Hero",

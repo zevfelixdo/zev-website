@@ -6,6 +6,8 @@ import { Cartoon } from "@/components/public/Cartoon";
 import { Doodle } from "@/components/public/Doodle";
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo";
+import { field } from "@/lib/pageContent";
+import { getPageContent } from "@/lib/pageContent.server";
 
 export const revalidate = 60;
 
@@ -19,60 +21,62 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-const timeline = [
-  {
-    period: "2008–2012",
-    title: "University of Southern California",
-    body: "Studied business and cinematic arts. I was fascinated by stories: why people make the decisions they do, and how communities form.",
-  },
-  {
-    period: "2012–2013",
-    title: "Digital Detox",
-    body: "Joined my brother Levi in building one of the earliest digital-wellness movements, designing its brand and website.",
-  },
-  {
-    period: "2013–2018",
-    title: "Camp Grounded",
-    body: "Co-founded and helped run a screen-free summer camp for adults. Years of campfires, and the question that still guides me: what matters to you?",
-  },
-  {
-    period: "2018",
-    title: "Kunming, China",
-    body: "A three-month Shaolin Kung Fu and meditation intensive. A long detour that turned out to be part of the path.",
-  },
-  {
-    period: "2018–2020",
-    title: "Mills College",
-    body: "Returned to school for a post-baccalaureate pre-medical program. A deliberate pivot toward medicine, made after years of noticing what I cared about most.",
-  },
-  {
-    period: "2021–2025",
-    title: "Touro University California",
-    body: "Doctor of Osteopathic Medicine. Drawn to osteopathic medicine for its insistence that the body, mind, and context of a life are inseparable from health.",
-  },
-  {
-    period: "2025–2026",
-    title: "UCSF East Bay",
-    body: "A preliminary year in general surgery. Urgency, discipline, teamwork, and how to think clearly when things get complicated fast.",
-  },
-  {
-    period: "Now",
-    title: "Family Medicine",
-    body: "Continuity, relationships, and helping people before they arrive in crisis. The place where all the pieces finally fit.",
-  },
-];
+export default async function PathPage() {
+  const c = await getPageContent("path");
+  const f = (key: string, fallback: string) => field(c, key, fallback);
 
-export default function PathPage() {
+  const timeline = [
+    {
+      period: f("t1.period", "2008–2012"),
+      title: f("t1.title", "University of Southern California"),
+      body: f("t1.body", "Studied business and cinematic arts. I was fascinated by stories: why people make the decisions they do, and how communities form."),
+    },
+    {
+      period: f("t2.period", "2012–2013"),
+      title: f("t2.title", "Digital Detox"),
+      body: f("t2.body", "Joined my brother Levi in building one of the earliest digital-wellness movements, designing its brand and website."),
+    },
+    {
+      period: f("t3.period", "2013–2018"),
+      title: f("t3.title", "Camp Grounded"),
+      body: f("t3.body", "Co-founded and helped run a screen-free summer camp for adults. Years of campfires, and the question that still guides me: what matters to you?"),
+    },
+    {
+      period: f("t4.period", "2018"),
+      title: f("t4.title", "Kunming, China"),
+      body: f("t4.body", "A three-month Shaolin Kung Fu and meditation intensive. A long detour that turned out to be part of the path."),
+    },
+    {
+      period: f("t5.period", "2018–2020"),
+      title: f("t5.title", "Mills College"),
+      body: f("t5.body", "Returned to school for a post-baccalaureate pre-medical program. A deliberate pivot toward medicine, made after years of noticing what I cared about most."),
+    },
+    {
+      period: f("t6.period", "2021–2025"),
+      title: f("t6.title", "Touro University California"),
+      body: f("t6.body", "Doctor of Osteopathic Medicine. Drawn to osteopathic medicine for its insistence that the body, mind, and context of a life are inseparable from health."),
+    },
+    {
+      period: f("t7.period", "2025–2026"),
+      title: f("t7.title", "UCSF East Bay"),
+      body: f("t7.body", "A preliminary year in general surgery. Urgency, discipline, teamwork, and how to think clearly when things get complicated fast."),
+    },
+    {
+      period: f("t8.period", "Now"),
+      title: f("t8.title", "Family Medicine"),
+      body: f("t8.body", "Continuity, relationships, and helping people before they arrive in crisis. The place where all the pieces finally fit."),
+    },
+  ];
+
   return (
     <>
       <PageHero
-        eyebrow="My Path"
-        heading="From Film to Family Medicine"
+        eyebrow={f("hero.eyebrow", "My Path")}
+        heading={f("hero.heading", "From Film to Family Medicine")}
         collage={{ cartoon: "walking", blobVariant: 2, blobClass: "text-primary/10", doodle: "path", doodleClass: "text-accent" }}
       >
         <p>
-          The route was not a straight line, and I am glad it was not. Each detour taught me
-          something I now use as a physician. Here it is, in order.
+          {f("hero.lead", "The route was not a straight line, and I am glad it was not. Each detour taught me something I now use as a physician. Here it is, in order.")}
         </p>
       </PageHero>
 
