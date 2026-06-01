@@ -24,6 +24,67 @@ export interface ContentGroup {
 }
 
 export const PAGE_CONTENT_SCHEMA: Record<string, ContentGroup[]> = {
+  home: [
+    {
+      group: "Hero",
+      fields: [
+        { key: "hero.eyebrow", label: "Eyebrow / tagline", type: "text" },
+        { key: "hero.heading", label: "Headline", type: "text" },
+        { key: "hero.lead", label: "Lead paragraph", type: "textarea" },
+        { key: "hero.intro", label: "Intro paragraph", type: "textarea" },
+        { key: "hero.cta1", label: "Primary button label", type: "text" },
+        { key: "hero.cta2", label: "Secondary button label", type: "text" },
+      ],
+    },
+    {
+      group: "A few true things (stat labels)",
+      fields: [
+        { key: "facts.eyebrow", label: "Eyebrow", type: "text" },
+        { key: "facts.l1", label: "Stat 1 label", type: "text" },
+        { key: "facts.l2", label: "Stat 2 label", type: "text" },
+        { key: "facts.l3", label: "Stat 3 label", type: "text" },
+        { key: "facts.l4", label: "Stat 4 label", type: "text" },
+      ],
+    },
+    {
+      group: "01 — Introduction",
+      fields: [
+        { key: "intro.p1", label: "Paragraph 1 (large)", type: "textarea" },
+        { key: "intro.p2", label: "Paragraph 2", type: "textarea" },
+      ],
+    },
+    {
+      group: "Question band (green)",
+      fields: [
+        { key: "band.eyebrow", label: "Eyebrow", type: "text" },
+        { key: "band.l1", label: "Line 1", type: "text" },
+        { key: "band.l2", label: "Line 2 (large)", type: "text" },
+        { key: "band.close", label: "Closing line", type: "textarea" },
+      ],
+    },
+    {
+      group: "Glimpses",
+      fields: [
+        { key: "glimpses.heading", label: "Heading", type: "text" },
+        { key: "glimpses.index", label: "Section index", type: "text" },
+      ],
+    },
+    {
+      group: "Explore",
+      fields: [{ key: "explore.heading", label: "Heading", type: "textarea" }],
+    },
+    {
+      group: "Closing — Stay a while",
+      fields: [
+        { key: "close.eyebrow", label: "Eyebrow", type: "text" },
+        { key: "close.heading", label: "Heading", type: "text" },
+        { key: "close.p", label: "Paragraph", type: "textarea" },
+        { key: "close.cta1", label: "Primary button label", type: "text" },
+        { key: "close.cta2", label: "Secondary button label", type: "text" },
+        { key: "close.search", label: "Search prompt", type: "text" },
+      ],
+    },
+  ],
   about: [
     {
       group: "Hero",

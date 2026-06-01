@@ -47,6 +47,8 @@ export async function buildPageMetadata(opts: {
   path: string;
   fallbackTitle: string;
   fallbackDescription: string;
+  /** Bypass the root layout's "%s | Zev Felix" title template (use for the home page). */
+  absoluteTitle?: boolean;
 }): Promise<Metadata> {
   let pageTitle = opts.fallbackTitle;
   let pageDesc = opts.fallbackDescription;
@@ -70,7 +72,7 @@ export async function buildPageMetadata(opts: {
 
   const canonical = `${BASE}${opts.path}`;
   return {
-    title: pageTitle,
+    title: opts.absoluteTitle ? { absolute: pageTitle } : pageTitle,
     description: pageDesc,
     alternates: { canonical },
     openGraph: {

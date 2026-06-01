@@ -16,15 +16,25 @@ import { Doodle } from "@/components/public/Doodle";
 import { CountUp } from "@/components/public/CountUp";
 import { BikeEasterEgg } from "@/components/public/BikeEasterEgg";
 import { getPlacements } from "@/lib/placements";
+import { field } from "@/lib/pageContent";
+import { getPageContent } from "@/lib/pageContent.server";
+import { buildPageMetadata } from "@/lib/seo";
 
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
+export const revalidate = 60;
 
-export const metadata: Metadata = {
-  title: "Zev Felix: Medicine, Creativity, Community, and the Art of Staying Human",
-  description:
-    "Family Medicine resident, former Camp Grounded co-founder, climber, and maker. A lifelong student of how people heal, connect, and build meaningful lives.",
-  alternates: { canonical: BASE },
-};
+// Per-page SEO sourced from the admin (Pages → Home → title/description),
+// falling back to the bespoke homepage values so nothing regresses if unset.
+// absoluteTitle keeps the full title (skips the "%s | Zev Felix" template).
+export async function generateMetadata(): Promise<Metadata> {
+  return buildPageMetadata({
+    slug: "home",
+    path: "",
+    absoluteTitle: true,
+    fallbackTitle: "Zev Felix: Medicine, Creativity, Community, and the Art of Staying Human",
+    fallbackDescription:
+      "Family Medicine resident, former Camp Grounded co-founder, climber, and maker. A lifelong student of how people heal, connect, and build meaningful lives.",
+  });
+}
 
 const exploreItems = [
   { label: "About", href: "/about", area: "home.card.about", description: "The long way to Family Medicine: film, camp, surgery, and a dog from Taiwan." },
@@ -49,6 +59,11 @@ const threads = [
 
 export default async function HomePage() {
   const cardMap = await getPlacements(exploreItems.map((i) => i.area));
+
+  // Editable copy from the admin (Pages → Home → Page text content). Every field
+  // falls back to the original text, so the design is unchanged until an admin edits it.
+  const c = await getPageContent("home");
+  const f = (key: string, fallback: string) => field(c, key, fallback);
 
   const items: ExploreItem[] = exploreItems.map((it) => {
     const p = cardMap[it.area];
@@ -91,31 +106,22 @@ export default async function HomePage() {
           {/* center text */}
           <div className="relative z-10 max-w-3xl">
             <p className="eyebrow rise" style={{ animationDelay: "40ms" }}>
-              Community Builder, Designer, and Creative Problem Solver
+              {f("hero.eyebrow", "Community Builder, Designer, and Creative Problem Solver")}
             </p>
             <h1 className="font-serif text-display text-text-base mt-5 mb-6">
-              <RevealHeading text="Medicine, Creativity, Community, and the Art of Staying Human" trigger="mount" stagger={48} delay={120} />
+              <RevealHeading text={f("hero.heading", "Medicine, Creativity, Community, and the Art of Staying Human")} trigger="mount" stagger={48} delay={120} />
             </h1>
             <p className="text-lg sm:text-xl text-text-muted leading-relaxed max-w-2xl mx-auto rise" style={{ animationDelay: "620ms" }}>
-              I&#8217;m Zev Felix, a Family Medicine resident, former Camp Grounded co-founder,
-              climber, maker, and lifelong student of how people heal, connect, and build meaningful
-              lives.
+              {f("hero.lead", "I’m Zev Felix, a Family Medicine resident, former Camp Grounded co-founder, climber, maker, and lifelong student of how people heal, connect, and build meaningful lives.")}
             </p>
             <p className="text-base text-text-muted/90 leading-relaxed max-w-2xl mx-auto mt-4 rise" style={{ animationDelay: "720ms" }}>
-              I&#8217;ve always been fascinated by people: how we heal, how we connect, and how we
-              make meaning of our lives. That curiosity has taken me from film sets to summer camps,
-              from startup projects to mountain trails, and eventually into hospitals and clinics.
-              Before medicine, I helped build a device-free summer camp where people came to
-              reconnect with themselves and each other. Looking back, the settings changed, but the
-              question never did: what helps people live healthier, more connected, and more
-              meaningful lives? Family Medicine is where I&#8217;ve found the privilege of exploring
-              that question alongside patients every day.
+              {f("hero.intro", "I’ve always been fascinated by people: how we heal, how we connect, and how we make meaning of our lives. That curiosity has taken me from film sets to summer camps, from startup projects to mountain trails, and eventually into hospitals and clinics. Before medicine, I helped build a device-free summer camp where people came to reconnect with themselves and each other. Looking back, the settings changed, but the question never did: what helps people live healthier, more connected, and more meaningful lives? Family Medicine is where I’ve found the privilege of exploring that question alongside patients every day.")}
             </p>
             <div className="flex flex-wrap gap-3 mt-8 justify-center rise" style={{ animationDelay: "820ms" }}>
               <MagneticButton>
-                <Button as="link" href="/about" size="lg">Read my story</Button>
+                <Button as="link" href="/about" size="lg">{f("hero.cta1", "Read my story")}</Button>
               </MagneticButton>
-              <Button as="link" href="/work" size="lg" variant="outline">See my work</Button>
+              <Button as="link" href="/work" size="lg" variant="outline">{f("hero.cta2", "See my work")}</Button>
             </div>
           </div>
 
@@ -152,14 +158,14 @@ export default async function HomePage() {
         <Doodle name="sparkle" size={28} float className="hidden sm:block absolute right-[10%] top-8 text-fun-coral" />
         <Doodle name="star" size={22} className="hidden sm:block absolute left-[10%] bottom-8 text-fun-tangerine" />
         <Reveal>
-          <p className="eyebrow text-center mb-12">A few true things</p>
+          <p className="eyebrow text-center mb-12">{f("facts.eyebrow", "A few true things")}</p>
         </Reveal>
         <div className="relative grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12 text-center">
           {[
-            { v: 3000, suffix: "+", label: "people who set their phones down at Camp Grounded" },
-            { v: 17, suffix: "", label: "device-free camps, run with a small team" },
-            { v: 10, suffix: "+", label: "years since my first day in a climbing gym" },
-            { v: 1, suffix: "", label: "very good rescue dog, named Maisy" },
+            { v: 3000, suffix: "+", label: f("facts.l1", "people who set their phones down at Camp Grounded") },
+            { v: 17, suffix: "", label: f("facts.l2", "device-free camps, run with a small team") },
+            { v: 10, suffix: "+", label: f("facts.l3", "years since my first day in a climbing gym") },
+            { v: 1, suffix: "", label: f("facts.l4", "very good rescue dog, named Maisy") },
           ].map((s, i) => (
             <Reveal key={i} delay={i * 90}>
               <p className="font-serif text-display-sm text-primary leading-none">
@@ -187,16 +193,12 @@ export default async function HomePage() {
           <div className="max-w-2xl space-y-6">
             <Reveal>
               <p className="font-serif text-2xl sm:text-3xl text-text-base leading-snug">
-                Before medicine, I helped build a summer camp where adults handed over their phones,
-                left their job titles behind, and spent weekends rediscovering how to be present.
+                {f("intro.p1", "Before medicine, I helped build a summer camp where adults handed over their phones, left their job titles behind, and spent weekends rediscovering how to be present.")}
               </p>
             </Reveal>
             <Reveal delay={120}>
               <p className="text-lg text-text-muted leading-relaxed">
-                Years later, after caring for my brother through glioblastoma, training in osteopathic
-                medicine, spending long nights in trauma bays and operating rooms, and learning
-                firsthand both the power and limits of modern healthcare, I found myself drawn toward a
-                different kind of question.
+                {f("intro.p2", "Years later, after caring for my brother through glioblastoma, training in osteopathic medicine, spending long nights in trauma bays and operating rooms, and learning firsthand both the power and limits of modern healthcare, I found myself drawn toward a different kind of question.")}
               </p>
             </Reveal>
           </div>
@@ -216,15 +218,15 @@ export default async function HomePage() {
         <Doodle name="loops" size={70} strokeWidth={4} className="hidden sm:block absolute right-[14%] top-16 text-fun-sky/50" />
         <div className="container-content max-w-3xl text-center relative">
           <Reveal variant="rule-draw" className="mx-auto mb-8 h-px w-16 bg-surface/40" />
-          <p className="eyebrow !text-surface/60 mb-8">The question that guides everything</p>
+          <p className="eyebrow !text-surface/60 mb-8">{f("band.eyebrow", "The question that guides everything")}</p>
           <p className="font-serif text-display-sm italic leading-tight text-surface/75">
-            <RevealHeading text="Not just: how do we treat disease?" stagger={32} />
+            <RevealHeading text={f("band.l1", "Not just: how do we treat disease?")} stagger={32} />
           </p>
           <p className="font-serif text-display leading-tight mt-3">
-            <RevealHeading text="How do we help people live well?" stagger={42} />
+            <RevealHeading text={f("band.l2", "How do we help people live well?")} stagger={42} />
           </p>
           <Reveal delay={150}>
-            <p className="text-surface/75 text-lg mt-10">That question still guides everything I do.</p>
+            <p className="text-surface/75 text-lg mt-10">{f("band.close", "That question still guides everything I do.")}</p>
           </Reveal>
         </div>
       </section>
@@ -235,11 +237,11 @@ export default async function HomePage() {
           <div className="flex items-end justify-between gap-4 mb-8">
             <h2 className="font-serif text-display-sm text-text-base">
               <span className="relative inline-block">
-                A few glimpses
+                {f("glimpses.heading", "A few glimpses")}
                 <Doodle name="underline" stretch strokeWidth={3} className="absolute -bottom-2 left-0 h-3 w-full text-fun-tangerine/70" />
               </span>
             </h2>
-            <p className="section-index hidden sm:block">In &amp; out of the white coat</p>
+            <p className="section-index hidden sm:block">{f("glimpses.index", "In & out of the white coat")}</p>
           </div>
         </Reveal>
         <Reveal delay={80}>
@@ -259,7 +261,7 @@ export default async function HomePage() {
           <div className="grid lg:grid-cols-[auto_1fr] gap-5 lg:gap-16 mb-12">
             <p className="section-index lg:pt-3 whitespace-nowrap">02 — Explore</p>
             <h2 className="font-serif text-display-sm text-text-base max-w-2xl">
-              Wander through the threads that make up a life, and a way of practicing.
+              {f("explore.heading", "Wander through the threads that make up a life, and a way of practicing.")}
             </h2>
           </div>
         </Reveal>
@@ -275,23 +277,22 @@ export default async function HomePage() {
           <div className="relative overflow-hidden rounded-xl border border-border bg-surface-alt px-6 sm:px-12 py-14 sm:py-16">
             <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-12 items-center">
               <div>
-                <p className="eyebrow mb-5">Stay a while</p>
+                <p className="eyebrow mb-5">{f("close.eyebrow", "Stay a while")}</p>
                 <h2 className="font-serif text-display-sm text-text-base leading-tight">
-                  Wander, read, or reach out.
+                  {f("close.heading", "Wander, read, or reach out.")}
                 </h2>
                 <p className="text-lg text-text-muted leading-relaxed mt-5 max-w-md">
-                  This site is a slow walk through the threads of a life in medicine. If something
-                  here resonates, I&#8217;d love to hear from you.
+                  {f("close.p", "This site is a slow walk through the threads of a life in medicine. If something here resonates, I’d love to hear from you.")}
                 </p>
                 <div className="flex flex-wrap gap-3 mt-8">
                   <MagneticButton>
-                    <Button as="link" href="/contact" size="lg">Get in touch</Button>
+                    <Button as="link" href="/contact" size="lg">{f("close.cta1", "Get in touch")}</Button>
                   </MagneticButton>
-                  <Button as="link" href="/writing" size="lg" variant="outline">Read the writing</Button>
+                  <Button as="link" href="/writing" size="lg" variant="outline">{f("close.cta2", "Read the writing")}</Button>
                 </div>
 
                 <div className="mt-10 pt-8 border-t border-border max-w-md">
-                  <h3 className="font-serif text-lg text-text-base mb-3">Looking for something?</h3>
+                  <h3 className="font-serif text-lg text-text-base mb-3">{f("close.search", "Looking for something?")}</h3>
                   <SearchBar variant="compact" />
                 </div>
               </div>
