@@ -20,7 +20,7 @@ import { getPlacements } from "@/lib/placements";
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
 
 export const metadata: Metadata = {
-  title: "Zev Felix: Medicine, Storytelling, and the Art of Staying Human",
+  title: "Zev Felix: Medicine, Creativity, Community, and the Art of Staying Human",
   description:
     "Family Medicine resident, former Camp Grounded co-founder, climber, and maker. A lifelong student of how people heal, connect, and build meaningful lives.",
   alternates: { canonical: BASE },
@@ -91,10 +91,10 @@ export default async function HomePage() {
           {/* center text */}
           <div className="relative z-10 max-w-3xl">
             <p className="eyebrow rise" style={{ animationDelay: "40ms" }}>
-              Physician · Storyteller · Builder
+              Community Builder, Designer, and Creative Problem Solver
             </p>
             <h1 className="font-serif text-display text-text-base mt-5 mb-6">
-              <RevealHeading text="Medicine, Storytelling, and the Art of Staying Human" trigger="mount" stagger={55} delay={120} />
+              <RevealHeading text="Medicine, Creativity, Community, and the Art of Staying Human" trigger="mount" stagger={48} delay={120} />
             </h1>
             <p className="text-lg sm:text-xl text-text-muted leading-relaxed max-w-2xl mx-auto rise" style={{ animationDelay: "620ms" }}>
               I&#8217;m Zev Felix, a Family Medicine resident, former Camp Grounded co-founder,
@@ -102,9 +102,14 @@ export default async function HomePage() {
               lives.
             </p>
             <p className="text-base text-text-muted/90 leading-relaxed max-w-2xl mx-auto mt-4 rise" style={{ animationDelay: "720ms" }}>
-              My path here has wound through documentary storytelling, digital detox retreats,
-              wilderness medicine, surgery, community-building, and more than a few campfires.
-              Family Medicine is where those threads finally came together.
+              I&#8217;ve always been fascinated by people: how we heal, how we connect, and how we
+              make meaning of our lives. That curiosity has taken me from film sets to summer camps,
+              from startup projects to mountain trails, and eventually into hospitals and clinics.
+              Before medicine, I helped build a device-free summer camp where people came to
+              reconnect with themselves and each other. Looking back, the settings changed, but the
+              question never did: what helps people live healthier, more connected, and more
+              meaningful lives? Family Medicine is where I&#8217;ve found the privilege of exploring
+              that question alongside patients every day.
             </p>
             <div className="flex flex-wrap gap-3 mt-8 justify-center rise" style={{ animationDelay: "820ms" }}>
               <MagneticButton>
