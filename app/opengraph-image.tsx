@@ -57,8 +57,8 @@ export default function OGImage() {
           >
             Physician · Storyteller · Builder
           </p>
-          <h1 style={{ fontSize: 104, fontWeight: 800, color: "rgb(35,30,25)", lineHeight: 1.05, margin: 0 }}>
-            Zev Felix
+          <h1 style={{ fontSize: 80, fontWeight: 800, color: "rgb(35,30,25)", lineHeight: 1.05, margin: 0, whiteSpace: "nowrap" }}>
+            Zev Felix, DO
           </h1>
           <p style={{ fontSize: 30, color: "rgb(95,90,80)", lineHeight: 1.45, marginTop: 24 }}>
             Family Medicine, Camp Grounded, climbing, and the art of staying human.

@@ -13,7 +13,7 @@ interface NavProps {
   siteName?: string;
 }
 
-export function Nav({ items, siteName = "Zev Felix" }: NavProps) {
+export function Nav({ items, siteName = "Zev Felix, DO" }: NavProps) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
@@ -58,7 +58,7 @@ export function Nav({ items, siteName = "Zev Felix" }: NavProps) {
             {/* Logo / Name */}
             <Link
               href="/"
-              className="group flex items-center gap-2.5 font-serif text-xl font-semibold text-text-base hover:text-primary transition-colors"
+              className="group flex items-center gap-2.5 font-serif text-xl font-semibold text-text-base hover:text-primary transition-colors whitespace-nowrap shrink-0"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -79,7 +79,7 @@ export function Nav({ items, siteName = "Zev Felix" }: NavProps) {
                   target={item.is_external ? "_blank" : undefined}
                   rel={item.is_external ? "noopener noreferrer" : undefined}
                   className={cn(
-                    "relative px-3 py-2 text-sm font-medium transition-colors after:absolute after:left-3 after:right-3 after:-bottom-0.5 after:h-[2px] after:rounded-full after:bg-fun-tangerine after:origin-left after:transition-transform after:duration-300",
+                    "relative whitespace-nowrap px-3 py-2 text-sm font-medium transition-colors after:absolute after:left-3 after:right-3 after:-bottom-0.5 after:h-[2px] after:rounded-full after:bg-fun-tangerine after:origin-left after:transition-transform after:duration-300",
                     pathname === item.href || pathname.startsWith(item.href + "/")
                       ? "text-primary after:scale-x-100"
                       : "text-text-muted hover:text-text-base after:scale-x-0 hover:after:scale-x-100"
