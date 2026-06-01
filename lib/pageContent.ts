@@ -274,6 +274,139 @@ export const PAGE_CONTENT_SCHEMA: Record<string, ContentGroup[]> = {
       ],
     },
   ],
+  work: [
+    {
+      group: "Hero",
+      fields: [
+        { key: "hero.eyebrow", label: "Eyebrow", type: "text" },
+        { key: "hero.heading", label: "Heading", type: "text" },
+        { key: "hero.lead", label: "Lead paragraph", type: "textarea" },
+      ],
+    },
+    {
+      group: "Narrative",
+      fields: [
+        { key: "narr.p1", label: "Paragraph 1", type: "textarea" },
+        { key: "narr.p2", label: "Paragraph 2", type: "textarea" },
+        { key: "narr.quote1", label: "Pull-quote 1", type: "textarea" },
+        { key: "narr.questions", label: "Questions list (one per line)", type: "textarea" },
+        { key: "narr.p3", label: "Paragraph 3", type: "textarea" },
+        { key: "narr.quote2", label: "Pull-quote 2", type: "textarea" },
+      ],
+    },
+    {
+      group: "Projects section",
+      fields: [
+        { key: "proj.heading", label: "Heading", type: "text" },
+        { key: "proj.empty", label: "Empty state", type: "text" },
+      ],
+    },
+  ],
+  unplugged: [
+    {
+      group: "Hero",
+      fields: [
+        { key: "hero.eyebrow", label: "Eyebrow", type: "text" },
+        { key: "hero.heading", label: "Heading", type: "text" },
+        { key: "hero.lead", label: "Lead paragraph", type: "textarea" },
+      ],
+    },
+    {
+      group: "The origin",
+      fields: [
+        { key: "origin.p1", label: "Paragraph 1", type: "textarea" },
+        { key: "origin.p2", label: "Paragraph 2", type: "textarea" },
+        { key: "origin.p3", label: "Paragraph 3", type: "textarea" },
+      ],
+    },
+    {
+      group: "Around the fire",
+      fields: [
+        { key: "fire.quote", label: "Pull-quote", type: "textarea" },
+        { key: "fire.p1", label: "Paragraph 1", type: "textarea" },
+        { key: "fire.p2", label: "Paragraph 2", type: "textarea" },
+        { key: "fire.p3", label: "Paragraph 3", type: "textarea" },
+        { key: "fire.qLead", label: "Question lead-in", type: "text" },
+        { key: "fire.qLink", label: "Question link text", type: "text" },
+      ],
+    },
+    {
+      group: "My brother Levi (reverent)",
+      fields: [
+        { key: "levi.heading", label: "Heading", type: "text" },
+        { key: "levi.p1", label: "Paragraph 1", type: "textarea" },
+        { key: "levi.p2", label: "Paragraph 2 (before link)", type: "textarea" },
+        { key: "levi.p2link", label: "Paragraph 2 link text", type: "text" },
+        { key: "levi.p3", label: "Paragraph 3 (before link)", type: "textarea" },
+        { key: "levi.p3link", label: "Paragraph 3 link text", type: "text" },
+        { key: "levi.p4", label: "Paragraph 4", type: "textarea" },
+      ],
+    },
+    {
+      group: "What this has to do with medicine",
+      fields: [
+        { key: "med.heading", label: "Heading", type: "text" },
+        { key: "med.p1a", label: "Paragraph 1 (start)", type: "textarea" },
+        { key: "med.p1italic", label: "Paragraph 1 italic phrase", type: "text" },
+        { key: "med.p1b", label: "Paragraph 1 (middle)", type: "textarea" },
+        { key: "med.p1link", label: "Paragraph 1 link text", type: "text" },
+        { key: "med.p2", label: "Paragraph 2", type: "textarea" },
+        { key: "med.p3a", label: "Paragraph 3 (start)", type: "textarea" },
+        { key: "med.p3link", label: "Paragraph 3 link text", type: "text" },
+        { key: "med.p3b", label: "Paragraph 3 (end)", type: "text" },
+      ],
+    },
+    {
+      group: "Section headings",
+      fields: [
+        { key: "gallery.heading", label: "Gallery heading", type: "text" },
+        { key: "press.heading", label: "Press heading", type: "text" },
+      ],
+    },
+  ],
+  contact: [
+    {
+      group: "Hero",
+      fields: [
+        { key: "hero.eyebrow", label: "Eyebrow", type: "text" },
+        { key: "hero.heading", label: "Heading", type: "text" },
+        { key: "hero.lead", label: "Lead paragraph", type: "textarea" },
+      ],
+    },
+    {
+      group: "Forms",
+      fields: [
+        { key: "msg.heading", label: "Message form heading", type: "text" },
+        { key: "news.heading", label: "Newsletter heading", type: "text" },
+        { key: "news.blurb", label: "Newsletter blurb", type: "textarea" },
+      ],
+    },
+  ],
+  cv: [
+    {
+      group: "Hero",
+      fields: [
+        { key: "hero.eyebrow", label: "Eyebrow", type: "text" },
+        { key: "hero.heading", label: "Heading", type: "text" },
+        { key: "hero.lead", label: "Lead paragraph", type: "textarea" },
+      ],
+    },
+  ],
+  writing: [
+    {
+      group: "Hero",
+      fields: [
+        { key: "hero.eyebrow", label: "Eyebrow", type: "text" },
+        { key: "hero.heading", label: "Heading", type: "text" },
+        { key: "hero.lead", label: "Lead paragraph", type: "textarea" },
+        { key: "hero.rss", label: "RSS link label", type: "text" },
+      ],
+    },
+    {
+      group: "Empty state",
+      fields: [{ key: "empty", label: "No-posts message", type: "text" }],
+    },
+  ],
   about: [
     {
       group: "Hero",

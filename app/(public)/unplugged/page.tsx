@@ -8,6 +8,8 @@ import { Reveal } from "@/components/public/Reveal";
 import { Doodle } from "@/components/public/Doodle";
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo";
+import { field } from "@/lib/pageContent";
+import { getPageContent } from "@/lib/pageContent.server";
 
 export const revalidate = 60;
 
@@ -30,17 +32,19 @@ const press = [
   { outlet: "TechCrunch", url: "https://techcrunch.com/2019/11/21/camp-grounded-returns/" },
 ];
 
-export default function UnpluggedPage() {
+export default async function UnpluggedPage() {
+  const c = await getPageContent("unplugged");
+  const f = (key: string, fallback: string) => field(c, key, fallback);
+
   return (
     <>
       <PageHero
-        eyebrow="Camp Grounded & Digital Detox"
-        heading="Putting Down the Phone"
+        eyebrow={f("hero.eyebrow", "Camp Grounded & Digital Detox")}
+        heading={f("hero.heading", "Putting Down the Phone")}
         collage={{ cartoon: "high-five", blobVariant: 1, blobClass: "text-primary/10", doodle: "star", doodleClass: "text-accent" }}
       >
         <p>
-          Imagine a circle of adults gathered under towering redwoods, their phones locked away,
-          their attention fully present. For five years, that was my work.
+          {f("hero.lead", "Imagine a circle of adults gathered under towering redwoods, their phones locked away, their attention fully present. For five years, that was my work.")}
         </p>
       </PageHero>
 
@@ -55,17 +59,13 @@ export default function UnpluggedPage() {
         collage={{ cartoon: "sitting", blobVariant: 2, blobClass: "text-accent/10", doodle: "sparkle", doodleClass: "text-accent" }}
       >
         <p>
-          Before I ever set foot in a hospital, I helped build Digital Detox and Camp Grounded
-          alongside my brother Levi and a group of remarkably creative friends.
+          {f("origin.p1", "Before I ever set foot in a hospital, I helped build Digital Detox and Camp Grounded alongside my brother Levi and a group of remarkably creative friends.")}
         </p>
         <p>
-          Camp Grounded was a summer camp for adults. No phones. No screens. No work talk. No last
-          names or job titles. For a few days at a time, a few hundred people set all of it down in
-          the redwoods of Northern California and remembered how to be present.
+          {f("origin.p2", "Camp Grounded was a summer camp for adults. No phones. No screens. No work talk. No last names or job titles. For a few days at a time, a few hundred people set all of it down in the redwoods of Northern California and remembered how to be present.")}
         </p>
         <p>
-          Over those years, our small team delivered 17 camps and 12 events for more than 3,000
-          people across the country.
+          {f("origin.p3", "Over those years, our small team delivered 17 camps and 12 events for more than 3,000 people across the country.")}
         </p>
       </CollageRow>
 
@@ -75,26 +75,22 @@ export default function UnpluggedPage() {
         collage={{ cartoon: "teaching", blobVariant: 3, blobClass: "text-primary/10", doodle: "sun", doodleClass: "text-accent" }}
       >
         <p className="font-serif text-2xl text-text-base leading-snug">
-          The idea sounds simple. What happened was not.
+          {f("fire.quote", "The idea sounds simple. What happened was not.")}
         </p>
         <p>
-          People arrived carrying the same invisible weight: full calendars, overflowing inboxes,
-          careers moving forward, and a quiet exhaustion underneath it all.
+          {f("fire.p1", "People arrived carrying the same invisible weight: full calendars, overflowing inboxes, careers moving forward, and a quiet exhaustion underneath it all.")}
         </p>
         <p>
-          Around the fire, they spoke openly about loneliness, burnout, and hope. They made
-          things with their hands. They sang. They slept. They reconnected with parts of
-          themselves that had been buried beneath notifications.
+          {f("fire.p2", "Around the fire, they spoke openly about loneliness, burnout, and hope. They made things with their hands. They sang. They slept. They reconnected with parts of themselves that had been buried beneath notifications.")}
         </p>
         <p>
-          I found myself listening closely, noticing what mattered most to each person, and
-          helping them shape small habits that actually stuck.
+          {f("fire.p3", "I found myself listening closely, noticing what mattered most to each person, and helping them shape small habits that actually stuck.")}
         </p>
         <div className="font-serif text-xl text-text-base leading-snug border-l-2 border-accent pl-5">
           <p>
-            It started with one question:{" "}
+            {f("fire.qLead", "It started with one question:")}{" "}
             <Link href="/philosophy" className="text-primary underline underline-offset-2 hover:opacity-80">
-              What matters to you?
+              {f("fire.qLink", "What matters to you?")}
             </Link>
           </p>
         </div>
@@ -104,38 +100,33 @@ export default function UnpluggedPage() {
       <section className="relative section-y container-content overflow-hidden">
         <Doodle name="star" size={24} className="absolute right-[14%] top-10 text-fun-sky/50" />
         <div className="max-w-2xl space-y-5 text-lg text-text-base leading-relaxed relative">
-          <Reveal><h2 className="font-serif text-display-sm text-text-base">My brother Levi</h2></Reveal>
-          <Reveal delay={80}><p>None of this would have existed without my brother Levi.</p></Reveal>
+          <Reveal><h2 className="font-serif text-display-sm text-text-base">{f("levi.heading", "My brother Levi")}</h2></Reveal>
+          <Reveal delay={80}><p>{f("levi.p1", "None of this would have existed without my brother Levi.")}</p></Reveal>
           <Reveal delay={120}>
             <p>
-              Levi believed technology should be built with intention. He used to talk about
-              reclaiming language from the tech industry: not rejecting innovation, but insisting that
-              powerful tools serve people rather than the other way around. That idea still shapes how
-              I think about{" "}
+              {f("levi.p2", "Levi believed technology should be built with intention. He used to talk about reclaiming language from the tech industry: not rejecting innovation, but insisting that powerful tools serve people rather than the other way around. That idea still shapes how I think about")}{" "}
               <Link href="/technology" className="text-primary underline underline-offset-2 hover:opacity-80">
-                technology in medicine
+                {f("levi.p2link", "technology in medicine")}
               </Link>
               .
             </p>
           </Reveal>
           <Reveal delay={160}>
             <p>
-              He was diagnosed with glioblastoma, and he died in 2017.{" "}
+              {f("levi.p3", "He was diagnosed with glioblastoma, and he died in 2017.")}{" "}
               <a
                 href="https://www.nytimes.com/2017/01/12/us/obituary-levi-felix-digital-detox.html"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary underline underline-offset-2 hover:opacity-80"
               >
-                The New York Times wrote his obituary.
+                {f("levi.p3link", "The New York Times wrote his obituary.")}
               </a>
             </p>
           </Reveal>
           <Reveal delay={200}>
             <p>
-              Building something joyful and deeply human alongside him, and later walking with him
-              through his illness, changed what I notice about people, presence, and care. It is a
-              large part of why I became a doctor.
+              {f("levi.p4", "Building something joyful and deeply human alongside him, and later walking with him through his illness, changed what I notice about people, presence, and care. It is a large part of why I became a doctor.")}
             </p>
           </Reveal>
         </div>
@@ -145,37 +136,33 @@ export default function UnpluggedPage() {
       <CollageRow
         tinted
         mirror
-        heading="What this has to do with medicine"
+        heading={f("med.heading", "What this has to do with medicine")}
         collage={{ cartoon: "talking-to-nurse", blobVariant: 1, blobClass: "text-accent/10", doodle: "heart", doodleClass: "text-accent" }}
       >
         <p>
-          That practice, beginning with{" "}
-          <span className="italic">What matters to you?</span> and building from there, became the
-          foundation of the{" "}
+          {f("med.p1a", "That practice, beginning with")}{" "}
+          <span className="italic">{f("med.p1italic", "What matters to you?")}</span> {f("med.p1b", "and building from there, became the foundation of the")}{" "}
           <Link href="/medicine" className="text-primary underline underline-offset-2 hover:opacity-80">
-            physician I want to be
+            {f("med.p1link", "physician I want to be")}
           </Link>
           .
         </p>
         <p>
-          I still believe a good prescription can include play, social connection, time outdoors,
-          and a healthier relationship with screens, right alongside medication and procedures.
+          {f("med.p2", "I still believe a good prescription can include play, social connection, time outdoors, and a healthier relationship with screens, right alongside medication and procedures.")}
         </p>
         <p>
-          In a world of constant connectivity, I want to help people protect their attention,
-          their mood, and their relationships. Not with guilt, and not with all-or-nothing rules,
-          but with small, sustainable steps. It is the same{" "}
+          {f("med.p3a", "In a world of constant connectivity, I want to help people protect their attention, their mood, and their relationships. Not with guilt, and not with all-or-nothing rules, but with small, sustainable steps. It is the same")}{" "}
           <Link href="/balance" className="text-primary underline underline-offset-2 hover:opacity-80">
-            balance
+            {f("med.p3link", "balance")}
           </Link>{" "}
-          I try to build into my own life.
+          {f("med.p3b", "I try to build into my own life.")}
         </p>
       </CollageRow>
 
       {/* Scenes from camp — interactive masonry gallery with lightbox */}
       <section className="section-y container-content">
         <Reveal>
-          <h2 className="font-serif text-display-sm text-text-base mb-6">Scenes from camp</h2>
+          <h2 className="font-serif text-display-sm text-text-base mb-6">{f("gallery.heading", "Scenes from camp")}</h2>
         </Reveal>
         <Reveal delay={80}>
           <PlacedGallery
@@ -192,7 +179,7 @@ export default function UnpluggedPage() {
         <div className="max-w-2xl">
           <Reveal>
             <h2 className="font-serif text-display-sm text-text-base mb-6">
-              Camp Grounded in the press
+              {f("press.heading", "Camp Grounded in the press")}
             </h2>
           </Reveal>
           <Reveal delay={80}>

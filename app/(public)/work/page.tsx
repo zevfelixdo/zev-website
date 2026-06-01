@@ -1,6 +1,8 @@
 import { DynamicSections } from "@/components/public/DynamicSections";
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo";
+import { field } from "@/lib/pageContent";
+import { getPageContent } from "@/lib/pageContent.server";
 
 export const revalidate = 60;
 import { createClient } from "@/lib/supabase/server";
@@ -55,18 +57,19 @@ async function getProjects(): Promise<Project[]> {
 
 export default async function WorkPage() {
   const projects = await getProjects();
+  const c = await getPageContent("work");
+  const f = (key: string, fallback: string) => field(c, key, fallback);
+  const lines = (s: string) => s.split("\n").map((x) => x.trim()).filter(Boolean);
 
   return (
     <>
       <PageHero
-        eyebrow="Projects"
-        heading="Building Things That Bring People Together"
+        eyebrow={f("hero.eyebrow", "Projects")}
+        heading={f("hero.heading", "Building Things That Bring People Together")}
         collage={{ cartoon: "high-five", blobVariant: 1, blobClass: "text-primary/10", doodle: "star", doodleClass: "text-accent" }}
       >
         <p>
-          I&#8217;ve spent much of my life building things. Some of those things are tangible:
-          furniture, websites, events, community spaces. Some are harder to see: experiences,
-          conversations, relationships, communities.
+          {f("hero.lead", "I’ve spent much of my life building things. Some of those things are tangible: furniture, websites, events, community spaces. Some are harder to see: experiences, conversations, relationships, communities.")}
         </p>
       </PageHero>
 
@@ -81,32 +84,24 @@ export default async function WorkPage() {
         collage={{ cartoon: "teaching", blobVariant: 2, blobClass: "text-accent/10", doodle: "sparkle", doodleClass: "text-accent" }}
       >
         <p>
-          Before medicine, I helped create Camp Grounded and Digital Detox, organizations built
-          around helping people reconnect with themselves and each other in an increasingly
-          connected world.
+          {f("narr.p1", "Before medicine, I helped create Camp Grounded and Digital Detox, organizations built around helping people reconnect with themselves and each other in an increasingly connected world.")}
         </p>
         <p>
-          Since entering healthcare, I&#8217;ve continued exploring similar questions through
-          telemedicine research, medical education, community health initiatives, and technology
-          projects.
+          {f("narr.p2", "Since entering healthcare, I’ve continued exploring similar questions through telemedicine research, medical education, community health initiatives, and technology projects.")}
         </p>
         <p className="font-serif text-2xl text-text-base leading-snug">
-          The specific projects change. The underlying interest stays remarkably consistent.
+          {f("narr.quote1", "The specific projects change. The underlying interest stays remarkably consistent.")}
         </p>
         <div className="space-y-2 font-serif text-xl text-text-base leading-snug border-l-2 border-accent pl-5">
-          <p>How do we help people connect?</p>
-          <p>How do we reduce unnecessary barriers?</p>
-          <p>
-            How do we design systems that support human flourishing rather than simply efficiency?
-          </p>
+          {lines(f("narr.questions", "How do we help people connect?\nHow do we reduce unnecessary barriers?\nHow do we design systems that support human flourishing rather than simply efficiency?")).map((it, i) => (
+            <p key={i}>{it}</p>
+          ))}
         </div>
         <p>
-          Whether I&#8217;m building a website, designing a presentation, conducting research,
-          organizing an event, or caring for patients, I&#8217;m usually trying to solve some
-          version of the same problem.
+          {f("narr.p3", "Whether I’m building a website, designing a presentation, conducting research, organizing an event, or caring for patients, I’m usually trying to solve some version of the same problem.")}
         </p>
         <p className="font-serif text-2xl sm:text-3xl text-text-base leading-snug">
-          How do we make things work better for humans?
+          {f("narr.quote2", "How do we make things work better for humans?")}
         </p>
       </CollageRow>
 
@@ -115,10 +110,10 @@ export default async function WorkPage() {
         <Doodle name="loops" size={90} strokeWidth={4} className="absolute right-[8%] top-10 text-fun-leaf/60" />
         <div className="container-content relative">
           <Reveal>
-            <h2 className="font-serif text-display-sm text-text-base mb-10">Selected work</h2>
+            <h2 className="font-serif text-display-sm text-text-base mb-10">{f("proj.heading", "Selected work")}</h2>
           </Reveal>
           {projects.length === 0 ? (
-            <p className="text-text-muted">Projects coming soon.</p>
+            <p className="text-text-muted">{f("proj.empty", "Projects coming soon.")}</p>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {projects.map((project, i) => (

@@ -1,6 +1,8 @@
 import { DynamicSections } from "@/components/public/DynamicSections";
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo";
+import { field } from "@/lib/pageContent";
+import { getPageContent } from "@/lib/pageContent.server";
 import { ContactForm } from "@/components/public/ContactForm";
 import { NewsletterForm } from "@/components/public/NewsletterForm";
 import { PageHero } from "@/components/public/PageHero";
@@ -17,17 +19,19 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const c = await getPageContent("contact");
+  const f = (key: string, fallback: string) => field(c, key, fallback);
+
   return (
     <>
       <PageHero
-        eyebrow="Contact"
-        heading="Get in touch"
+        eyebrow={f("hero.eyebrow", "Contact")}
+        heading={f("hero.heading", "Get in touch")}
         collage={{ photoArea: "contact.portrait", cartoon: "drinking-coffee", blobVariant: 2, blobClass: "text-primary/10", doodle: "heart", doodleClass: "text-accent" }}
       >
         <p>
-          Whether you have a question, want to collaborate, or just want to say hello, I would
-          love to hear from you.
+          {f("hero.lead", "Whether you have a question, want to collaborate, or just want to say hello, I would love to hear from you.")}
         </p>
       </PageHero>
 
@@ -40,7 +44,7 @@ export default function ContactPage() {
           <Reveal>
             <div>
               <h2 className="font-serif text-2xl font-semibold text-text-base mb-6">
-                Send a message
+                {f("msg.heading", "Send a message")}
               </h2>
               <ContactForm />
             </div>
@@ -48,11 +52,10 @@ export default function ContactPage() {
           <Reveal delay={100}>
             <div>
               <h2 className="font-serif text-2xl font-semibold text-text-base mb-2">
-                Join the newsletter
+                {f("news.heading", "Join the newsletter")}
               </h2>
               <p className="text-text-muted mb-6 text-sm leading-relaxed">
-                Occasional thoughts on medicine, technology, the outdoors, and living well. No spam,
-                ever. Unsubscribe any time.
+                {f("news.blurb", "Occasional thoughts on medicine, technology, the outdoors, and living well. No spam, ever. Unsubscribe any time.")}
               </p>
               <NewsletterForm />
             </div>

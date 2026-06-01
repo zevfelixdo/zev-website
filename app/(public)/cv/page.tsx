@@ -1,6 +1,8 @@
 import { DynamicSections } from "@/components/public/DynamicSections";
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo";
+import { field } from "@/lib/pageContent";
+import { getPageContent } from "@/lib/pageContent.server";
 
 export const revalidate = 60;
 import { createClient } from "@/lib/supabase/server";
@@ -72,6 +74,8 @@ async function getCvData() {
 
 export default async function CvPage() {
   const { entries, publications } = await getCvData();
+  const c = await getPageContent("cv");
+  const f = (key: string, fallback: string) => field(c, key, fallback);
 
   const grouped = CATEGORY_ORDER.reduce<Record<string, CvEntry[]>>((acc, cat) => {
     const items = entries.filter((e) => e.category === cat);
@@ -82,14 +86,13 @@ export default async function CvPage() {
   return (
     <>
       <PageHero
-        eyebrow="CV / Background"
-        heading="Curriculum Vitae"
+        eyebrow={f("hero.eyebrow", "CV / Background")}
+        heading={f("hero.heading", "Curriculum Vitae")}
         collage={{ photoArea: "cv.portrait", cartoon: "standing", blobVariant: 1, blobClass: "text-primary/10", doodle: "sparkle", doodleClass: "text-accent" }}
         underDoodle={null}
       >
         <p>
-          Education, training, leadership, publications, and the other things that do not fit
-          neatly on a page but end up there anyway.
+          {f("hero.lead", "Education, training, leadership, publications, and the other things that do not fit neatly on a page but end up there anyway.")}
         </p>
         <PrintButton />
       </PageHero>

@@ -9,6 +9,8 @@ import { Clock, Rss, X } from "lucide-react";
 import { PageHero } from "@/components/public/PageHero";
 import { Reveal } from "@/components/public/Reveal";
 import { Doodle } from "@/components/public/Doodle";
+import { field } from "@/lib/pageContent";
+import { getPageContent } from "@/lib/pageContent.server";
 
 export const revalidate = 60;
 
@@ -69,6 +71,8 @@ export default async function WritingPage({ searchParams }: Props) {
   const activeTag = searchParams.tag ?? undefined;
   const page = Math.max(1, parseInt(searchParams.page ?? "1", 10));
   const { posts, total, allTags } = await getPosts(activeTag, page);
+  const c = await getPageContent("writing");
+  const f = (key: string, fallback: string) => field(c, key, fallback);
 
   const featured = activeTag ? [] : posts.filter((p) => p.is_featured);
   const rest = activeTag ? posts : posts.filter((p) => !p.is_featured);
@@ -78,15 +82,14 @@ export default async function WritingPage({ searchParams }: Props) {
     <>
       {/* Hero */}
       <PageHero
-        eyebrow="Writing"
-        heading="Essays & notes"
+        eyebrow={f("hero.eyebrow", "Writing")}
+        heading={f("hero.heading", "Essays & notes")}
         minH="min-h-[50vh]"
         underDoodle={null}
         collage={{ cartoon: "sitting", blobVariant: 1, doodle: "sparkle" }}
       >
         <p>
-          Occasional thoughts on medicine, technology, the outdoors, and what it means to live
-          well. Written when I have something worth saying.
+          {f("hero.lead", "Occasional thoughts on medicine, technology, the outdoors, and what it means to live well. Written when I have something worth saying.")}
         </p>
         <a
           href="/feed.xml"
@@ -94,7 +97,7 @@ export default async function WritingPage({ searchParams }: Props) {
           aria-label="RSS feed"
         >
           <Rss size={16} />
-          RSS feed
+          {f("hero.rss", "RSS feed")}
         </a>
       </PageHero>
 
@@ -140,7 +143,7 @@ export default async function WritingPage({ searchParams }: Props) {
 
         {posts.length === 0 ? (
           <p className="text-text-muted">
-            {activeTag ? `No posts tagged "${activeTag}" yet.` : "Essays and notes coming soon."}
+            {activeTag ? `No posts tagged "${activeTag}" yet.` : f("empty", "Essays and notes coming soon.")}
           </p>
         ) : (
           <div className="max-w-3xl">
