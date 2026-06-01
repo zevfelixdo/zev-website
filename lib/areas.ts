@@ -16,7 +16,6 @@ export interface AreaDef {
 export const PLACEMENT_AREAS: AreaDef[] = [
   // Home
   { area: "home.portrait", label: "Home — hero portrait", page: "/", aspect: "4/5", note: "Portrait beside the intro" },
-  { area: "home.feature", label: "Home — feature band", page: "/", aspect: "21/9", note: "Wide landscape works best" },
   { area: "home.card.about", label: "Home card — About", page: "/", aspect: "16/10", note: "Card cover" },
   { area: "home.card.medicine", label: "Home card — Family Medicine", page: "/", aspect: "16/10", note: "Card cover" },
   { area: "home.card.balance", label: "Home card — Balance", page: "/", aspect: "16/10", note: "Card cover" },

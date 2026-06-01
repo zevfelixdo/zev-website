@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/Button";
 import { SearchBar } from "@/components/public/SearchBar";
 import { DynamicSections } from "@/components/public/DynamicSections";
 import { PlacedGallery } from "@/components/public/PlacedGallery";
-import { PlacedParallax } from "@/components/public/PlacedParallax";
 import { ExploreIndex, type ExploreItem } from "@/components/public/ExploreIndex";
 import { RevealHeading } from "@/components/public/RevealHeading";
 import { Reveal } from "@/components/public/Reveal";
@@ -267,9 +266,6 @@ export default async function HomePage() {
         </Reveal>
         <ExploreIndex items={items} />
       </section>
-
-      {/* ── Feature (parallax, renders only if assigned) ── */}
-      <PlacedParallax area="home.feature" height="lg" />
 
       {/* ── Closing: stay a while ────────────────────────── */}
       <section className="section-y container-content">
