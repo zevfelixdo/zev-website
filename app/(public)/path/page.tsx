@@ -5,16 +5,19 @@ import { Reveal } from "@/components/public/Reveal";
 import { Cartoon } from "@/components/public/Cartoon";
 import { Doodle } from "@/components/public/Doodle";
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
 
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
-export const metadata: Metadata = {
-  title: "From Film to Family Medicine",
-  description:
-    "A nonlinear path to Family Medicine, in order: film school, Digital Detox and Camp Grounded, a post-bac pivot, osteopathic medical school, a surgical year, and the place where the pieces fit.",
-  alternates: { canonical: `${BASE}/path` },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return buildPageMetadata({
+    slug: "path",
+    path: "/path",
+    fallbackTitle: "From Film to Family Medicine",
+    fallbackDescription:
+      "A nonlinear path to Family Medicine, in order: film school, Digital Detox and Camp Grounded, a post-bac pivot, osteopathic medical school, a surgical year, and the place where the pieces fit.",
+  });
+}
 
 const timeline = [
   {

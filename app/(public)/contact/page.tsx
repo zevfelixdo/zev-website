@@ -1,18 +1,21 @@
 import { DynamicSections } from "@/components/public/DynamicSections";
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 import { ContactForm } from "@/components/public/ContactForm";
 import { NewsletterForm } from "@/components/public/NewsletterForm";
 import { PageHero } from "@/components/public/PageHero";
 import { Reveal } from "@/components/public/Reveal";
 import { Doodle } from "@/components/public/Doodle";
 
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
-export const metadata: Metadata = {
-  title: "Contact",
-  description:
-    "Send a message, subscribe to the newsletter, or ask how to support my work.",
-  alternates: { canonical: `${BASE}/contact` },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return buildPageMetadata({
+    slug: "contact",
+    path: "/contact",
+    fallbackTitle: "Contact",
+    fallbackDescription:
+      "Send a message, subscribe to the newsletter, or ask how to support my work.",
+  });
+}
 
 export default function ContactPage() {
   return (

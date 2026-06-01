@@ -3,16 +3,19 @@ import { PageHero } from "@/components/public/PageHero";
 import { CollageRow } from "@/components/public/CollageRow";
 import { Doodle } from "@/components/public/Doodle";
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
 
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
-export const metadata: Metadata = {
-  title: "Technology Should Serve People",
-  description:
-    "Not anti-technology, but deeply interested in it. Healthcare is not fundamentally a technology problem. It's a human problem, and the best tools create more connection, not less.",
-  alternates: { canonical: `${BASE}/technology` },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return buildPageMetadata({
+    slug: "technology",
+    path: "/technology",
+    fallbackTitle: "Technology Should Serve People",
+    fallbackDescription:
+      "Not anti-technology, but deeply interested in it. Healthcare is not fundamentally a technology problem. It's a human problem, and the best tools create more connection, not less.",
+  });
+}
 
 export default function TechnologyPage() {
   return (

@@ -4,16 +4,19 @@ import { CollageRow } from "@/components/public/CollageRow";
 import { Reveal } from "@/components/public/Reveal";
 import { Doodle } from "@/components/public/Doodle";
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
 
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
-export const metadata: Metadata = {
-  title: "What Matters To You?",
-  description:
-    "One of the most important questions in medicine is also one of the simplest. Not what's the matter with you. What matters to you. The answer changes everything.",
-  alternates: { canonical: `${BASE}/philosophy` },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return buildPageMetadata({
+    slug: "philosophy",
+    path: "/philosophy",
+    fallbackTitle: "What Matters To You?",
+    fallbackDescription:
+      "One of the most important questions in medicine is also one of the simplest. Not what's the matter with you. What matters to you. The answer changes everything.",
+  });
+}
 
 export default function PhilosophyPage() {
   return (

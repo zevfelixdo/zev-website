@@ -7,16 +7,19 @@ import { CollageRow } from "@/components/public/CollageRow";
 import { Reveal } from "@/components/public/Reveal";
 import { Doodle } from "@/components/public/Doodle";
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
 
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
-export const metadata: Metadata = {
-  title: "Putting Down the Phone",
-  description:
-    "Before medicine, I helped build Digital Detox and Camp Grounded with my brother Levi: screen-free retreats where adults set down their phones and remembered how to be present.",
-  alternates: { canonical: `${BASE}/unplugged` },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return buildPageMetadata({
+    slug: "unplugged",
+    path: "/unplugged",
+    fallbackTitle: "Putting Down the Phone",
+    fallbackDescription:
+      "Before medicine, I helped build Digital Detox and Camp Grounded with my brother Levi: screen-free retreats where adults set down their phones and remembered how to be present.",
+  });
+}
 
 const press = [
   { outlet: "The New York Times", url: "https://www.nytimes.com/2013/07/07/fashion/a-trip-to-camp-to-break-a-tech-addiction.html" },

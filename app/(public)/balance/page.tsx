@@ -3,16 +3,19 @@ import { PlacedImage } from "@/components/public/PlacedImage";
 import { PageHero } from "@/components/public/PageHero";
 import { CollageRow } from "@/components/public/CollageRow";
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
 
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
-export const metadata: Metadata = {
-  title: "Balance Is Not the Opposite of Ambition",
-  description:
-    "Why balance isn't something you earn after working hard. It's what allows people to sustain excellence, survive difficult seasons, and keep showing up for what matters.",
-  alternates: { canonical: `${BASE}/balance` },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return buildPageMetadata({
+    slug: "balance",
+    path: "/balance",
+    fallbackTitle: "Balance Is Not the Opposite of Ambition",
+    fallbackDescription:
+      "Why balance isn't something you earn after working hard. It's what allows people to sustain excellence, survive difficult seasons, and keep showing up for what matters.",
+  });
+}
 
 export default function BalancePage() {
   return (

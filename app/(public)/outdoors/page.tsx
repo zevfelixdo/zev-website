@@ -5,16 +5,19 @@ import { CollageRow } from "@/components/public/CollageRow";
 import { Reveal } from "@/components/public/Reveal";
 import { Doodle } from "@/components/public/Doodle";
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
 
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
-export const metadata: Metadata = {
-  title: "The Things That Keep Me Grounded",
-  description:
-    "Making things, rock climbing, a rescue dog named Maisy, and wilderness medicine: the life outside the hospital that makes the work inside it possible.",
-  alternates: { canonical: `${BASE}/outdoors` },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return buildPageMetadata({
+    slug: "outdoors",
+    path: "/outdoors",
+    fallbackTitle: "The Things That Keep Me Grounded",
+    fallbackDescription:
+      "Making things, rock climbing, a rescue dog named Maisy, and wilderness medicine: the life outside the hospital that makes the work inside it possible.",
+  });
+}
 
 export default function OutdoorsPage() {
   return (

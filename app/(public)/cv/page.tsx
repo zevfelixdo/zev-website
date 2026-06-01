@@ -1,5 +1,6 @@
 import { DynamicSections } from "@/components/public/DynamicSections";
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
 import { createClient } from "@/lib/supabase/server";
@@ -9,14 +10,15 @@ import { PrintButton } from "@/components/public/PrintButton";
 import { PageHero } from "@/components/public/PageHero";
 import { Reveal } from "@/components/public/Reveal";
 
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
-
-export const metadata: Metadata = {
-  title: "CV / Background",
-  description:
-    "Education, clinical training, publications, presentations, research, and leadership.",
-  alternates: { canonical: `${BASE}/cv` },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return buildPageMetadata({
+    slug: "cv",
+    path: "/cv",
+    fallbackTitle: "CV / Background",
+    fallbackDescription:
+      "Education, clinical training, publications, presentations, research, and leadership.",
+  });
+}
 
 const CATEGORY_LABELS: Record<CvEntry["category"], string> = {
   education: "Education",

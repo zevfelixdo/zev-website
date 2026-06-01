@@ -1,5 +1,6 @@
 import { DynamicSections } from "@/components/public/DynamicSections";
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
 import { createClient } from "@/lib/supabase/server";
@@ -14,14 +15,15 @@ import { CollageRow } from "@/components/public/CollageRow";
 import { Reveal } from "@/components/public/Reveal";
 import { Doodle } from "@/components/public/Doodle";
 
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
-
-export const metadata: Metadata = {
-  title: "Building Things That Bring People Together",
-  description:
-    "Camp Grounded, Digital Detox, telemedicine research, medical education, community health, and technology projects. All versions of the same question: how do we make things work better for humans?",
-  alternates: { canonical: `${BASE}/work` },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return buildPageMetadata({
+    slug: "work",
+    path: "/work",
+    fallbackTitle: "Building Things That Bring People Together",
+    fallbackDescription:
+      "Camp Grounded, Digital Detox, telemedicine research, medical education, community health, and technology projects. All versions of the same question: how do we make things work better for humans?",
+  });
+}
 
 const statusLabel: Record<Project["status"], string> = {
   active: "Active",
