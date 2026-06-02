@@ -8,6 +8,8 @@ import { NewsletterForm } from "@/components/public/NewsletterForm";
 import { PageHero } from "@/components/public/PageHero";
 import { Reveal } from "@/components/public/Reveal";
 import { Doodle } from "@/components/public/Doodle";
+import { Mail, Linkedin } from "lucide-react";
+import { createClient } from "@/lib/supabase/server";
 
 export async function generateMetadata(): Promise<Metadata> {
   return buildPageMetadata({
@@ -22,6 +24,17 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ContactPage() {
   const c = await getPageContent("contact");
   const f = (key: string, fallback: string) => field(c, key, fallback);
+
+  // Direct-contact details from Settings -> Footer (email appears once it's filled in).
+  const sb = createClient();
+  const { data: footerData } = await sb
+    .from("site_settings")
+    .select("value")
+    .eq("key", "footer")
+    .maybeSingle();
+  const footer = (footerData?.value ?? {}) as { email?: string; social?: { linkedin?: string } };
+  const email = footer.email?.trim() || "";
+  const linkedin = footer.social?.linkedin?.trim() || "";
 
   return (
     <>
@@ -61,6 +74,22 @@ export default async function ContactPage() {
             </div>
           </Reveal>
         </div>
+
+        {(email || linkedin) && (
+          <div className="mt-14 pt-8 border-t border-border max-w-4xl flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
+            <span className="font-semibold uppercase tracking-wider text-text-muted">Or reach me directly</span>
+            {email && (
+              <a href={`mailto:${email}`} className="inline-flex items-center gap-1.5 text-primary hover:opacity-80 transition-opacity">
+                <Mail size={15} aria-hidden="true" /> {email}
+              </a>
+            )}
+            {linkedin && (
+              <a href={linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-primary hover:opacity-80 transition-opacity">
+                <Linkedin size={15} aria-hidden="true" /> LinkedIn
+              </a>
+            )}
+          </div>
+        )}
       </section>
       <DynamicSections pageSlug="contact" />
     </>
