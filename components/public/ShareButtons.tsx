@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Twitter, Linkedin, Link2, Check } from "lucide-react";
+import { Linkedin, Link2, Check } from "lucide-react";
 
 interface ShareButtonsProps {
   url: string;
@@ -29,7 +29,6 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
     }
   };
 
-  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;
   const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
 
   return (
@@ -37,16 +36,6 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
       <span className="text-xs font-semibold uppercase tracking-wider text-text-muted">
         Share
       </span>
-      <a
-        href={twitterUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Share on Twitter (opens in new tab)"
-        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border text-sm text-text-muted hover:text-text-base hover:border-text-muted transition-colors"
-      >
-        <Twitter size={14} aria-hidden="true" />
-        Twitter
-      </a>
       <a
         href={linkedinUrl}
         target="_blank"

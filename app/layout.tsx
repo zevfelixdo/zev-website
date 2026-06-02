@@ -47,10 +47,6 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: seo.defaultTitle,
       locale: "en_US",
     },
-    twitter: {
-      card: "summary_large_image",
-      creator: "@zevfelix",
-    },
     robots: {
       index: true,
       follow: true,

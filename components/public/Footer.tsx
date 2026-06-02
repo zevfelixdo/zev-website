@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { SiteSettings } from "@/types/database";
-import { Twitter, Linkedin, Instagram, Mail, Rss } from "lucide-react";
+import { Linkedin, Instagram, Mail, Rss } from "lucide-react";
 import { FooterNewsletter } from "@/components/public/FooterNewsletter";
 import { Blob } from "@/components/public/Blob";
 import { Doodle } from "@/components/public/Doodle";
@@ -115,17 +115,6 @@ export function Footer({ settings = defaultSettings }: FooterProps) {
                 Connect
               </p>
               <div className="flex flex-wrap gap-1">
-                {s.social.twitter && (
-                  <a
-                    href={s.social.twitter}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Twitter (opens in new tab)"
-                    className="p-2 rounded text-text-muted hover:text-primary hover:bg-surface transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
-                  >
-                    <Twitter size={18} aria-hidden="true" />
-                  </a>
-                )}
                 {s.social.linkedin && (
                   <a
                     href={s.social.linkedin}

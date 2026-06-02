@@ -72,7 +72,6 @@ export default function AdminSettingsPage() {
         <Input label="Tagline" value={footer.tagline} onChange={(e) => setFooter((f) => ({ ...f, tagline: e.target.value }))} />
         <Input label="Contact email" type="email" value={footer.email} onChange={(e) => setFooter((f) => ({ ...f, email: e.target.value }))} />
         <Input label="Copyright name" value={footer.copyright} onChange={(e) => setFooter((f) => ({ ...f, copyright: e.target.value }))} />
-        <Input label="Twitter URL" type="url" value={footer.social.twitter} onChange={(e) => setFooter((f) => ({ ...f, social: { ...f.social, twitter: e.target.value } }))} />
         <Input label="LinkedIn URL" type="url" value={footer.social.linkedin} onChange={(e) => setFooter((f) => ({ ...f, social: { ...f.social, linkedin: e.target.value } }))} />
         <Input label="Instagram URL" type="url" value={footer.social.instagram} onChange={(e) => setFooter((f) => ({ ...f, social: { ...f.social, instagram: e.target.value } }))} />
       </section>

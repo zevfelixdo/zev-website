@@ -85,11 +85,5 @@ export async function buildPageMetadata(opts: {
       url: canonical,
       images: [{ url: ogImageUrl, width: 1200, height: 630, alt: pageTitle }],
     },
-    twitter: {
-      card: "summary_large_image",
-      title: pageTitle,
-      description: pageDesc,
-      images: [ogImageUrl],
-    },
   };
 }
