@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/Button";
 import { SearchBar } from "@/components/public/SearchBar";
 import { DynamicSections } from "@/components/public/DynamicSections";
 import { PlacedGallery } from "@/components/public/PlacedGallery";
+import { PlacedImage } from "@/components/public/PlacedImage";
 import { ExploreIndex, type ExploreItem } from "@/components/public/ExploreIndex";
 import { RevealHeading } from "@/components/public/RevealHeading";
 import { Reveal } from "@/components/public/Reveal";
@@ -158,42 +159,55 @@ export default async function HomePage() {
         </div>
       </div>
 
-      {/* ── The short version (path + press) ─────────────── */}
+      {/* ── The short version (path + press + real portrait) ─ */}
       <section className="relative section-y container-content overflow-x-clip">
-        <Doodle name="loops" size={70} strokeWidth={4} className="hidden lg:block absolute right-[7%] top-10 text-fun-leaf/60" />
-        <div className="max-w-3xl">
-          <Reveal>
-            <p className="eyebrow mb-6">The short version</p>
-          </Reveal>
-          <Reveal delay={80}>
-            <p className="font-serif text-2xl sm:text-3xl text-text-base leading-snug">
-              A long, winding path to Family Medicine: film school, then co-founding Camp Grounded and Digital Detox, then a year in surgery, and finally the work where all the pieces fit.
-            </p>
-          </Reveal>
-          <Reveal delay={140}>
-            <p className="text-lg text-text-muted leading-relaxed mt-6 max-w-2xl">
-              Before medicine, my brother Levi and I built device-free retreats that brought thousands of people back to presence, and to each other.
-            </p>
-          </Reveal>
-          <Reveal delay={200}>
-            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2">
-              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-text-muted">Camp Grounded in the press</span>
-              {press.map((p) => (
-                <a
-                  key={p.url}
-                  href={p.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="link-anim text-sm text-primary hover:opacity-80 transition-opacity"
-                >
-                  {p.outlet}
-                </a>
-              ))}
-            </div>
-          </Reveal>
-          <Reveal delay={260}>
-            <div className="mt-9">
-              <Button as="link" href="/unplugged" variant="outline">Read the full story</Button>
+        <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-16 items-center">
+          <div className="max-w-2xl">
+            <Reveal>
+              <p className="eyebrow mb-6">{f("story.eyebrow", "The short version")}</p>
+            </Reveal>
+            <Reveal delay={80}>
+              <p className="font-serif text-2xl sm:text-3xl text-text-base leading-snug">
+                {f("story.lead", "A long, winding path to Family Medicine: film school, then co-founding Camp Grounded and Digital Detox, then a year in surgery, and finally the work where all the pieces fit.")}
+              </p>
+            </Reveal>
+            <Reveal delay={140}>
+              <p className="text-lg text-text-muted leading-relaxed mt-6">
+                {f("story.body", "Before medicine, my brother Levi and I built device-free retreats that brought thousands of people back to presence, and to each other.")}
+              </p>
+            </Reveal>
+            <Reveal delay={200}>
+              <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2">
+                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-text-muted">Camp Grounded in the press</span>
+                {press.map((p) => (
+                  <a
+                    key={p.url}
+                    href={p.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link-anim text-sm text-primary hover:opacity-80 transition-opacity"
+                  >
+                    {p.outlet}
+                  </a>
+                ))}
+              </div>
+            </Reveal>
+            <Reveal delay={260}>
+              <div className="mt-9">
+                <Button as="link" href="/unplugged" variant="outline">{f("story.cta", "Read the full story")}</Button>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* a real photo — reuses the (otherwise unused) homepage portrait slot, unique to home */}
+          <Reveal delay={120}>
+            <div className="relative mx-auto w-full max-w-[340px] lg:ml-auto">
+              <Blob variant={1} float className="absolute -inset-[12%] h-[124%] w-[124%] text-fun-sky/25 blur-[1px]" />
+              <Doodle name="sparkle" size={26} float className="absolute -right-1 top-1 z-20 text-fun-tangerine" />
+              <Doodle name="loops" size={64} strokeWidth={4} className="absolute -bottom-6 -left-4 z-20 hidden text-fun-leaf/60 sm:block" />
+              <div className="relative z-10 overflow-hidden rounded-2xl shadow-card">
+                <PlacedImage area="home.portrait" aspect="4/5" sizes="(min-width:1024px) 30vw, 80vw" />
+              </div>
             </div>
           </Reveal>
         </div>

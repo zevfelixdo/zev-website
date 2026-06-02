@@ -37,6 +37,15 @@ export const PAGE_CONTENT_SCHEMA: Record<string, ContentGroup[]> = {
       ],
     },
     {
+      group: "The short version",
+      fields: [
+        { key: "story.eyebrow", label: "Eyebrow", type: "text" },
+        { key: "story.lead", label: "Path summary (large)", type: "textarea" },
+        { key: "story.body", label: "Supporting line", type: "textarea" },
+        { key: "story.cta", label: "Button label", type: "text" },
+      ],
+    },
+    {
       group: "A few true things (stat labels)",
       fields: [
         { key: "facts.eyebrow", label: "Eyebrow", type: "text" },
