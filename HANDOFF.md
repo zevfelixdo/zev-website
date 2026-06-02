@@ -1,6 +1,6 @@
 # Zev Felix Website — Project Handoff / Status
 
-_Last updated: 2026-06-01. This doc is the single source of truth for resuming work. Read it top to bottom._
+_Last updated: 2026-06-02. Single source of truth for resuming. Read top to bottom; the auto-memory note `project_zev_website.md` has the same status._
 
 ---
 
@@ -9,8 +9,24 @@ _Last updated: 2026-06-01. This doc is the single source of truth for resuming w
 - **What it is:** Personal/professional site for **Zev Felix, DO** (Family Medicine resident). Next.js 14 (App Router) + TypeScript + Tailwind + Supabase (Postgres/Auth/Storage) + TipTap. Deployed on Vercel.
 - **Live:** https://zev-website.vercel.app · **Admin:** https://zev-website.vercel.app/admin · **GitHub:** github.com/zevfelixdo/zev-website
 - **Local:** `/Users/zevfelix/zev-website`
-- **State:** A large **playful redesign + CMS/admin upgrade is complete and on `main`** (now `f486154`). `main` and `redesign` are identical and pushed. **Every public page's text is now CMS-bound** and per-page SEO is wired site-wide (see CMS section).
-- **⚠️ Deploy lag (2026-06-01):** Production now serves **`443a5b3`** (full redesign + CMS + "Zev Felix, DO" wordmark + new hero — confirmed live). FIVE newer commits — `d37c624` (home binding), `77c3856` (site-wide SEO), `bf6270d` + `f486154` (page-text binding), `42d0e48` (docs) — are on `main` but **not yet deployed**: Vercel's free-tier **daily build limit** is hit again (latest commit status = failure → build-rate-limit). They deploy together via the scheduled job below (it builds current `main`) or a manual redeploy once the window resets. The pending work is invisible until an admin edits copy (fallbacks = original text), so there's no visual regression risk.
+- **State:** Playful redesign + full CMS + **site-wide page-text binding + per-page SEO + a purpose/identity rework** are complete on `main` (now **`9462739`**). `main` = `redesign`, pushed, working tree clean. **Custom domain `zevfelix.com` is live** (Porkbun → Vercel).
+- **PURPOSE (confirmed 2026-06-02):** NOT residency applications (Zev is already in residency), NOT patient lead-gen. The site's job = a clear, memorable, accurate **professional/personal identity** for coworkers, future employers, and anyone who googles him. Judge changes by "does this help someone quickly understand who Zev is and what he's about."
+- **⚠️ Deploy lag:** Lots of code is on `main` but Vercel's free-tier **daily build cap** keeps blocking the production deploy. **DB-driven bits ARE live** (footer tagline "Physician & Community Builder", the trimmed nav, CMS content). The newer CODE (identity rework + homepage + caching, commits `d37c624`→`9462739`) deploys when the cap resets — Zev opted to **redeploy manually** (Vercel → Deployments → Redeploy, or POST the deploy hook below). No visual-regression risk (CMS fallbacks = original copy).
+
+---
+
+## Identity rework — 2026-06-02 (most recent work)
+
+Re-centered the site on **professional/personal identity** (see PURPOSE above). **Backup before this work: tag `v2-baseline` + branch `backup/v2-baseline` (commit `9e61068`)** — restore via `git reset --hard v2-baseline` or Vercel Instant Rollback. Shipped to `main`:
+- **`og:image` sitewide** (it was being suppressed → blank link previews) + enriched `Person` JSON-LD (DO, jobTitle, knowsAbout, alumniOf). `buildPageMetadata` defaults the OG image to `${BASE}/opengraph-image`.
+- **Twitter/X removed everywhere** (meta incl. @zevfelix, blog Share button, footer link, admin "Twitter URL" field) — Zev doesn't use it; OG drives previews.
+- **Contact email slot:** Admin → Settings → Footer → "Contact email" → auto-appears in the footer + a new Contact-page "Or reach me directly" block (with LinkedIn); hidden when empty. Zev will add the email later.
+- **Homepage:** hero lead now leads with the path (film → Camp Grounded → surgery → Family Medicine), intro tightened; new **"The short version"** band (CMS-bound `story.eyebrow/lead/body/cta`) surfacing the path + **Camp Grounded press** (NYT/Forbes/New Yorker/CBS — links in the `press` const in `app/(public)/page.tsx`) + a **real portrait** (`home.portrait` = `ZevFelixDO-35`). Kept the lyrical H1.
+- **Nav trimmed** to an identity map (DB / `nav_items`, LIVE): About · Family Medicine · Projects · Writing · CV · Contact. Removed Balance/Technology/Outdoors/Philosophy from the menu (still reachable via homepage Explore + footer + URL; re-add in `/admin/navigation`).
+- **Perf:** dropped the unused JetBrains Mono font (2 families now: Inter + Lora); **public pages are now static + ISR (`revalidate = 60`)** via a new cookie-less anon read client `lib/supabase/public.ts` (with a `next:{revalidate:60}` fetch so Next caches the Authorization-bearing supabase reads), swapped into every public read incl. `DynamicSections`. Build confirms 12 pages are `○` static; `/search` + `/writing` stay dynamic (searchParams). **TRADEOFF: CMS/DB content edits now appear within ~60s (ISR), not instantly.** Auth/admin keep the cookie + `no-store` client (`lib/supabase/server.ts`).
+- **DB gotcha:** the `media` table's filename column is **`name`** (NOT `file_name`) — wrong-column queries silently return nothing.
+
+**Open / not done (optional):** a public contact email (Zev to add via admin); publish the 3 draft blog posts at `/admin/writing`; rotate the admin password. Larger ideas from the audit: a real headshot in the hero (currently cartoons), making `/writing/[slug]` static via `generateStaticParams`.
 
 ---
 
