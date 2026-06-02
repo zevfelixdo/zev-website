@@ -78,13 +78,31 @@ const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Zev Felix",
+  givenName: "Zev",
+  familyName: "Felix",
+  honorificSuffix: "DO",
   url: BASE,
-  jobTitle: "Family Medicine Physician",
+  jobTitle: "Family Medicine Resident Physician",
   description:
-    "Family medicine physician in training, former surgical resident, co-founder of Digital Detox and Camp Grounded.",
-  sameAs: [
-    "https://www.linkedin.com/in/zev-felix-09b94a13",
+    "Family Medicine resident physician, former surgical resident, and co-founder of Camp Grounded and Digital Detox. Writes about medicine, technology, the outdoors, and how people stay human.",
+  knowsAbout: [
+    "Family Medicine",
+    "Preventive Medicine",
+    "Osteopathic Medicine",
+    "Wilderness Medicine",
+    "Digital Wellness",
+    "Community Building",
   ],
+  alumniOf: [
+    { "@type": "CollegeOrUniversity", name: "University of Southern California" },
+    { "@type": "CollegeOrUniversity", name: "Mills College" },
+    {
+      "@type": "CollegeOrUniversity",
+      name: "Touro University California College of Osteopathic Medicine",
+    },
+    { "@type": "MedicalOrganization", name: "UCSF East Bay (General Surgery, preliminary year)" },
+  ],
+  sameAs: ["https://www.linkedin.com/in/zev-felix-09b94a13"],
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {

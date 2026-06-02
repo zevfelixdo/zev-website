@@ -71,6 +71,10 @@ export async function buildPageMetadata(opts: {
   }
 
   const canonical = `${BASE}${opts.path}`;
+  // Always provide an OG image: the per-page og_image if set, else the site's
+  // generated share card. (Previously, setting openGraph without `images`
+  // suppressed the file-based opengraph-image, so link shares had NO preview.)
+  const ogImageUrl = ogImage || `${BASE}/opengraph-image`;
   return {
     title: opts.absoluteTitle ? { absolute: pageTitle } : pageTitle,
     description: pageDesc,
@@ -79,7 +83,13 @@ export async function buildPageMetadata(opts: {
       title: pageTitle,
       description: pageDesc,
       url: canonical,
-      ...(ogImage ? { images: [{ url: ogImage }] } : {}),
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: pageTitle }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: pageTitle,
+      description: pageDesc,
+      images: [ogImageUrl],
     },
   };
 }
