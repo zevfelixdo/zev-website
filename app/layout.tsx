@@ -5,7 +5,7 @@ import { createClient } from "@/lib/supabase/server";
 import { defaultThemeConfig } from "@/lib/theme";
 import type { ThemeConfig } from "@/types/database";
 import { Toaster } from "react-hot-toast";
-import { Inter, Lora, JetBrains_Mono } from "next/font/google";
+import { Inter, Lora } from "next/font/google";
 import { SkipLink } from "@/components/public/SkipLink";
 import { BackToTop } from "@/components/public/BackToTop";
 import { getSeoDefaults } from "@/lib/seo";
@@ -20,11 +20,6 @@ const lora = Lora({
   subsets: ["latin"],
   variable: "--font-lora",
   style: ["normal", "italic"],
-  display: "swap",
-});
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
   display: "swap",
 });
 
@@ -108,7 +103,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${lora.variable} ${jetbrainsMono.variable}`}
+      className={`${inter.variable} ${lora.variable}`}
     >
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
