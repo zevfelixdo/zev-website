@@ -105,7 +105,7 @@ export default async function HomePage() {
           {/* center text */}
           <div className="relative z-10 max-w-3xl">
             <p className="eyebrow rise" style={{ animationDelay: "40ms" }}>
-              {f("hero.eyebrow", "Community Builder, Designer, and Creative Problem Solver")}
+              {f("hero.eyebrow", "Physician, Community Builder, Designer, and Creative Problem Solver")}
             </p>
             <h1 className="font-serif text-display text-text-base mt-5 mb-6">
               <RevealHeading text={f("hero.heading", "Medicine, Creativity, Community, and the Art of Staying Human")} trigger="mount" stagger={48} delay={120} />

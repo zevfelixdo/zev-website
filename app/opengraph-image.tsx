@@ -3,7 +3,7 @@ import { readFileSync } from "fs";
 import { join } from "path";
 
 export const runtime = "nodejs";
-export const alt = "Zev Felix · Community Builder, Designer, and Creative Problem Solver";
+export const alt = "Zev Felix · Physician, Community Builder, Designer, and Creative Problem Solver";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -53,10 +53,9 @@ export default function OGImage() {
               color: "rgb(30,64,48)",
               marginBottom: 18,
               fontWeight: 700,
-              whiteSpace: "nowrap",
             }}
           >
-            Community Builder, Designer, and Creative Problem Solver
+            Physician, Community Builder, Designer, and Creative Problem Solver
           </p>
           <h1 style={{ fontSize: 80, fontWeight: 800, color: "rgb(35,30,25)", lineHeight: 1.05, margin: 0, whiteSpace: "nowrap" }}>
             Zev Felix, DO
