@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import type { ImagePlacement } from "@/types/database";
 
 /**
@@ -8,7 +8,7 @@ import type { ImagePlacement } from "@/types/database";
  */
 export async function getPlacement(area: string): Promise<ImagePlacement | null> {
   try {
-    const supabase = createClient();
+    const supabase = createPublicClient();
     const { data, error } = await supabase
       .from("image_placements")
       .select("*, media:media_id(*)")
@@ -27,7 +27,7 @@ export async function getPlacement(area: string): Promise<ImagePlacement | null>
 /** Fetch multiple placements at once, keyed by area. */
 export async function getPlacements(areas: string[]): Promise<Record<string, ImagePlacement>> {
   try {
-    const supabase = createClient();
+    const supabase = createPublicClient();
     const { data, error } = await supabase
       .from("image_placements")
       .select("*, media:media_id(*)")

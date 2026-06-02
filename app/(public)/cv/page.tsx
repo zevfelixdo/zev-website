@@ -5,7 +5,7 @@ import { field } from "@/lib/pageContent";
 import { getPageContent } from "@/lib/pageContent.server";
 
 export const revalidate = 60;
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import type { CvEntry, Publication } from "@/types/database";
 import { ExternalLink } from "lucide-react";
 import { PrintButton } from "@/components/public/PrintButton";
@@ -48,7 +48,7 @@ const CATEGORY_ORDER: CvEntry["category"][] = [
 
 async function getCvData() {
   try {
-    const supabase = createClient();
+    const supabase = createPublicClient();
     const [cvRes, pubRes] = await Promise.all([
       supabase
         .from("cv_entries")

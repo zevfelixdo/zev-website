@@ -9,7 +9,9 @@ import { PageHero } from "@/components/public/PageHero";
 import { Reveal } from "@/components/public/Reveal";
 import { Doodle } from "@/components/public/Doodle";
 import { Mail, Linkedin } from "lucide-react";
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
+
+export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   return buildPageMetadata({
@@ -26,7 +28,7 @@ export default async function ContactPage() {
   const f = (key: string, fallback: string) => field(c, key, fallback);
 
   // Direct-contact details from Settings -> Footer (email appears once it's filled in).
-  const sb = createClient();
+  const sb = createPublicClient();
   const { data: footerData } = await sb
     .from("site_settings")
     .select("value")

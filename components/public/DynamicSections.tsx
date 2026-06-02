@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import type { PageSection } from "@/types/database";
 import { SectionList } from "./SectionRenderer";
 
@@ -8,7 +8,7 @@ interface DynamicSectionsProps {
 
 async function getSections(slug: string): Promise<PageSection[]> {
   try {
-    const supabase = createClient();
+    const supabase = createPublicClient();
     const { data: page } = await supabase
       .from("pages")
       .select("id")

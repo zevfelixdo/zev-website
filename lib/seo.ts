@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
 
@@ -23,7 +23,7 @@ const isAbsoluteUrl = (s?: string | null) => !!s && /^https?:\/\//i.test(s.trim(
 /** Site-wide SEO defaults from the admin (site_settings.seo), with safe fallbacks. */
 export async function getSeoDefaults(): Promise<SeoDefaults> {
   try {
-    const sb = createClient();
+    const sb = createPublicClient();
     const { data } = await sb.from("site_settings").select("value").eq("key", "seo").single();
     const v = (data?.value ?? {}) as Partial<SeoDefaults>;
     return {
@@ -55,7 +55,7 @@ export async function buildPageMetadata(opts: {
   let ogImage = "";
 
   try {
-    const sb = createClient();
+    const sb = createPublicClient();
     const { data } = await sb
       .from("pages")
       .select("title, description, og_image")

@@ -5,7 +5,7 @@ import { field } from "@/lib/pageContent";
 import { getPageContent } from "@/lib/pageContent.server";
 
 export const revalidate = 60;
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import type { Project } from "@/types/database";
 import { Badge } from "@/components/ui/Badge";
 import { ExternalLink } from "lucide-react";
@@ -43,7 +43,7 @@ const statusVariant: Record<Project["status"], "success" | "info" | "warning" | 
 
 async function getProjects(): Promise<Project[]> {
   try {
-    const supabase = createClient();
+    const supabase = createPublicClient();
     const { data } = await supabase
       .from("projects")
       .select("*, image:image_id(*)")

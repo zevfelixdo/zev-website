@@ -1,11 +1,11 @@
 import { Nav } from "@/components/public/Nav";
 import { Footer } from "@/components/public/Footer";
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import type { NavItem, SiteSettings } from "@/types/database";
 
 async function getNavItems(): Promise<NavItem[]> {
   try {
-    const supabase = createClient();
+    const supabase = createPublicClient();
     const { data } = await supabase
       .from("nav_items")
       .select("*")
@@ -19,7 +19,7 @@ async function getNavItems(): Promise<NavItem[]> {
 
 async function getFooterSettings(): Promise<SiteSettings["footer"] | undefined> {
   try {
-    const supabase = createClient();
+    const supabase = createPublicClient();
     const { data } = await supabase
       .from("site_settings")
       .select("value")

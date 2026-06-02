@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import type { Post } from "@/types/database";
 import { formatDate } from "@/lib/utils";
 import { Clock, ArrowLeft, Tag } from "lucide-react";
@@ -24,7 +24,7 @@ interface Props {
 
 async function getPost(slug: string): Promise<Post | null> {
   try {
-    const supabase = createClient();
+    const supabase = createPublicClient();
     const { data } = await supabase
       .from("posts")
       .select("*, cover_image:cover_image_id(*)")
@@ -40,7 +40,7 @@ async function getPost(slug: string): Promise<Post | null> {
 async function getRelatedPosts(post: Post): Promise<Post[]> {
   if (!post.tags?.length) return [];
   try {
-    const supabase = createClient();
+    const supabase = createPublicClient();
     const { data } = await supabase
       .from("posts")
       .select("id, title, slug, excerpt, published_at, reading_time_minutes, tags, cover_image_url")

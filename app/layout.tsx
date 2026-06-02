@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import { defaultThemeConfig } from "@/lib/theme";
 import type { ThemeConfig } from "@/types/database";
 import { Toaster } from "react-hot-toast";
@@ -52,7 +52,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 async function getActiveTheme(): Promise<ThemeConfig> {
   try {
-    const supabase = createClient();
+    const supabase = createPublicClient();
     const { data } = await supabase
       .from("themes")
       .select("config")

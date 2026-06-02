@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import type { Post } from "@/types/database";
 import { DynamicSections } from "@/components/public/DynamicSections";
 import { Badge } from "@/components/ui/Badge";
@@ -27,7 +27,7 @@ const PAGE_SIZE = 12;
 
 async function getPosts(tag?: string, page = 1): Promise<{ posts: Post[]; total: number; allTags: string[] }> {
   try {
-    const supabase = createClient();
+    const supabase = createPublicClient();
     const from = (page - 1) * PAGE_SIZE;
     const to = from + PAGE_SIZE - 1;
 
