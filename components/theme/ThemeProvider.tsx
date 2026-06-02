@@ -16,7 +16,8 @@ interface Props {
 }
 
 export function ThemeProvider({ config, children }: Props) {
-  const css = themeToCSS(config);
+  // Strip < and > so a malicious theme value can't break out of the <style> tag.
+  const css = themeToCSS(config).replace(/[<>]/g, "");
 
   return (
     <ThemeContext.Provider value={config}>

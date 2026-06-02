@@ -1,4 +1,5 @@
 import { Resend } from "resend";
+import { makeUnsubscribeToken } from "@/lib/unsubscribe-token";
 
 let _resend: Resend | null = null;
 
@@ -14,6 +15,16 @@ function getResend(): Resend {
 const FROM = "Zev Felix <hello@zevfelix.com>";
 const NOTIFY_TO = process.env.NOTIFICATION_EMAIL ?? "zev@zevfelix.com";
 
+/** Escape user-provided text before interpolating it into notification email HTML. */
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 // ── Contact form notification ────────────────────────────────────────────────
 export async function sendContactNotification(opts: {
   name: string;
@@ -22,16 +33,21 @@ export async function sendContactNotification(opts: {
   message: string;
 }) {
   const resend = getResend();
+  // Escape submitter-controlled fields so a submission can't inject HTML into the inbox.
+  const name = escapeHtml(opts.name);
+  const email = escapeHtml(opts.email);
+  const subject = opts.subject ? escapeHtml(opts.subject) : "";
+  const message = escapeHtml(opts.message);
   await resend.emails.send({
     from: FROM,
     to: NOTIFY_TO,
     replyTo: opts.email,
     subject: `New message from ${opts.name}${opts.subject ? `: ${opts.subject}` : ""}`,
     html: `
-      <p><strong>From:</strong> ${opts.name} &lt;${opts.email}&gt;</p>
-      ${opts.subject ? `<p><strong>Subject:</strong> ${opts.subject}</p>` : ""}
+      <p><strong>From:</strong> ${name} &lt;${email}&gt;</p>
+      ${subject ? `<p><strong>Subject:</strong> ${subject}</p>` : ""}
       <hr />
-      <p style="white-space:pre-wrap;">${opts.message}</p>
+      <p style="white-space:pre-wrap;">${message}</p>
       <hr />
       <p style="color:#999;font-size:12px;">Sent via zevfelix.com contact form</p>
     `,
@@ -93,7 +109,7 @@ function wrapNewsletterHtml(body: string, previewText: string, firstName?: strin
   const greeting = firstName ? `Hi ${firstName},` : "Hi there,";
   const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zevfelix.com";
   const unsubUrl = email
-    ? `${BASE}/api/unsubscribe?email=${encodeURIComponent(email)}`
+    ? `${BASE}/api/unsubscribe?email=${encodeURIComponent(email)}&token=${makeUnsubscribeToken(email)}`
     : `${BASE}/contact`;
   return `<!DOCTYPE html>
 <html>

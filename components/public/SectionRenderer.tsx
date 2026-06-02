@@ -8,6 +8,7 @@ import { ContactForm } from "./ContactForm";
 import { NewsletterForm } from "./NewsletterForm";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
+import { sanitizePostHtml } from "@/lib/sanitize";
 
 // ──────────────────────────────────────────────────────────
 // Individual section renderers
@@ -126,7 +127,7 @@ function RichTextSection({ content }: { content: Record<string, unknown> }) {
       <div className="container-content">
         <div
           className="prose-content max-w-3xl"
-          dangerouslySetInnerHTML={{ __html: html }}
+          dangerouslySetInnerHTML={{ __html: sanitizePostHtml(html) }}
         />
       </div>
     </section>
@@ -141,7 +142,7 @@ function IntroTextSection({ content }: { content: Record<string, unknown> }) {
   return (
     <section className="section-y container-content">
       {isHtml ? (
-        <div className="prose-content max-w-2xl" dangerouslySetInnerHTML={{ __html: text }} />
+        <div className="prose-content max-w-2xl" dangerouslySetInnerHTML={{ __html: sanitizePostHtml(text) }} />
       ) : (
         <p className="text-lg text-text-base leading-relaxed max-w-2xl">{text}</p>
       )}
@@ -198,7 +199,7 @@ function ImageTextSection({ content }: { content: Record<string, unknown> }) {
               {html && (
                 <div
                   className="prose-content"
-                  dangerouslySetInnerHTML={{ __html: html }}
+                  dangerouslySetInnerHTML={{ __html: sanitizePostHtml(html) }}
                 />
               )}
             </div>
@@ -318,7 +319,7 @@ function CalloutSection({ content }: { content: Record<string, unknown> }) {
           <h3 className="font-serif text-xl font-semibold text-text-base mb-3">{title}</h3>
         )}
         {body && (
-          <div className="prose-content" dangerouslySetInnerHTML={{ __html: body }} />
+          <div className="prose-content" dangerouslySetInnerHTML={{ __html: sanitizePostHtml(body) }} />
         )}
       </div>
     </section>
@@ -447,7 +448,7 @@ function FaqSection({ content }: { content: Record<string, unknown> }) {
                 {item.question}
                 <span className="text-primary transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>
               </summary>
-              <div className="prose-content mt-3 text-text-muted" dangerouslySetInnerHTML={{ __html: item.answer }} />
+              <div className="prose-content mt-3 text-text-muted" dangerouslySetInnerHTML={{ __html: sanitizePostHtml(item.answer) }} />
             </details>
           ))}
         </div>
