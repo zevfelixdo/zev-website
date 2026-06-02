@@ -56,6 +56,14 @@ const threads = [
   "Staying Human",
 ];
 
+// Camp Grounded press (the strongest, most-defining proof — surfaced on the homepage).
+const press = [
+  { outlet: "The New York Times", url: "https://www.nytimes.com/2013/07/07/fashion/a-trip-to-camp-to-break-a-tech-addiction.html" },
+  { outlet: "Forbes", url: "https://www.forbes.com/sites/ellenhuet/2014/06/20/camp-grounded-digital-detox/" },
+  { outlet: "The New Yorker", url: "https://www.newyorker.com/tech/annals-of-technology/into-the-woods-and-away-from-technology" },
+  { outlet: "CBS News", url: "https://www.cbsnews.com/news/camp-grounded-digital-detox-summer-camp-for-grown-ups/" },
+];
+
 export default async function HomePage() {
   const cardMap = await getPlacements(exploreItems.map((i) => i.area));
 
@@ -111,10 +119,10 @@ export default async function HomePage() {
               <RevealHeading text={f("hero.heading", "Medicine, Creativity, Community, and the Art of Staying Human")} trigger="mount" stagger={48} delay={120} />
             </h1>
             <p className="text-lg sm:text-xl text-text-muted leading-relaxed max-w-2xl mx-auto rise" style={{ animationDelay: "620ms" }}>
-              {f("hero.lead", "I’m Zev Felix, a Family Medicine resident, former Camp Grounded co-founder, climber, maker, and lifelong student of how people heal, connect, and build meaningful lives.")}
+              {f("hero.lead", "I’m Zev Felix, a Family Medicine resident who came to medicine the long way: film school, then co-founding Camp Grounded, then a year in surgery, and finally Family Medicine. I still build things, and I think a lot about how people stay human.")}
             </p>
             <p className="text-base text-text-muted/90 leading-relaxed max-w-2xl mx-auto mt-4 rise" style={{ animationDelay: "720ms" }}>
-              {f("hero.intro", "I’ve always been fascinated by people: how we heal, how we connect, and how we make meaning of our lives. That curiosity has taken me from film sets to summer camps, from startup projects to mountain trails, and eventually into hospitals and clinics. Before medicine, I helped build a device-free summer camp where people came to reconnect with themselves and each other. Looking back, the settings changed, but the question never did: what helps people live healthier, more connected, and more meaningful lives? Family Medicine is where I’ve found the privilege of exploring that question alongside patients every day.")}
+              {f("hero.intro", "The settings kept changing: film sets, summer camps, startup projects, mountain trails, operating rooms. The question never did: what helps people live healthier, more connected, and more meaningful lives?")}
             </p>
             <div className="flex flex-wrap gap-3 mt-8 justify-center rise" style={{ animationDelay: "820ms" }}>
               <MagneticButton>
@@ -149,6 +157,47 @@ export default async function HomePage() {
           />
         </div>
       </div>
+
+      {/* ── The short version (path + press) ─────────────── */}
+      <section className="relative section-y container-content overflow-x-clip">
+        <Doodle name="loops" size={70} strokeWidth={4} className="hidden lg:block absolute right-[7%] top-10 text-fun-leaf/60" />
+        <div className="max-w-3xl">
+          <Reveal>
+            <p className="eyebrow mb-6">The short version</p>
+          </Reveal>
+          <Reveal delay={80}>
+            <p className="font-serif text-2xl sm:text-3xl text-text-base leading-snug">
+              A long, winding path to Family Medicine: film school, then co-founding Camp Grounded and Digital Detox, then a year in surgery, and finally the work where all the pieces fit.
+            </p>
+          </Reveal>
+          <Reveal delay={140}>
+            <p className="text-lg text-text-muted leading-relaxed mt-6 max-w-2xl">
+              Before medicine, my brother Levi and I built device-free retreats that brought thousands of people back to presence, and to each other.
+            </p>
+          </Reveal>
+          <Reveal delay={200}>
+            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2">
+              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-text-muted">Camp Grounded in the press</span>
+              {press.map((p) => (
+                <a
+                  key={p.url}
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-anim text-sm text-primary hover:opacity-80 transition-opacity"
+                >
+                  {p.outlet}
+                </a>
+              ))}
+            </div>
+          </Reveal>
+          <Reveal delay={260}>
+            <div className="mt-9">
+              <Button as="link" href="/unplugged" variant="outline">Read the full story</Button>
+            </div>
+          </Reveal>
+        </div>
+      </section>
 
       {/* ── A few true things (count-up) ─────────────────── */}
       <section className="relative section-y container-content overflow-x-clip">
