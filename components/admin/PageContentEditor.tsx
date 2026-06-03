@@ -57,16 +57,17 @@ export function PageContentEditor({ slug }: { slug: string }) {
     <div className="bg-surface border border-border rounded-lg p-5 space-y-5">
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          <FileText size={16} className="text-primary" />
-          <h2 className="font-semibold text-text-base text-sm">Page text content</h2>
+          <FileText size={18} className="text-primary" />
+          <h2 className="font-semibold text-text-base text-base">Page text content</h2>
         </div>
         <Button size="sm" onClick={save} loading={saving} disabled={!loaded}>
           <Save size={14} /> Save text
         </Button>
       </div>
       <p className="text-xs text-text-muted -mt-2">
-        Edit the words on this page. Leave a field blank to use the original default. The page&#8217;s
-        design stays the same.
+        The actual words shown on this page (headings, paragraphs, lists), separate from the SEO
+        title/description above. Edit any field; leave it blank to restore the original. The design
+        stays the same, and changes go live within about a minute.
       </p>
 
       {!loaded ? (

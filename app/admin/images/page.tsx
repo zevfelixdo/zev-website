@@ -25,8 +25,9 @@ export default async function AdminImagePlacementsPage() {
       <div>
         <h1 className="font-serif text-3xl font-semibold text-text-base">Image Placements</h1>
         <p className="text-text-muted mt-1">
-          Assign a library image to each spot on the site. Set its framing for desktop and mobile,
-          fit, caption, and visibility. Changes go live without touching code.
+          Assign an image from the <span className="font-medium text-text-base">Media Library</span> to each
+          spot on the site. Set its framing for desktop and mobile, fit, caption, and visibility. Upload
+          files in Media first; changes here go live without touching code.
         </p>
       </div>
       <ImagePlacements areas={PLACEMENT_AREAS} initialPlacements={placements} images={images} />

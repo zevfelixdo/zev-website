@@ -36,33 +36,17 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
+// Explore cards — the structure (href/area) lives here; the title + description
+// are editable via the CMS (see `exploreText` inside the component).
 const exploreItems = [
-  { label: "About", href: "/about", area: "home.card.about", description: "The long way to Family Medicine: film, camp, surgery, and a dog from Taiwan." },
-  { label: "Family Medicine", href: "/medicine", area: "home.card.medicine", description: "Why I chose it, and caring for the space before crisis." },
-  { label: "Balance", href: "/balance", area: "home.card.balance", description: "Why balance is not the opposite of ambition." },
-  { label: "Technology", href: "/technology", area: "home.card.technology", description: "Why the best tools create more connection, not less." },
-  { label: "Outside the Hospital", href: "/outdoors", area: "home.card.outdoors", description: "Making things, climbing, Maisy, and wilderness medicine." },
-  { label: "Projects", href: "/work", area: "home.card.projects", description: "Camp Grounded, Digital Detox, and building things that bring people together." },
-  { label: "Philosophy of Care", href: "/philosophy", area: "home.card.philosophy", description: "What matters to you? The question that changes everything." },
-  { label: "Writing", href: "/writing", area: "home.card.writing", description: "Essays and notes on medicine, technology, and living well." },
-];
-
-const threads = [
-  "Family Medicine",
-  "Camp Grounded",
-  "Wilderness Medicine",
-  "Documentary Storytelling",
-  "Digital Detox",
-  "Rock Climbing",
-  "Staying Human",
-];
-
-// Camp Grounded press (the strongest, most-defining proof — surfaced on the homepage).
-const press = [
-  { outlet: "The New York Times", url: "https://www.nytimes.com/2013/07/07/fashion/a-trip-to-camp-to-break-a-tech-addiction.html" },
-  { outlet: "Forbes", url: "https://www.forbes.com/sites/ellenhuet/2014/06/20/camp-grounded-digital-detox/" },
-  { outlet: "The New Yorker", url: "https://www.newyorker.com/tech/annals-of-technology/into-the-woods-and-away-from-technology" },
-  { outlet: "CBS News", url: "https://www.cbsnews.com/news/camp-grounded-digital-detox-summer-camp-for-grown-ups/" },
+  { key: "about", label: "About", href: "/about", area: "home.card.about", description: "The long way to Family Medicine: film, camp, surgery, and a dog from Taiwan." },
+  { key: "medicine", label: "Family Medicine", href: "/medicine", area: "home.card.medicine", description: "Why I chose it, and caring for the space before crisis." },
+  { key: "balance", label: "Balance", href: "/balance", area: "home.card.balance", description: "Why balance is not the opposite of ambition." },
+  { key: "technology", label: "Technology", href: "/technology", area: "home.card.technology", description: "Why the best tools create more connection, not less." },
+  { key: "outdoors", label: "Outside the Hospital", href: "/outdoors", area: "home.card.outdoors", description: "Making things, climbing, Maisy, and wilderness medicine." },
+  { key: "projects", label: "Projects", href: "/work", area: "home.card.projects", description: "Camp Grounded, Digital Detox, and building things that bring people together." },
+  { key: "philosophy", label: "Philosophy of Care", href: "/philosophy", area: "home.card.philosophy", description: "What matters to you? The question that changes everything." },
+  { key: "writing", label: "Writing", href: "/writing", area: "home.card.writing", description: "Essays and notes on medicine, technology, and living well." },
 ];
 
 export default async function HomePage() {
@@ -72,13 +56,43 @@ export default async function HomePage() {
   // falls back to the original text, so the design is unchanged until an admin edits it.
   const c = await getPageContent("home");
   const f = (key: string, fallback: string) => field(c, key, fallback);
+  const lines = (s: string) => s.split("\n").map((x) => x.trim()).filter(Boolean);
+
+  // ── Editable structured content (CMS-bound; each falls back to the original) ──
+  const threads = lines(
+    f("threads", "Family Medicine\nCamp Grounded\nWilderness Medicine\nDocumentary Storytelling\nDigital Detox\nRock Climbing\nStaying Human")
+  );
+  const press = lines(
+    f(
+      "press",
+      "The New York Times | https://www.nytimes.com/2013/07/07/fashion/a-trip-to-camp-to-break-a-tech-addiction.html\nForbes | https://www.forbes.com/sites/ellenhuet/2014/06/20/camp-grounded-digital-detox/\nThe New Yorker | https://www.newyorker.com/tech/annals-of-technology/into-the-woods-and-away-from-technology\nCBS News | https://www.cbsnews.com/news/camp-grounded-digital-detox-summer-camp-for-grown-ups/"
+    )
+  ).map((l) => {
+    const sep = l.indexOf("|");
+    return sep === -1 ? { outlet: l.trim(), url: "#" } : { outlet: l.slice(0, sep).trim(), url: l.slice(sep + 1).trim() };
+  });
+  const stat = (raw: string) => {
+    const m = raw.match(/^\s*([\d,]+)(.*)$/);
+    return { v: m ? parseInt(m[1].replace(/,/g, ""), 10) || 0 : 0, suffix: m ? m[2].trim() : "" };
+  };
+  const exploreText: Record<string, { title: string; desc: string }> = {
+    about: { title: f("explore.about.title", "About"), desc: f("explore.about.desc", "The long way to Family Medicine: film, camp, surgery, and a dog from Taiwan.") },
+    medicine: { title: f("explore.medicine.title", "Family Medicine"), desc: f("explore.medicine.desc", "Why I chose it, and caring for the space before crisis.") },
+    balance: { title: f("explore.balance.title", "Balance"), desc: f("explore.balance.desc", "Why balance is not the opposite of ambition.") },
+    technology: { title: f("explore.technology.title", "Technology"), desc: f("explore.technology.desc", "Why the best tools create more connection, not less.") },
+    outdoors: { title: f("explore.outdoors.title", "Outside the Hospital"), desc: f("explore.outdoors.desc", "Making things, climbing, Maisy, and wilderness medicine.") },
+    projects: { title: f("explore.projects.title", "Projects"), desc: f("explore.projects.desc", "Camp Grounded, Digital Detox, and building things that bring people together.") },
+    philosophy: { title: f("explore.philosophy.title", "Philosophy of Care"), desc: f("explore.philosophy.desc", "What matters to you? The question that changes everything.") },
+    writing: { title: f("explore.writing.title", "Writing"), desc: f("explore.writing.desc", "Essays and notes on medicine, technology, and living well.") },
+  };
 
   const items: ExploreItem[] = exploreItems.map((it) => {
     const p = cardMap[it.area];
+    const t = exploreText[it.key];
     return {
-      label: it.label,
+      label: t?.title ?? it.label,
       href: it.href,
-      description: it.description,
+      description: t?.desc ?? it.description,
       imageUrl: p?.media?.public_url ?? null,
       focalX: p?.focal_x ?? 50,
       focalY: p?.focal_y ?? 50,
@@ -175,10 +189,10 @@ export default async function HomePage() {
             </Reveal>
             <Reveal delay={200}>
               <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2">
-                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-text-muted">Camp Grounded in the press</span>
-                {press.map((p) => (
+                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-text-muted">{f("story.presslabel", "Camp Grounded in the press")}</span>
+                {press.map((p, i) => (
                   <a
-                    key={p.url}
+                    key={i}
                     href={p.url}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -221,10 +235,10 @@ export default async function HomePage() {
         </Reveal>
         <div className="relative grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12 text-center">
           {[
-            { v: 3000, suffix: "+", label: f("facts.l1", "people who set their phones down at Camp Grounded") },
-            { v: 17, suffix: "", label: f("facts.l2", "device-free camps, run with a small team") },
-            { v: 10, suffix: "+", label: f("facts.l3", "years since my first day in a climbing gym") },
-            { v: 1, suffix: "", label: f("facts.l4", "very good rescue dog, named Maisy") },
+            { ...stat(f("facts.v1", "3,000+")), label: f("facts.l1", "people who set their phones down at Camp Grounded") },
+            { ...stat(f("facts.v2", "17")), label: f("facts.l2", "device-free camps, run with a small team") },
+            { ...stat(f("facts.v3", "10+")), label: f("facts.l3", "years since my first day in a climbing gym") },
+            { ...stat(f("facts.v4", "1")), label: f("facts.l4", "very good rescue dog, named Maisy") },
           ].map((s, i) => (
             <Reveal key={i} delay={i * 90}>
               <p className="font-serif text-display-sm text-primary leading-none">

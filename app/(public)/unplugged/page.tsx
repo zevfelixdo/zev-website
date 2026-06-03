@@ -23,18 +23,20 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-const press = [
-  { outlet: "The New York Times", url: "https://www.nytimes.com/2013/07/07/fashion/a-trip-to-camp-to-break-a-tech-addiction.html" },
-  { outlet: "The New Yorker", url: "https://www.newyorker.com/tech/annals-of-technology/into-the-woods-and-away-from-technology" },
-  { outlet: "Forbes", url: "https://www.forbes.com/sites/ellenhuet/2014/06/20/camp-grounded-digital-detox/" },
-  { outlet: "CBS News", url: "https://www.cbsnews.com/news/camp-grounded-digital-detox-summer-camp-for-grown-ups/" },
-  { outlet: "Al Jazeera", url: "https://www.aljazeera.com/video/al-jazeera-correspondent/2014/11/7/camp-grounded-an-analogue-adventure" },
-  { outlet: "TechCrunch", url: "https://techcrunch.com/2019/11/21/camp-grounded-returns/" },
-];
-
 export default async function UnpluggedPage() {
   const c = await getPageContent("unplugged");
   const f = (key: string, fallback: string) => field(c, key, fallback);
+  const press = f(
+    "press",
+    "The New York Times | https://www.nytimes.com/2013/07/07/fashion/a-trip-to-camp-to-break-a-tech-addiction.html\nThe New Yorker | https://www.newyorker.com/tech/annals-of-technology/into-the-woods-and-away-from-technology\nForbes | https://www.forbes.com/sites/ellenhuet/2014/06/20/camp-grounded-digital-detox/\nCBS News | https://www.cbsnews.com/news/camp-grounded-digital-detox-summer-camp-for-grown-ups/\nAl Jazeera | https://www.aljazeera.com/video/al-jazeera-correspondent/2014/11/7/camp-grounded-an-analogue-adventure\nTechCrunch | https://techcrunch.com/2019/11/21/camp-grounded-returns/"
+  )
+    .split("\n")
+    .map((x) => x.trim())
+    .filter(Boolean)
+    .map((l) => {
+      const sep = l.indexOf("|");
+      return sep === -1 ? { outlet: l.trim(), url: "#" } : { outlet: l.slice(0, sep).trim(), url: l.slice(sep + 1).trim() };
+    });
 
   return (
     <>
@@ -184,8 +186,8 @@ export default async function UnpluggedPage() {
           </Reveal>
           <Reveal delay={80}>
             <ul className="space-y-3">
-              {press.map((p) => (
-                <li key={p.url}>
+              {press.map((p, i) => (
+                <li key={i}>
                   <a
                     href={p.url}
                     target="_blank"

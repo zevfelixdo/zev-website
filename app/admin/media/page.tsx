@@ -21,7 +21,10 @@ export default async function AdminMediaPage() {
     <div className="space-y-6">
       <div>
         <h1 className="font-serif text-3xl font-semibold text-text-base">Media Library</h1>
-        <p className="text-text-muted mt-1">Upload and manage images, videos, and documents.</p>
+        <p className="text-text-muted mt-1">
+          Your central library: upload and manage images, videos, and documents. To actually show an
+          image on a page, assign it to a spot in <span className="font-medium text-text-base">Image Placements</span>.
+        </p>
       </div>
       <MediaLibraryClient initialMedia={media} />
     </div>
