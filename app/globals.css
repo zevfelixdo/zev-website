@@ -230,8 +230,10 @@
   }
   .rule-draw.is-in { transform: scaleX(1); }
 
-  /* Marquee — track holds the content twice and slides one copy width. */
-  .marquee { overflow: hidden; }
+  /* Marquee — track holds the content twice and slides one copy width.
+     Clip only the x-axis so the scrolling copy is hidden but italic
+     descenders (g, y, p) aren't cropped at the bottom edge. */
+  .marquee { overflow-x: clip; }
   .marquee-track {
     display: flex;
     width: max-content;
