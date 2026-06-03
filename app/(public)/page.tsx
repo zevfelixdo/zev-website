@@ -101,14 +101,12 @@ export default async function HomePage() {
           <Doodle name="star" size={26} className="absolute left-[14%] bottom-[24%] text-fun-sky" />
           <Doodle name="loops" size={84} strokeWidth={4} className="hidden sm:block absolute right-[12%] bottom-[26%] text-fun-leaf/70" />
 
-          {/* side cartoons framing the headline (wide screens only) — hover to meet each side of me */}
-          <div className="group hidden xl:block absolute left-0 bottom-[10%] z-10">
-            <Cartoon name="drinking-coffee" width={210} decorative className="w-[180px] h-auto sticker transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-3 group-hover:-rotate-3" />
-            <span className="pointer-events-none absolute left-1/2 top-2 -translate-x-1/2 whitespace-nowrap rounded-full bg-primary text-white text-xs font-medium px-3 py-1 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:-translate-y-3 shadow-card">Off the clock</span>
+          {/* side cartoons framing the headline (wide screens only), lifted up beside the text over the sky/sun blobs */}
+          <div className="group hidden xl:block absolute left-0 top-[13%] z-10">
+            <Cartoon name="drinking-coffee" width={210} decorative className="w-[180px] 2xl:w-[200px] h-auto sticker transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-3 group-hover:-rotate-3" />
           </div>
-          <div className="group hidden xl:block absolute right-0 bottom-[9%] z-10">
-            <Cartoon name="hiking-standing" width={200} decorative className="w-[172px] h-auto sticker transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-3 group-hover:rotate-3" />
-            <span className="pointer-events-none absolute left-1/2 top-2 -translate-x-1/2 whitespace-nowrap rounded-full bg-primary text-white text-xs font-medium px-3 py-1 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:-translate-y-3 shadow-card">Wilderness medicine</span>
+          <div className="group hidden xl:block absolute right-0 top-[13%] z-10">
+            <Cartoon name="hiking-standing" width={200} decorative className="w-[172px] 2xl:w-[192px] h-auto sticker transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-3 group-hover:rotate-3" />
           </div>
 
           {/* center text */}
@@ -134,9 +132,8 @@ export default async function HomePage() {
           </div>
 
           {/* the star of the scene — Zev biking with Maisy (click me!) */}
-          <div className="group relative z-10 mt-10 rise" style={{ animationDelay: "900ms" }}>
+          <div className="relative z-10 mt-10 rise" style={{ animationDelay: "900ms" }}>
             <Doodle name="path" size={120} className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-[125%] text-fun-tangerine/45" />
-            <span className="pointer-events-none absolute left-1/2 -top-2 -translate-x-1/2 whitespace-nowrap rounded-full bg-primary text-white text-xs font-medium px-3 py-1 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:-translate-y-2 shadow-card z-20">Maisy &amp; the trail</span>
             <BikeEasterEgg />
           </div>
         </div>
