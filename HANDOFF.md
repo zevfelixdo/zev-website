@@ -1,6 +1,9 @@
 # Zev Felix Website — Project Handoff / Status
 
-_Last updated: 2026-06-02. Single source of truth for resuming. Read top to bottom; the auto-memory note `project_zev_website.md` has the same status._
+_Last updated: 2026-06-02 (deploy verified live). Single source of truth for resuming. Read top to bottom; the auto-memory note `project_zev_website.md` has the same status._
+
+> ## ✅ STATUS: FULLY DEPLOYED & LIVE
+> The earlier "deploy lag" is **resolved.** The scheduled job fired 2026-06-01 21:38 PDT and `9462739` (identity rework + homepage + caching) **built green on Vercel.** HEAD `a00035c` is a docs-only commit (this file); its `failure` status is a harmless same-day build-cap hit with no code diff. **Verified 2026-06-02:** every public page + /search + /feed.xml + /sitemap.xml + /opengraph-image → 200 on `https://www.zevfelix.com`; `/admin` → login. og:image emits sitewide at `https://zevfelix.com/opengraph-image`; top nav trimmed to the 6-item identity map. Remaining items (contact email, publish 3 drafts, rotate password, Supabase Auth Site URL) each need Zev and are non-blocking.
 
 ---
 
@@ -11,7 +14,7 @@ _Last updated: 2026-06-02. Single source of truth for resuming. Read top to bott
 - **Local:** `/Users/zevfelix/zev-website`
 - **State:** Playful redesign + full CMS + **site-wide page-text binding + per-page SEO + a purpose/identity rework** are complete on `main` (now **`9462739`**). `main` = `redesign`, pushed, working tree clean. **Custom domain `zevfelix.com` is live** (Porkbun → Vercel).
 - **PURPOSE (confirmed 2026-06-02):** NOT residency applications (Zev is already in residency), NOT patient lead-gen. The site's job = a clear, memorable, accurate **professional/personal identity** for coworkers, future employers, and anyone who googles him. Judge changes by "does this help someone quickly understand who Zev is and what he's about."
-- **⚠️ Deploy lag:** Lots of code is on `main` but Vercel's free-tier **daily build cap** keeps blocking the production deploy. **DB-driven bits ARE live** (footer tagline "Physician & Community Builder", the trimmed nav, CMS content). The newer CODE (identity rework + homepage + caching, commits `d37c624`→`9462739`) deploys when the cap resets — Zev opted to **redeploy manually** (Vercel → Deployments → Redeploy, or POST the deploy hook below). No visual-regression risk (CMS fallbacks = original copy).
+- **✅ Deploy:** RESOLVED — all code (identity rework + homepage + caching, through `9462739`) is **live in production** on `zevfelix.com` and `zev-website.vercel.app`, verified 2026-06-02 (see the status banner above). The free-tier daily build cap that caused the earlier lag no longer applies; future pushes to `main` auto-deploy as normal (one push/day stays under the Hobby cap).
 
 ---
 
