@@ -31,7 +31,7 @@ export default async function OutdoorsPage() {
       <PageHero
         eyebrow={f("hero.eyebrow", "Outside the Hospital")}
         heading={f("hero.heading", "The Things That Keep Me Grounded")}
-        collage={{ cartoon: "outdoor-back", blobVariant: 2, blobClass: "text-primary/10", doodle: "sun", doodleClass: "text-accent" }}
+        collage={{ cartoon: "hiking-standing", blobVariant: 2, blobClass: "text-primary/10", doodle: "sun", doodleClass: "text-accent" }}
       >
         <p>
           {f("hero.lead", "When people hear “doctor,” they often imagine someone who spends all day thinking about medicine. I like medicine. I spend plenty of time thinking about it. But I don’t think a good life can be built from a single interest.")}

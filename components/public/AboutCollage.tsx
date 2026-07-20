@@ -65,15 +65,15 @@ export function AboutCollage({
             </div>
           </ParallaxView>
 
-          {/* cartoon sticker, front layer, faster parallax */}
-          <ParallaxView speed={0.13} className={cn("absolute bottom-0 z-20 w-[58%]", mirror ? "left-0" : "right-0")}>
-            <Cartoon name={cartoon} width={320} priority={priority} decorative float className="h-auto w-full sticker" />
+          {/* cartoon sticker, front layer — object-contain in a fixed box so tall figures never blow up */}
+          <ParallaxView speed={0.13} className={cn("absolute bottom-0 z-20 h-[94%] w-[58%]", mirror ? "left-0" : "right-0")}>
+            <Cartoon name={cartoon} width={320} priority={priority} decorative float className="h-full w-full object-contain object-bottom sticker" />
           </ParallaxView>
         </>
       ) : (
-        /* cartoon-only cluster (no photo) — centered, larger */
-        <div className="absolute inset-0 z-10 flex items-center justify-center">
-          <Cartoon name={cartoon} width={360} priority={priority} decorative float className="h-auto w-[78%] sticker" />
+        /* cartoon-only cluster (no photo) — object-contain so tall figures fit */
+        <div className="absolute inset-0 z-10 flex items-center justify-center p-[6%]">
+          <Cartoon name={cartoon} width={360} priority={priority} decorative float className="h-full w-full object-contain sticker" />
         </div>
       )}
     </div>

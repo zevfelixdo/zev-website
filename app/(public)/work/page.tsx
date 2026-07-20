@@ -66,7 +66,7 @@ export default async function WorkPage() {
       <PageHero
         eyebrow={f("hero.eyebrow", "Projects")}
         heading={f("hero.heading", "Building Things That Bring People Together")}
-        collage={{ cartoon: "scrubs-front-alt", blobVariant: 1, blobClass: "text-primary/10", doodle: "star", doodleClass: "text-accent" }}
+        collage={{ cartoon: "high-five", blobVariant: 1, blobClass: "text-primary/10", doodle: "star", doodleClass: "text-accent" }}
       >
         <p>
           {f("hero.lead", "I’ve spent much of my life building things. Some of those things are tangible: furniture, websites, events, community spaces. Some are harder to see: experiences, conversations, relationships, communities.")}
@@ -81,7 +81,7 @@ export default async function WorkPage() {
       {/* Narrative */}
       <CollageRow
         mirror
-        collage={{ cartoon: "maisy-trotting", blobVariant: 2, blobClass: "text-accent/10", doodle: "sparkle", doodleClass: "text-accent" }}
+        collage={{ cartoon: "teaching", blobVariant: 2, blobClass: "text-accent/10", doodle: "sparkle", doodleClass: "text-accent" }}
       >
         <p>
           {f("narr.p1", "Before medicine, I helped create Camp Grounded and Digital Detox, organizations built around helping people reconnect with themselves and each other in an increasingly connected world.")}

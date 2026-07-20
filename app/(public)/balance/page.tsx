@@ -29,7 +29,7 @@ export default async function BalancePage() {
       <PageHero
         eyebrow={f("hero.eyebrow", "Balance")}
         heading={f("hero.heading", "Balance Is Not the Opposite of Ambition")}
-        collage={{ cartoon: "outdoor-left", blobVariant: 2, blobClass: "text-primary/10", doodle: "sun", doodleClass: "text-accent" }}
+        collage={{ cartoon: "maisy-trotting", blobVariant: 2, blobClass: "text-primary/10", doodle: "sun", doodleClass: "text-accent" }}
       >
         <p>
           {f("hero.lead", "For a long time, I thought balance was something you earned after working hard. Now I think it’s something you build first.")}
