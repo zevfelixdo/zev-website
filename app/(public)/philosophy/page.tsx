@@ -38,7 +38,7 @@ export default async function PhilosophyPage() {
       {/* Opening */}
       <CollageRow
         mirror
-        collage={{ photoArea: "philosophy.opening", cartoon: "older-gentleman", blobVariant: 1, blobClass: "text-accent/10", doodle: "sparkle", doodleClass: "text-accent" }}
+        collage={{ photoArea: "philosophy.opening", cartoon: "wrapping-ace", blobVariant: 1, blobClass: "text-accent/10", doodle: "sparkle", doodleClass: "text-accent" }}
       >
         <div className="space-y-4 font-serif text-2xl sm:text-3xl text-text-base leading-snug">
           <p>
@@ -74,7 +74,7 @@ export default async function PhilosophyPage() {
 
       {/* Goal */}
       <CollageRow
-        collage={{ photoArea: "philosophy.goal", cartoon: "treating-person", blobVariant: 3, blobClass: "text-primary/10", doodle: "loops", doodleClass: "text-accent" }}
+        collage={{ photoArea: "philosophy.goal", cartoon: "lunging", blobVariant: 3, blobClass: "text-primary/10", doodle: "loops", doodleClass: "text-accent" }}
       >
         <p>
           {f("goal.p1", "My goal as a physician is not to create perfect patients. It’s to help people make meaningful progress.")}

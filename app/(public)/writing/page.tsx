@@ -86,7 +86,7 @@ export default async function WritingPage({ searchParams }: Props) {
         heading={f("hero.heading", "Essays & notes")}
         minH="min-h-[50vh]"
         underDoodle={null}
-        collage={{ cartoon: "sitting", blobVariant: 1, doodle: "sparkle" }}
+        collage={{ cartoon: "maisy-lying", blobVariant: 1, doodle: "sparkle" }}
       >
         <p>
           {f("hero.lead", "Occasional thoughts on medicine, technology, the outdoors, and what it means to live well. Written when I have something worth saying.")}

@@ -139,7 +139,7 @@ export default async function UnpluggedPage() {
         tinted
         mirror
         heading={f("med.heading", "What this has to do with medicine")}
-        collage={{ cartoon: "talking-to-nurse", blobVariant: 1, blobClass: "text-accent/10", doodle: "heart", doodleClass: "text-accent" }}
+        collage={{ cartoon: "maisy-sniffing", blobVariant: 1, blobClass: "text-accent/10", doodle: "heart", doodleClass: "text-accent" }}
       >
         <p>
           {f("med.p1a", "That practice, beginning with")}{" "}

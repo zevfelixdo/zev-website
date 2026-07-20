@@ -63,7 +63,7 @@ export default async function AboutPage() {
             </ParallaxView>
 
             <ParallaxView speed={0.13} className="absolute bottom-0 left-0 z-20 w-[56%]">
-              <Cartoon name="walking" width={320} priority decorative float className="h-auto w-full sticker" />
+              <Cartoon name="maisy-walking" width={320} priority decorative float className="h-auto w-full sticker" />
             </ParallaxView>
           </div>
         </div>
@@ -84,7 +84,7 @@ export default async function AboutPage() {
             </div>
           </div>
           <Reveal>
-            <AboutCollage photoArea="about.curiosity" cartoon="hiking-walking" blobVariant={1} doodle="sun" />
+            <AboutCollage photoArea="about.curiosity" cartoon="outdoor-right" blobVariant={1} doodle="sun" />
           </Reveal>
         </div>
       </section>
@@ -118,7 +118,7 @@ export default async function AboutPage() {
             </div>
           </div>
           <Reveal className="lg:order-1">
-            <AboutCollage photoArea="about.camp" cartoon="high-five" mirror blobVariant={3} doodle="heart" />
+            <AboutCollage photoArea="about.camp" cartoon="family-visit" mirror blobVariant={3} doodle="heart" />
           </Reveal>
         </div>
       </section>
@@ -159,7 +159,7 @@ export default async function AboutPage() {
             </div>
           </div>
           <Reveal>
-            <AboutCollage photoArea="about.surgery" cartoon="scrubbing" blobVariant={2} doodle="sparkle" />
+            <AboutCollage photoArea="about.surgery" cartoon="scrubs-back" blobVariant={2} doodle="sparkle" />
           </Reveal>
         </div>
       </section>
@@ -179,7 +179,7 @@ export default async function AboutPage() {
             </Reveal>
           </div>
           <Reveal className="lg:order-1">
-            <AboutCollage photoArea="about.family" cartoon="talking-to-kid" mirror blobVariant={1} doodle="heart" />
+            <AboutCollage photoArea="about.family" cartoon="scrubs-side" mirror blobVariant={1} doodle="heart" />
           </Reveal>
         </div>
       </section>

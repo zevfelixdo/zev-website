@@ -31,7 +31,7 @@ export default async function OutdoorsPage() {
       <PageHero
         eyebrow={f("hero.eyebrow", "Outside the Hospital")}
         heading={f("hero.heading", "The Things That Keep Me Grounded")}
-        collage={{ cartoon: "hiking-standing", blobVariant: 2, blobClass: "text-primary/10", doodle: "sun", doodleClass: "text-accent" }}
+        collage={{ cartoon: "outdoor-back", blobVariant: 2, blobClass: "text-primary/10", doodle: "sun", doodleClass: "text-accent" }}
       >
         <p>
           {f("hero.lead", "When people hear “doctor,” they often imagine someone who spends all day thinking about medicine. I like medicine. I spend plenty of time thinking about it. But I don’t think a good life can be built from a single interest.")}
@@ -49,7 +49,7 @@ export default async function OutdoorsPage() {
       {/* Making things */}
       <CollageRow
         heading={f("make.heading", "Making things")}
-        collage={{ cartoon: "plant", blobVariant: 3, blobClass: "text-accent/10", doodle: "sparkle" }}
+        collage={{ cartoon: "maisy-running", blobVariant: 3, blobClass: "text-accent/10", doodle: "sparkle" }}
       >
         <p>
           {f("make.p1", "Outside the hospital, you’ll usually find me making something. Sometimes it’s a loaf of bread. Sometimes it’s fresh pasta. Sometimes it’s a woodworking project that takes three times longer than expected because I convinced myself I could build it without reading the instructions.")}
@@ -81,7 +81,7 @@ export default async function OutdoorsPage() {
       {/* Maisy */}
       <CollageRow
         heading={f("maisy.heading", "Maisy")}
-        collage={{ photoArea: "outdoors.maisy", cartoon: "petting-maisy", blobVariant: 2, blobClass: "text-accent/10", doodle: "heart", doodleClass: "text-accent" }}
+        collage={{ photoArea: "outdoors.maisy", cartoon: "maisy-standing", blobVariant: 2, blobClass: "text-accent/10", doodle: "heart", doodleClass: "text-accent" }}
       >
         <p>
           {f("maisy.p1", "My rescue dog Maisy helps reinforce similar lessons. She spent the first years of her life as a street dog in Taiwan and arrived with understandable concerns about trusting humans.")}
