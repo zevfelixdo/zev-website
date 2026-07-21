@@ -45,7 +45,7 @@ export default async function MedicinePage() {
       <CollageRow
         heading={f("c1.heading", "Drawn to complexity")}
         mirror
-        collage={{ cartoon: "scrubbing", blobVariant: 2, doodle: "star" }}
+        collage={{ cartoon: "xray", blobVariant: 2, doodle: "star" }}
       >
         <p>
           {f("c1.p1", "During medical school and surgical training, I was drawn to complexity. Trauma. Critical care. Burn surgery. Procedures. The moments when teams come together under pressure to solve difficult problems.")}
