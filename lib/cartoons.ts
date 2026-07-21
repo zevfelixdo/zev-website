@@ -32,7 +32,7 @@ export const cartoons = {
   "scrubbing": { file: "scrubbing.png", width: 899, height: 1000, alt: "Illustration of Zev scrubbing in" },
   "iv-pole": { file: "iv-pole.png", width: 526, height: 1000, alt: "Illustration of Zev with an IV pole" },
   "wrapping-ace": { file: "wrapping-ace.png", width: 1000, height: 901, alt: "Illustration of Zev wrapping an ace bandage" },
-  "brace": { file: "brace.png", width: 1000, height: 901, alt: "Illustration of Zev fitting a brace" },
+  "brace": { file: "brace.png", width: 1000, height: 699, alt: "Illustration of Zev fitting a brace" },
   "lunging": { file: "lunging.png", width: 794, height: 564, alt: "Illustration of Zev guiding a stretch" },
   "sports": { file: "sports.png", width: 1000, height: 850, alt: "Illustration of Zev being active" },
   "plant": { file: "plant.png", width: 1000, height: 841, alt: "Illustration of Zev tending a plant" },

@@ -46,7 +46,6 @@ const exploreItems = [
   { key: "outdoors", label: "Outside the Hospital", href: "/outdoors", area: "home.card.outdoors", description: "Making things, climbing, Maisy, and wilderness medicine." },
   { key: "projects", label: "Projects", href: "/work", area: "home.card.projects", description: "Camp Grounded, Digital Detox, and building things that bring people together." },
   { key: "philosophy", label: "Philosophy of Care", href: "/philosophy", area: "home.card.philosophy", description: "What matters to you? The question that changes everything." },
-  { key: "writing", label: "Writing", href: "/writing", area: "home.card.writing", description: "Essays and notes on medicine, technology, and living well." },
 ];
 
 export default async function HomePage() {
@@ -83,7 +82,6 @@ export default async function HomePage() {
     outdoors: { title: f("explore.outdoors.title", "Outside the Hospital"), desc: f("explore.outdoors.desc", "Making things, climbing, Maisy, and wilderness medicine.") },
     projects: { title: f("explore.projects.title", "Projects"), desc: f("explore.projects.desc", "Camp Grounded, Digital Detox, and building things that bring people together.") },
     philosophy: { title: f("explore.philosophy.title", "Philosophy of Care"), desc: f("explore.philosophy.desc", "What matters to you? The question that changes everything.") },
-    writing: { title: f("explore.writing.title", "Writing"), desc: f("explore.writing.desc", "Essays and notes on medicine, technology, and living well.") },
   };
 
   const items: ExploreItem[] = exploreItems.map((it) => {
@@ -355,7 +353,7 @@ export default async function HomePage() {
                   <MagneticButton>
                     <Button as="link" href="/contact" size="lg">{f("close.cta1", "Get in touch")}</Button>
                   </MagneticButton>
-                  <Button as="link" href="/writing" size="lg" variant="outline">{f("close.cta2", "Read the writing")}</Button>
+                  <Button as="link" href="/work" size="lg" variant="outline">{f("close.cta2b", "See my work")}</Button>
                 </div>
 
                 <div className="mt-10 pt-8 border-t border-border max-w-md">

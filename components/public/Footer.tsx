@@ -89,7 +89,6 @@ export function Footer({ settings = defaultSettings }: FooterProps) {
                 {[
                   { label: "Outdoors", href: "/outdoors" },
                   { label: "Projects", href: "/work" },
-                  { label: "Writing", href: "/writing" },
                   { label: "CV", href: "/cv" },
                   { label: "Contact", href: "/contact" },
                 ].map((link) => (
