@@ -43,7 +43,7 @@ export default async function ContactPage() {
       <PageHero
         eyebrow={f("hero.eyebrow", "Contact")}
         heading={f("hero.heading", "Get in touch")}
-        collage={{ photoArea: "contact.portrait", cartoon: "drinking-coffee", blobVariant: 2, blobClass: "text-primary/10", doodle: "heart", doodleClass: "text-accent" }}
+        collage={{ photoArea: "contact.portrait", cartoon: "scrubs-front", blobVariant: 2, blobClass: "text-primary/10", doodle: "heart", doodleClass: "text-accent" }}
       >
         <p>
           {f("hero.lead", "Whether you have a question, want to collaborate, or just want to say hello, I would love to hear from you.")}
