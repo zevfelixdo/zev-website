@@ -29,7 +29,7 @@ export const cartoons = {
   "talking-to-nurse": { file: "talking-to-nurse.png", width: 986, height: 930, alt: "Illustration of Zev talking with a nurse" },
   "ultrasound": { file: "ultrasound.png", width: 770, height: 564, alt: "Illustration of Zev performing an ultrasound" },
   "xray": { file: "xray.png", width: 665, height: 1000, alt: "Illustration of Zev reviewing an x-ray" },
-  "scrubbing": { file: "scrubbing.png", width: 548, height: 786, alt: "Illustration of Zev scrubbing in" },
+  "scrubbing": { file: "scrubbing.png", width: 899, height: 1000, alt: "Illustration of Zev scrubbing in" },
   "iv-pole": { file: "iv-pole.png", width: 526, height: 1000, alt: "Illustration of Zev with an IV pole" },
   "wrapping-ace": { file: "wrapping-ace.png", width: 1000, height: 901, alt: "Illustration of Zev wrapping an ace bandage" },
   "brace": { file: "brace.png", width: 1000, height: 901, alt: "Illustration of Zev fitting a brace" },
