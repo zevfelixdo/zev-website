@@ -24,6 +24,7 @@ export const PLACEMENT_AREAS: AreaDef[] = [
   { area: "home.card.projects", label: "Home card — Projects", page: "/", aspect: "16/10", note: "Card cover" },
   { area: "home.card.philosophy", label: "Home card — Philosophy", page: "/", aspect: "16/10", note: "Card cover" },
   { area: "home.card.writing", label: "Home card — Writing", page: "/", aspect: "16/10", note: "Card cover" },
+  { area: "home.card.unplugged", label: "Home card — Unplugged", page: "/", aspect: "16/10", note: "Card cover" },
   { area: "home.glimpse1", label: "Home — glimpses gallery 1", page: "/", aspect: "1/1", note: "Square" },
   { area: "home.glimpse2", label: "Home — glimpses gallery 2", page: "/", aspect: "1/1", note: "Square" },
   { area: "home.glimpse3", label: "Home — glimpses gallery 3", page: "/", aspect: "1/1", note: "Square" },

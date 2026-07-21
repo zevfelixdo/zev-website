@@ -44,6 +44,7 @@ const exploreItems = [
   { key: "balance", label: "Balance", href: "/balance", area: "home.card.balance", description: "Why balance is not the opposite of ambition." },
   { key: "technology", label: "Technology", href: "/technology", area: "home.card.technology", description: "Why the best tools create more connection, not less." },
   { key: "outdoors", label: "Outside the Hospital", href: "/outdoors", area: "home.card.outdoors", description: "Making things, climbing, Maisy, and wilderness medicine." },
+  { key: "unplugged", label: "Unplugged", href: "/unplugged", area: "home.card.unplugged", description: "Camp Grounded, Digital Detox, and my brother Levi: the screen-free movement that led me to medicine." },
   { key: "projects", label: "Projects", href: "/work", area: "home.card.projects", description: "Camp Grounded, Digital Detox, and building things that bring people together." },
   { key: "philosophy", label: "Philosophy of Care", href: "/philosophy", area: "home.card.philosophy", description: "What matters to you? The question that changes everything." },
 ];
@@ -80,6 +81,7 @@ export default async function HomePage() {
     balance: { title: f("explore.balance.title", "Balance"), desc: f("explore.balance.desc", "Why balance is not the opposite of ambition.") },
     technology: { title: f("explore.technology.title", "Technology"), desc: f("explore.technology.desc", "Why the best tools create more connection, not less.") },
     outdoors: { title: f("explore.outdoors.title", "Outside the Hospital"), desc: f("explore.outdoors.desc", "Making things, climbing, Maisy, and wilderness medicine.") },
+    unplugged: { title: f("explore.unplugged.title", "Unplugged"), desc: f("explore.unplugged.desc", "Camp Grounded, Digital Detox, and my brother Levi: the screen-free movement that led me to medicine.") },
     projects: { title: f("explore.projects.title", "Projects"), desc: f("explore.projects.desc", "Camp Grounded, Digital Detox, and building things that bring people together.") },
     philosophy: { title: f("explore.philosophy.title", "Philosophy of Care"), desc: f("explore.philosophy.desc", "What matters to you? The question that changes everything.") },
   };

@@ -109,8 +109,8 @@ export const PAGE_CONTENT_SCHEMA: Record<string, ContentGroup[]> = {
         { key: "explore.projects.desc", label: "Card 6 — description", type: "textarea" },
         { key: "explore.philosophy.title", label: "Card 7 — title", type: "text" },
         { key: "explore.philosophy.desc", label: "Card 7 — description", type: "textarea" },
-        { key: "explore.writing.title", label: "Card 8 — title", type: "text" },
-        { key: "explore.writing.desc", label: "Card 8 — description", type: "textarea" },
+        { key: "explore.unplugged.title", label: "Unplugged card — title", type: "text" },
+        { key: "explore.unplugged.desc", label: "Unplugged card — description", type: "textarea" },
       ],
     },
     {
